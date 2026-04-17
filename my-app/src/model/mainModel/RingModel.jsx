@@ -138,20 +138,38 @@ const RingModel = ({
   const { themeClass } = useTheme();
 
 
+  const [isMobileView, setIsMobileView] = useState(false);
+
+useEffect(() => {
+  const checkScreen = () => {
+    setIsMobileView(window.innerWidth < 1024); // lg breakpoint
+  };
+
+  checkScreen();
+  window.addEventListener("resize", checkScreen);
+
+  return () => window.removeEventListener("resize", checkScreen);
+}, []);
+
   return (
 
     <div
       ref={containerRef}
-      className={`w-full h-[600px] transition-all duration-700 ease-in-out ${themeClass} relative `}
+      // className={`w-full h-[600px] transition-all duration-700 ease-in-out ${themeClass} relative `}
       // className={`w-full h-[600px] transition-all duration-700 ease-in-out  relative ` }
+      className={`w-full h-full transition-all duration-700 ease-in-out ${themeClass} relative`}
       style={{
-        width: isFullscreen ? '100vw' : '100%',
-        height: isFullscreen ? '100vh' : '80vh',
-        position: isFullscreen ? 'fixed' : 'relative',
-        top: isFullscreen ? 0 : 'auto',
-        left: isFullscreen ? 0 : 'auto',
-        zIndex: isFullscreen ? 9999 : 'auto',
-      }}
+  width: isFullscreen ? '100vw' : '100%',
+  height: isFullscreen
+    ? '100vh'
+    : isMobileView
+      ? '100%'   // mobile
+      : '80vh',  // desktop
+  position: isFullscreen ? 'fixed' : 'relative',
+  top: isFullscreen ? 0 : 'auto',
+  left: isFullscreen ? 0 : 'auto',
+  zIndex: isFullscreen ? 9999 : 'auto',
+}}
     >
       <Canvas
         onCreated={({ gl }) => {
@@ -242,9 +260,12 @@ const RingModel = ({
         )}
       </button>
 
-      <div className="flex justify-between items-center p-4 bg-[#373D73] text-white w-full relative">
+      {/* <div className="flex justify-between items-center p-4 bg-[#373D73] text-white w-full relative"> */}
+      {/* <div className="fixed bottom-0 left-0 w-full flex justify-between items-center p-3 bg-[#373D73] text-white z-50 lg:relative"> */}
+      {!isFullscreen && (
+  <div className="fixed bottom-0 left-0 w-full flex justify-between items-center p-3 bg-[#373D73] text-white z-50 lg:relative">
         {/* Center text - RING BUILDER */}
-        <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-10">
+        <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-10 hidden lg:block">
           <p className="text-sm md:text-lg lg:text-2xl font-bold tracking-wider">RING BUILDER</p>
         </div>
         {/* for logo 
@@ -267,6 +288,7 @@ const RingModel = ({
           Next
         </button>
       </div>
+      )}
     </div>
   );
 };

@@ -500,23 +500,23 @@ export const prongOptions = [
   },
 
 
-  { name: "Double Prong", path: "/assets/prong/Only Prong - W.glb" },
-  {
-    name: "Six Prong",
-    path: "/assets/prong/Only Prong - R.glb",
-    image_icon: "/assets/diamond-icon/Cushion.png",
-  },
+  // { name: "Double Prong", path: "/assets/prong/Only Prong - W.glb" },
+  // {
+  //   name: "Six Prong",
+  //   path: "/assets/prong/Only Prong - R.glb",
+  //   image_icon: "/assets/diamond-icon/Cushion.png",
+  // },
 
-  {
-    name: "Bezel",
-    path: "/assets/prong/Only Prong - W.glb",
-    image_icon: "/assets/diamond-icon/Round.png",
-  },
-  {
-    name: "Half Bezel",
-    path: "/assets/prong/Only Prong - W.glb",
-    image_icon: "/assets/diamond-icon/Round.png",
-  },
+  // {
+  //   name: "Bezel",
+  //   path: "/assets/prong/Only Prong - W.glb",
+  //   image_icon: "/assets/diamond-icon/Round.png",
+  // },
+  // {
+  //   name: "Half Bezel",
+  //   path: "/assets/prong/Only Prong - W.glb",
+  //   image_icon: "/assets/diamond-icon/Round.png",
+  // },
   // add more here
 ];
 
@@ -577,11 +577,11 @@ export const diamondOptions = [
     path: "/assets/diamond/Pricess_Diamond.glb",
     image_icon: "/assets/diamond-icon/Princess.png",
   },
-  {
-    name: "Radiant",
-    path: "/assets/diamond/Radiant_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Radiant.png",
-  },
+  // {
+  //   name: "Radiant",
+  //   path: "/assets/diamond/Radiant_Diamond.glb",
+  //   image_icon: "/assets/diamond-icon/Radiant.png",
+  // },
 ];
 
 export const diamondWeightOptions = [

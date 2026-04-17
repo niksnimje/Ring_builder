@@ -89,25 +89,25 @@
   };
 
   // Mobile Menu Button Component
-  const MobileMenuButton = ({ isOpen, onClick }) => (
-    <button
-      onClick={onClick}
-      className="lg:hidden fixed top-4 right-4 z-50 bg-white rounded-lg p-2 shadow-lg"
-    >
-      <svg
-        className="w-6 h-6"
-        fill="none"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        {isOpen ? (
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-        ) : (
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-        )}
-      </svg>
-    </button>
-  );
+  // const MobileMenuButton = ({ isOpen, onClick }) => (
+  //   <button
+  //     onClick={onClick}
+  //     className="lg:hidden fixed top-4 right-4 z-50 bg-white rounded-lg p-2 shadow-lg"
+  //   >
+  //     <svg
+  //       className="w-6 h-6"
+  //       fill="none"
+  //       stroke="currentColor"
+  //       viewBox="0 0 24 24"
+  //     >
+  //       {isOpen ? (
+  //         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+  //       ) : (
+  //         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+  //       )}
+  //     </svg>
+  //   </button>
+  // );
 
   // Responsive Tab Component
   const ResponsiveTabs = ({ activeTab, setActiveTab }) => {
@@ -137,7 +137,8 @@
     }
 
     return (
-      <div className="border-b border-gray-200 px-6 pt-4">
+      // <div className="border-b border-gray-200 px-6 pt-4">
+      <div className="border-b border-gray-200 px-6 pt-4 sticky top-0 z-10 bg-[#1e293b]">
         <div className="flex gap-4 sm:gap-8">
           <button
             onClick={() => setActiveTab("metal")}
@@ -182,8 +183,9 @@
     const [bandColor, setBandColor] = useState(defaultBandColor);
     const [prongColor, setProngColor] = useState(defaultProngColor);
     const [activeTab, setActiveTab] = useState("metal");
-    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-    const [isMobile, setIsMobile] = useState(false);
+    // const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+    // const [isMobile, setIsMobile] = useState(false);
+    
     
     // Accordion states
     const [openAccordions, setOpenAccordions] = useState({
@@ -194,17 +196,17 @@
       headBandType: true
     });
 
-    useEffect(() => {
-      const checkMobile = () => {
-        setIsMobile(window.innerWidth < 1024);
-        if (window.innerWidth >= 1024) {
-          setIsMobileMenuOpen(false);
-        }
-      };
-      checkMobile();
-      window.addEventListener('resize', checkMobile);
-      return () => window.removeEventListener('resize', checkMobile);
-    }, []);
+    // useEffect(() => {
+    //   const checkMobile = () => {
+    //     setIsMobile(window.innerWidth < 1024);
+    //     if (window.innerWidth >= 1024) {
+    //       setIsMobileMenuOpen(false);
+    //     }
+    //   };
+    //   checkMobile();
+    //   window.addEventListener('resize', checkMobile);
+    //   return () => window.removeEventListener('resize', checkMobile);
+    // }, []);
 
     const toggleAccordion = (key) => {
       setOpenAccordions(prev => ({
@@ -289,13 +291,12 @@
           <h1 className="text-xl sm:text-2xl font-bold text-gray-800">Ring Builder</h1>
         </header>
 
-        {/* Mobile Menu Button */}
-        <MobileMenuButton isOpen={isMobileMenuOpen} onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
 
         {/* Main Content */}
         <div className="flex-1 flex flex-col lg:flex-row overflow-hidden bg-gradient-to-tr from-slate-900 via-[#1e293b] to-slate-800">
           {/* Left Panel - Ring Model */}
-          <div className={`${isMobile && isMobileMenuOpen ? 'hidden' : 'flex'} w-full lg:w-[70%] xl:w-[75%] 2xl:w-[80%] h-[50vh] lg:h-full items-center justify-center transition-all duration-300`}>
+          {/* <div className={`${isMobile && isMobileMenuOpen ? 'hidden' : 'flex'} w-full lg:w-[70%] xl:w-[75%] 2xl:w-[80%] h-[50vh] lg:h-full items-center justify-center transition-all duration-300`}> */}
+          <div className="flex w-full lg:w-[70%] xl:w-[75%] 2xl:w-[80%] h-[35vh] sm:h-[40vh] lg:h-full items-center justify-center">
             <div className="w-full h-full">
               <RingModel
                 selectedProng={finalSelectedProng}
@@ -321,12 +322,15 @@
           </div>
 
           {/* Right Panel - Controls */}
-          <div className={`${isMobile && !isMobileMenuOpen ? 'hidden' : 'flex'} w-full lg:w-[30%] xl:w-[25%] 2xl:w-[20%] bg-transparent flex-col overflow-hidden transition-all duration-300`}>
+          {/* <div className={`${isMobile && !isMobileMenuOpen ? 'hidden' : 'flex'} w-full lg:w-[30%] xl:w-[25%] 2xl:w-[20%] bg-transparent flex-col overflow-hidden transition-all duration-300`}> */}
+          {/* <div className="flex w-full lg:w-[30%] xl:w-[25%] 2xl:w-[20%] bg-transparent flex-col overflow-hidden"> */}
+          <div className="flex w-full lg:w-[30%] xl:w-[25%] 2xl:w-[20%] bg-transparent flex-col h-[50vh] lg:h-full">
             {/* Tabs */}
             <ResponsiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
             {/* Scrollable Content Area */}
-            <div className="flex-1 overflow-y-auto">
+            {/* <div className="flex-1 overflow-y-auto"> */}
+            <div className="flex-1 overflow-y-auto pb-20">
               <div className="p-3 sm:p-4 md:p-6">
                 {/* Metal Tab */}
                 {activeTab === "metal" && (
