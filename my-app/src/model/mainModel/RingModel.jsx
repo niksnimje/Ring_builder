@@ -7,7 +7,7 @@ import BandRModel from "../Band/BandRModel";
 import ProngModel from "../Prong/ProngModel";
 import DiamondModel from "../Diamond/DiamondModel";
 import { useNavigate } from "react-router-dom";
-import { useTheme } from "../../Context/TheamContext";
+import { useTheme } from "../../Context/ThemeContext";
 import Pave from "../Band/Pave";
 // import { EffectComposer, Bloom } from '@react-three/postprocessing';
 
