@@ -9,7 +9,7 @@ import DiamondModel from "../Diamond/DiamondModel";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../Context/ThemeContext";
 import Pave from "../Band/Pave";
-// import { EffectComposer, Bloom } from '@react-three/postprocessing';
+// import { EffectComposer, Bloom } from '@react-three/postprocessing'; // Disco screen 
 
 const RotatingRing = ({ children, isRotating = true }) => {
   const groupRef = useRef();
@@ -155,8 +155,7 @@ useEffect(() => {
 
     <div
       ref={containerRef}
-      // className={`w-full h-[600px] transition-all duration-700 ease-in-out ${themeClass} relative `}
-      // className={`w-full h-[600px] transition-all duration-700 ease-in-out  relative ` }
+   
       className={`w-full h-full transition-all duration-700 ease-in-out ${themeClass} relative`}
       style={{
   width: isFullscreen ? '100vw' : '100%',
@@ -260,19 +259,14 @@ useEffect(() => {
         )}
       </button>
 
-      {/* <div className="flex justify-between items-center p-4 bg-[#373D73] text-white w-full relative"> */}
-      {/* <div className="fixed bottom-0 left-0 w-full flex justify-between items-center p-3 bg-[#373D73] text-white z-50 lg:relative"> */}
+
       {!isFullscreen && (
   <div className="fixed bottom-0 left-0 w-full flex justify-between items-center p-3 bg-[#373D73] text-white z-50 lg:relative">
         {/* Center text - RING BUILDER */}
         <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-10 hidden lg:block">
           <p className="text-sm md:text-lg lg:text-2xl font-bold tracking-wider">RING BUILDER</p>
         </div>
-        {/* for logo 
-  <div className="absolute left-1/2 transform -translate-x-1/2">
-  <img src="/path-to-your-logo.png" alt="Ring Builder" className="h-6 md:h-8 lg:h-10" />
-</div> */}
-
+ 
         {/* Left side - Price info */}
         <div className="flex flex-col">
           <p className="text-sm md:text-lg lg:text-xl font-bold">Engagement Ring: $1,005.00</p>
