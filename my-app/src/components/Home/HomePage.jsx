@@ -212,33 +212,13 @@ export default function HomePage() {
   const finalSelectedProng = (() => {
     if (!selectedProng) return null;
     const diamondShape = selectedDiamond?.name;
-    const shapeEntry = selectedProng?.shapeMap?.[diamondShape];
-    const resolvedPath = shapeEntry || selectedProng?.defaultPath || selectedProng?.path;
-
+    const shapeEntry = selectedProng.shapeMap?.[diamondShape];
+    const resolvedPath = shapeEntry || selectedProng.defaultPath || selectedProng.path;
     return {
       ...selectedProng,
       path: resolvedPath,
     };
   })();
-
-  useEffect(() => {
-  if (!finalSelectedProng) return;
-
-  const diamondShape = selectedDiamond?.name;
-  const weight = selectedDiamondWeight;
-
-  const shapeEntry = selectedProng?.shapeMap?.[diamondShape];
-
-  let resolvedPath =
-    shapeEntry?.[weight] || shapeEntry?.default || selectedProng?.defaultPath;
-
-  console.log("==== PRONG DEBUG ====");
-  console.log("Prong Name:", selectedProng?.name);
-  console.log("Diamond Shape:", diamondShape);
-  console.log("Weight:", weight);
-  console.log("Final Path:", resolvedPath);
-}, [selectedProng, selectedDiamond, selectedDiamondWeight]);
-
 
   const metalOptions = [
     ["#FFCC00", "14K YG"],
@@ -361,7 +341,6 @@ export default function HomePage() {
                             />
                           ))}
                         </div>
-                        
                       </div>
 
                       <div>
