@@ -9,7 +9,7 @@ import DiamondModel from "../Diamond/DiamondModel";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../Context/ThemeContext";
 import Pave from "../Band/Pave";
-// import { EffectComposer, Bloom } from '@react-three/postprocessing'; // Disco screen 
+// import { EffectComposer, Bloom } from '@react-three/postprocessing';
 
 const RotatingRing = ({ children, isRotating = true }) => {
   const groupRef = useRef();
@@ -50,29 +50,37 @@ const RingModel = ({
   const ringGroupRef = useRef();
 
   // Fullscreen functions
-  const toggleFullscreen = () => {
-    if (!document.fullscreenElement) {
-      // Enter fullscreen
-      if (containerRef.current.requestFullscreen) {
-        containerRef.current.requestFullscreen();
-      } else if (containerRef.current.webkitRequestFullscreen) { // Safari
-        containerRef.current.webkitRequestFullscreen();
-      } else if (containerRef.current.msRequestFullscreen) { // IE/Edge
-        containerRef.current.msRequestFullscreen();
-      }
-      setIsFullscreen(true);
-    } else {
-      // Exit fullscreen
-      if (document.exitFullscreen) {
-        document.exitFullscreen();
-      } else if (document.webkitExitFullscreen) { // Safari
-        document.webkitExitFullscreen();
-      } else if (document.msExitFullscreen) { // IE/Edge
-        document.msExitFullscreen();
-      }
-      setIsFullscreen(false);
+
+  
+ // ✅ fullscreen function OUTSIDE useEffect
+const toggleFullscreen = () => {
+  if (!document.fullscreenElement) {
+    if (containerRef.current.requestFullscreen) {
+      containerRef.current.requestFullscreen();
+    }
+    setIsFullscreen(true);
+  } else {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+    setIsFullscreen(false);
+  }
+};
+
+// ✅ key press listener
+useEffect(() => {
+  const handleKeyDown = (e) => {
+    if (e.key.toLowerCase() === "f") {
+      toggleFullscreen();
     }
   };
+
+  window.addEventListener("keydown", handleKeyDown);
+
+  return () => {
+    window.removeEventListener("keydown", handleKeyDown);
+  };
+}, []);
 
   // Listen for fullscreen change events
   useEffect(() => {
@@ -155,7 +163,8 @@ useEffect(() => {
 
     <div
       ref={containerRef}
-   
+      // className={`w-full h-[600px] transition-all duration-700 ease-in-out ${themeClass} relative `}
+      // className={`w-full h-[600px] transition-all duration-700 ease-in-out  relative ` }
       className={`w-full h-full transition-all duration-700 ease-in-out ${themeClass} relative`}
       style={{
   width: isFullscreen ? '100vw' : '100%',
@@ -240,33 +249,49 @@ useEffect(() => {
         />
       </Canvas>
 
+      { !isFullscreen && (
+  <div className="w-full text-center py-3 absolute bottom-0">
+    <p className="text-white text-lg lg:text-2xl font-bold tracking-wider">
+      RING BUILDER
+    </p>
+  </div>
+)}
+
       {/* Fullscreen Button at Bottom Right */}
-      <button
-        onClick={toggleFullscreen}
-        className="absolute bottom-4 right-4 z-10 bg-white/20 hover:bg-white/30 backdrop-blur-md text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
-        title={isFullscreen ? "Exit Fullscreen" : "Enter Fullscreen"}
-      >
-        {isFullscreen ? (
-          // Exit Fullscreen Icon
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        ) : (
-          // Enter Fullscreen Icon
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-          </svg>
-        )}
-      </button>
+   <div className="absolute bottom-4 right-4 z-10 group">
+  
+  <button
+    onClick={toggleFullscreen}
+    className="bg-white/20 hover:bg-white/30 backdrop-blur-md text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110"
+  >
+    {isFullscreen ? (
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    ) : (
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+      </svg>
+    )}
+  </button>
 
+  {/* 🔥 Tooltip */}
+  <div className="
+    absolute bottom-14 right-0
+    opacity-0 group-hover:opacity-100
+    transition-all duration-200
+    bg-black text-white text-xs px-2 py-1 rounded
+    whitespace-nowrap
+  ">
+    {isFullscreen ? "Exit Fullscreen (F)" : "Enter Fullscreen (F)"}
+  </div>
 
+</div>
+
+      {/* <div className="fixed bottom-0 left-0 w-full flex justify-between items-center p-3 bg-[#373D73] text-white z-50 lg:relative"> */}
       {!isFullscreen && (
   <div className="fixed bottom-0 left-0 w-full flex justify-between items-center p-3 bg-[#373D73] text-white z-50 lg:relative">
-        {/* Center text - RING BUILDER */}
-        <div className="absolute left-1/2 top-0 transform -translate-x-1/2 -translate-y-10 hidden lg:block">
-          <p className="text-sm md:text-lg lg:text-2xl font-bold tracking-wider">RING BUILDER</p>
-        </div>
- 
+    
         {/* Left side - Price info */}
         <div className="flex flex-col">
           <p className="text-sm md:text-lg lg:text-xl font-bold">Engagement Ring: $1,005.00</p>

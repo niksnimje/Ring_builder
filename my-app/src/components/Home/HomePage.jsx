@@ -221,23 +221,7 @@ export default function HomePage() {
     };
   })();
 
-  useEffect(() => {
-  if (!finalSelectedProng) return;
-
-  const diamondShape = selectedDiamond?.name;
-  const weight = selectedDiamondWeight;
-
-  const shapeEntry = selectedProng?.shapeMap?.[diamondShape];
-
-  let resolvedPath =
-    shapeEntry?.[weight] || shapeEntry?.default || selectedProng?.defaultPath;
-
-  console.log("==== PRONG DEBUG ====");
-  console.log("Prong Name:", selectedProng?.name);
-  console.log("Diamond Shape:", diamondShape);
-  console.log("Weight:", weight);
-  console.log("Final Path:", resolvedPath);
-}, [selectedProng, selectedDiamond, selectedDiamondWeight]);
+  
 
 
   const metalOptions = [

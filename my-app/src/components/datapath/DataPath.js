@@ -447,8 +447,8 @@ export const prongOptions = [
         default:
           "/assets/prong/Pave Hidden Halo/weight_1.0/Oval_weight_1.0_prong.glb",
          5.0: "/assets/prong/Pave Hidden Halo/weight_5.0/Oval_weight_5.0_prong.glb",
-          4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Oval_4.0_weight_prong.glb",
-          3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Oval_weight_4.0_prong.glb",
+          4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Oval_weight_4.0_prong.glb",
+          3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Oval_weight_3.0_prong.glb",
           2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/OVAL_weight_2.0_prong.glb",
           1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Oval_weight_1.0_prong.glb",
 
@@ -476,11 +476,15 @@ export const prongOptions = [
       Cushion: {
         default:
           "/assets/prong/Pave Hidden Halo/weight_1.0/Cushion _weight_1.0_prong.glb",
-        5.0: "/assets/prong/Pave Hidden Halo/weight_5.0/Cushion_weight_5.0_prong.glb",
-          4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Cushion_weight_4.0_prong.glb",
-          3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Cushion_weight_3.0_prong.glb",
-          2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/Cushion_weight_2.0_prong.glb",
-          1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Cushion _weight_1.0_prong.glb",
+        // 5.0: "/assets/prong/Pave Hidden Halo/weight_5.0/Cushion_weight_5.0_prong.glb",
+        //   4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Cushion_weight_4.0_prong.glb",
+        //   3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Cushion_weight_3.0_prong.glb",
+        //   2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/Cushion_weight_2.0_prong.glb",
+        //   1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Cushion _weight_1.0_prong.glb",
+        
+        1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Cushion _weight_1.0_prong.glb",
+
+
 
        
       },
@@ -538,10 +542,10 @@ export const prongOptions = [
       Pear: {
         default:
           "/assets/prong/Pave Hidden Halo/weight_1.0/Pear_weight_1.0_prong.glb",
-        5.0: "/assets/prong/Pave Hidden Halo/weight_5.0/Pear_weight_5.0_prong.glb",
-          4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Pear_weight_4.0_prong.glb",
-          3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Pear_weight_3.0_prong.glb",
-          2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/PEAR _weight_2.0_prong.glb",
+        // 5.0: "/assets/prong/Pave Hidden Halo/weight_5.0/Pear_weight_5.0_prong.glb",
+        //   4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Pear_weight_4.0_prong.glb",
+        //   3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Pear_weight_3.0_prong.glb",
+        //   2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/PEAR _weight_2.0_prong.glb",
           1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Pear_weight_1.0_prong.glb",
 
         
