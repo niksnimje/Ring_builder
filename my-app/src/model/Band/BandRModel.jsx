@@ -31,7 +31,7 @@ const BandRModel = ({
       if (child.isMesh) {
         const name = child.name.toLowerCase();
 
-        // ❌ diamond logic removed
+        
         if (!name.includes("diamond")) {
           child.material = child.material.clone();
           child.material.color.set(color);
@@ -47,7 +47,7 @@ const BandRModel = ({
   return (
     <>
       {clonedScene && (
-        <primitive object={clonedScene} scale={[1,1,0.7]} ref={bandRef} />
+        <primitive object={clonedScene} scale={[1,1,0.7]} ref={bandRef} />  // scale and incress diamond ring size 
       )}
     </>
   );
