@@ -26,8 +26,8 @@ const defaultProng = prongOptions.find(p =>
 ) || null;
 const defaultDiamond = diamondOptions.length > 0 ? diamondOptions[0] : null;
 const defaultDiamondWeight = diamondWeightOptions.find(opt => opt.weight === '1.0 ct')?.value || (diamondWeightOptions.length > 0 ? diamondWeightOptions[0].value : 0);
-const defaultBandColor = "#E6BE5A";
-const defaultProngColor = "#E6BE5A";
+const defaultBandColor = "#ffcb7d";
+const defaultProngColor = "#ffcb7d";
 
 // Premium Accordion Component
 const PremiumAccordion = ({ title, icon, children, isOpen, onToggle }) => {
@@ -63,15 +63,15 @@ const PremiumAccordion = ({ title, icon, children, isOpen, onToggle }) => {
 // Metal Color Button Component
 const MetalColorButton = ({ color, label, isSelected, onClick }) => {
   const getTextColor = (bgColor) => {
-    const darkColors = ["#c0c0c0", "#a4a4a4", "#B0C4DE", "#E6C27A" , "#E0E0E0" , "#B8B4B9"];
+    const darkColors = ["#c0c0c0", "#a4a4a4", "#B0C4DE", "#E6C27A"];
     return darkColors.includes(bgColor) ? "#333" : "#fff";
   };
 
   return (
     <button
       onClick={onClick}
-      className={`w-full relative py-2.5 sm:py-2 rounded-lg font-medium transition-all duration-200 text-sm sm:text-sm ${isSelected
-        ? 'ring ring-green-500 shadow-lg scale-105'
+      className={`w-full relative  py-2.5 sm:py-2 rounded-lg font-medium transition-all duration-200 text-sm sm:text-base ${isSelected
+        ? 'ring ring-green-500  shadow-lg scale-105'
         : 'hover:scale-105 hover:shadow-md'
         }`}
       style={{
@@ -87,11 +87,38 @@ const MetalColorButton = ({ color, label, isSelected, onClick }) => {
   );
 };
 
+
 // Responsive Tab Component
 const ResponsiveTabs = ({ activeTab, setActiveTab }) => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 640);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  // if (isMobile) {
+  //   return (
+  //     <div className="border-b border-gray-200 px-4 pt-3">
+  //       <select
+  //         value={activeTab}
+  //         onChange={(e) => setActiveTab(e.target.value)}
+  //         className="w-full p-2 border border-gray-300 rounded-lg bg-white text-gray-800"
+  //       >
+  //         <option value="metal">Metal</option>
+  //         <option value="diamonds">Diamonds</option>
+  //         <option value="theme">Theme</option>
+  //       </select>
+  //     </div>
+  //   );
+  // }
+
   return (
     <div className="border-b border-gray-200 px-3 sm:px-6 pt-3 sm:pt-4 sticky top-0 z-10 bg-[#1e293b]">
       <div className="flex justify-between sm:justify-start gap-2 sm:gap-6">
+
         <button
           onClick={() => setActiveTab("metal")}
           className={`flex-1 sm:flex-none pb-2 text-sm sm:text-lg font-medium transition-colors ${activeTab === "metal"
@@ -121,6 +148,7 @@ const ResponsiveTabs = ({ activeTab, setActiveTab }) => {
         >
           Theme
         </button>
+
       </div>
     </div>
   );
@@ -136,17 +164,18 @@ export default function HomePage() {
   const [bandColor, setBandColor] = useState(defaultBandColor);
   const [prongColor, setProngColor] = useState(defaultProngColor);
   const [activeTab, setActiveTab] = useState("metal");
-  
-  // Load More state - simple show/hide all
-  const [showAllDiamonds, setShowAllDiamonds] = useState(false);
+
 
   // Accordion states
   const [openAccordions, setOpenAccordions] = useState({
     headBandColor: true,
-    selectStones: true,
     centerStones: false,
+    selectStones: true,
+    diamondType: false,
     headBandType: true
   });
+
+
 
   const toggleAccordion = (key) => {
     setOpenAccordions(prev => ({
@@ -154,15 +183,6 @@ export default function HomePage() {
       [key]: !prev[key]
     }));
   };
-
-  // Load more handler - show ALL diamonds in one click
-  const handleLoadMore = () => {
-    setShowAllDiamonds(true);
-  };
-
-  // Get visible diamonds based on load more state
-  const visibleDiamonds = showAllDiamonds ? diamondOptions : diamondOptions.slice(0, 10);
-  const hasMoreDiamonds = diamondOptions.length > 10 && !showAllDiamonds;
 
   const bandScale = 1;
   const prongScale = 0.3;
@@ -201,18 +221,28 @@ export default function HomePage() {
     };
   })();
 
+  
+
+
   const metalOptions = [
-    ["#B8B4B9","14K White Gold"],
-    ["#E0E0E0","18K White Gold"],
-    ["#E6BE5A","14KY"],
-    ["#DDB140","18KY"],
-    ["#f7c5ad","14K RG"],
-    ["#f1a886","18K RG"],
-    ["#FFCC00","14K TT"],
-    ["#FAC000","18K TT"],
+    ["#FFCC00", "14K YG"],
+    ["#c0c0c0", "14K WG"],
+    ["#FAC000", "18K YG"],
+    ["#f7c5ad", "14K RG"],
+    ["#a4a4a4", "18K WG"],
     ["#B0C4DE", "PT"],
+    ["#f1a886", "18K RG"],
+    ["#E6C27A", "Mixed"],
+    ["#E7CC95", "Mixed3"],
+    ["#F2E5C4", "Mixed333"],
+    ["#D4AF37", "Mixed23"],
+    ["#ffcb7d", "gold"],
+    ["#DCAE96", "Rose"],
+    ["#d59c72", "Rosey"],
+    ["#E0E0E0", "Silver"],
   ];
 
+  const stoneOptions = ["One Stone", "Two Stone", "Three Stone"];
   const { setThemeClass, themeClass } = useTheme();
   const themes = [
     "bg-gradient-to-tr from-slate-900 via-[#1e293b] to-slate-800",
@@ -223,17 +253,27 @@ export default function HomePage() {
     "bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900",
     "bg-gradient-to-b from-gray-100 via-gray-200 to-gray-500",
     "bg-[radial-gradient(circle_at_50%_40%,#6d28d9_0%,#1e1b4b_50%,#020617_100%)]",
+    // 🔥 Matte Black + Soft Light (best contrast)
     "bg-[radial-gradient(circle_at_50%_30%,#2a2a2a_0%,#000000_80%)]",
-    "bg-[radial-gradient(circle_at_center,_#1e1b4b_0%,_#0f172a_40%,_#020617_100%)]",
-    "bg-[radial-gradient(circle,_#422006_0%,_#1c1917_60%,_#0c0a09_100%)]",
-    "bg-gradient-to-br from-[#111827] via-[#1f2937] to-[#111827]",
+    // --- Dark & Royal Themes ---
+    "bg-[radial-gradient(circle_at_center,_#1e1b4b_0%,_#0f172a_40%,_#020617_100%)]", // Midnight Blue
+    "bg-[radial-gradient(circle,_#422006_0%,_#1c1917_60%,_#0c0a09_100%)]",          // Deep Espresso/Bronze
+    // --- Aesthetic Gradients ---
+    "bg-gradient-to-br from-[#111827] via-[#1f2937] to-[#111827]",                   // Anthracite Grey
     "bg-[radial-gradient(circle,_#2d1b69_0%,_#1e1b4b_50%,_#020617_100%)]",
+
+    // Deep Blue & Royal
     "bg-gradient-to-br from-[#0a192f] via-[#0d2847] to-[#0a192f]",
+
     "bg-gradient-to-tr from-[#0a1f0a] via-[#1a3a1a] to-[#0a1f0a]",
     "bg-gradient-to-br from-[#1a0a2e] via-[#2a1a4e] to-[#1a0a2e]",
     "bg-[radial-gradient(circle_at_center,_#2a1a4e_0%,_#0a0515_100%)]",
+    // Warm Sand & Gold
     "bg-gradient-to-br from-[#2a2218] via-[#3d3224] to-[#1a1510]",
   ];
+
+
+
 
   return (
     <div className="h-screen flex flex-col bg-gray-50">
@@ -241,6 +281,7 @@ export default function HomePage() {
       <header className="bg-white border-b border-gray-200 px-4 sm:px-8 py-3 sm:py-4">
         <h1 className="text-xl sm:text-2xl font-bold text-gray-800">Ring Builder</h1>
       </header>
+
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col lg:flex-row overflow-hidden bg-gradient-to-tr from-slate-900 via-[#1e293b] to-slate-800">
@@ -271,6 +312,7 @@ export default function HomePage() {
         </div>
 
         {/* Right Panel - Controls */}
+
         <div className="flex w-full lg:w-[30%] xl:w-[25%] 2xl:w-[20%] bg-transparent flex-col h-[50vh] lg:h-full">
           {/* Tabs */}
           <ResponsiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
@@ -289,27 +331,10 @@ export default function HomePage() {
                   >
                     <div className="space-y-4">
                       <div>
-                        <label className="text-sm font-medium text-white mb-2 block">
-                          Head Metal Color
-                        </label>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-1.5 sm:gap-2">
-                          {metalOptions.map(([color, label]) => (
-                            <MetalColorButton
-                              key={label}
-                              color={color}
-                              label={label}
-                              isSelected={prongColor === color}
-                              onClick={() => changeProngColor(color)}
-                            />
-                          ))}
-                        </div>
-                      </div>
-
-                      <div>
                         <label className="text-sm font-medium text-white mt-2 mb-2 block">
                           Select Metal Type
                         </label>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-1.5 sm:gap-2">
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-1.5 sm:gap-2">
                           {metalOptions.map(([color, label]) => (
                             <MetalColorButton
                               key={label}
@@ -317,6 +342,24 @@ export default function HomePage() {
                               label={label}
                               isSelected={bandColor === color}
                               onClick={() => changeBandColor(color)}
+                            />
+                          ))}
+                        </div>
+                        
+                      </div>
+
+                      <div>
+                        <label className="text-sm font-medium text-white mb-2 block">
+                          Head Metal Color
+                        </label>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-1.5 sm:gap-2">
+                          {metalOptions.map(([color, label]) => (
+                            <MetalColorButton
+                              key={label}
+                              color={color}
+                              label={label}
+                              isSelected={prongColor === color}
+                              onClick={() => changeProngColor(color)}
                             />
                           ))}
                         </div>
@@ -336,7 +379,7 @@ export default function HomePage() {
                           <button
                             key={p.name}
                             onClick={() => setSelectedProng(p)}
-                            className={`px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg transition-all text-sm sm:text-base ${selectedProng?.name === p.name
+                            className={`px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg  transition-all text-sm sm:text-base ${selectedProng?.name === p.name
                               ? "bg-blue-600 text-white shadow-md"
                               : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                               }`}
@@ -353,6 +396,7 @@ export default function HomePage() {
               {/* Diamonds Tab */}
               {activeTab === "diamonds" && (
                 <>
+
                   <PremiumAccordion
                     title="Select Your Stones"
                     icon="✨"
@@ -360,7 +404,27 @@ export default function HomePage() {
                     onToggle={() => toggleAccordion('selectStones')}
                   >
                     <div className="space-y-4">
-                      {/* Carat Weight - Pehle */}
+                      <div>
+                        <label className="text-sm font-medium text-white mb-2 block">
+                          Center Stone Shape
+                        </label>
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-2 sm:gap-3">
+                          {diamondOptions.map((d) => (
+                            <button
+                              key={d.name}
+                              onClick={() => setSelectedDiamond(d)}
+                              className={`p-2 rounded-lg transition-all text-center ${selectedDiamond?.name === d.name
+                                ? "bg-blue-600 shadow-lg scale-105 text-white"
+                                : "bg-gray-50 hover:bg-gray-100 "
+                                }`}
+                            >
+                              <img src={d.image_icon} alt={d.name} width={40} height={40} className="mx-auto w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />
+                              <span className="text-sm mt-1 block">{d.name}</span>
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+
                       <div>
                         <label className="text-sm font-medium text-white mb-2 block">
                           Carat Weight
@@ -380,47 +444,10 @@ export default function HomePage() {
                           ))}
                         </div>
                       </div>
-
-                      {/* Center Stone Shape - Baad me, with Load More button */}
-                      <div>
-                        <label className="text-sm font-medium text-white mb-2 block">
-                          Center Stone Shape
-                        </label>
-                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-2 sm:gap-3">
-                          {visibleDiamonds.map((d) => (
-                            <button
-                              key={d.name}
-                              onClick={() => setSelectedDiamond(d)}
-                              className={`p-2 rounded-lg transition-all text-center ${selectedDiamond?.name === d.name
-                                ? "bg-blue-600 shadow-lg scale-105 text-white"
-                                : "bg-gray-50 hover:bg-gray-100"
-                                }`}
-                            >
-                              <img src={d.image_icon} alt={d.name} width={40} height={40} className="mx-auto w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />
-                              <span className="text-sm mt-1 block">{d.name}</span>
-                            </button>
-                          ))}
-                        </div>
-                        
-                        {/* Load More Button - Ek click me sab dikhao */}
-                        {hasMoreDiamonds && (
-                          <div className="mt-4 flex justify-center">
-                            <button
-                              onClick={handleLoadMore}
-                              className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center gap-2 text-sm sm:text-base font-medium"
-                            >
-                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                              </svg>
-                              Load More
-                            </button>
-                          </div>
-                        )}
-                      </div>
                     </div>
                   </PremiumAccordion>
 
-                  {/* Center Stones Accordion - Shank Type */}
+
                   <PremiumAccordion
                     title="Center Stones"
                     icon="💎"
@@ -457,20 +484,25 @@ export default function HomePage() {
                 <div className="grid grid-cols-2 gap-2 sm:gap-3">
                   {themes.map((theme, i) => {
                     const isActive = themeClass === theme;
+
                     return (
                       <button
                         key={i}
                         onClick={() => setThemeClass(theme)}
                         style={{ background: theme.includes('bg-') ? undefined : theme }}
                         className={`
-                          h-16 sm:h-16 rounded-lg transition-all duration-300
-                          ${theme}
-                          ${isActive
-                            ? "ring-4 ring-white shadow-[0_0_20px_rgba(255,255,255,0.6)]"
+        h-16 sm:h-16 rounded-lg transition-all duration-300
+        
+        ${theme}
+        
+        ${isActive
+                            ?  // 🔥 ACTIVE STYLE
+                            "ring-4 ring-white shadow-[0_0_20px_rgba(255,255,255,0.6)]"
                             : "hover:scale-105 opacity-80 hover:opacity-100"
                           }
-                        `}
+      `}
                       >
+
                       </button>
                     );
                   })}

@@ -19,7 +19,7 @@ export const prongOptions = [
         default:
           "/assets/prong/ClassicProng/Solitire/weight_1.0/Oval_Prong.glb",
         1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Oval_Prong.glb",
-
+        
         2.0: "/assets/prong/ClassicProng/Solitire/weight_2.0/OVAL _weight_2.0_prong.glb",
         3.0: "/assets/prong/ClassicProng/Solitire/weight_3.0/Oval_3.0_weight_prong.glb",
         4.0: "/assets/prong/ClassicProng/Solitire/weight_4.0/Oval_4.0_weight_prong.glb",
@@ -29,7 +29,7 @@ export const prongOptions = [
         default:
           "/assets/prong/ClassicProng/Solitire/weight_1.0/Asscher_Prong.glb",
         1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Asscher_Prong.glb",
-
+        
         2.0: "/assets/prong/ClassicProng/Solitire/weight_2.0/Asscher S_weight_2.0_prong.glb",
         3.0: "/assets/prong/ClassicProng/Solitire/weight_3.0/Asscher_3.0_weight_prong.glb",
         4.0: "/assets/prong/ClassicProng/Solitire/weight_4.0/Asscher_4.0_weight_prong.glb",
@@ -40,19 +40,19 @@ export const prongOptions = [
         default:
           "/assets/prong/ClassicProng/Solitire/weight_1.0/Round_Diamond porong.glb",
         1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Round_Diamond porong.glb",
-
+        
         2.0: "/assets/prong/ClassicProng/Solitire/weight_2.0/Round_weight_2.0_prong.glb",
         3.0: "/assets/prong/ClassicProng/Solitire/weight_3.0/Round_3.0__weight_prong.glb",
         4.0: "/assets/prong/ClassicProng/Solitire/weight_4.0/Round_4.0_weight_prong.glb",
         5.0: "/assets/prong/ClassicProng/Solitire/weight_5.0/Round_5.0_weight_prong.glb",
 
-
+       
       },
       Cushion: {
         default:
           "/assets/prong/ClassicProng/Solitire/weight_1.0/Cushion Brilliant_Prong.glb",
         1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Cushion Brilliant_Prong.glb",
-
+        
         // 2.0: "/assets/prong/ClassicProng/Solitire/weight_2.0/Cushion_weight_2.0_prong.glb",
         // 3.0: "/assets/prong/ClassicProng/Solitire/weight_3.0/Cushion_3.0_weight_prong.glb",
         // 4.0: "/assets/prong/ClassicProng/Solitire/weight_4.0/Cushion_4.0_weight_prong.glb",
@@ -62,7 +62,7 @@ export const prongOptions = [
         4.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Cushion Brilliant_Prong.glb",
         5.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Cushion Brilliant_Prong.glb",
 
-
+      
       },
       // CushionSquare: {
       //   default: "/assets/prong/ClassicProng/Solitire/weight_5.0/Cushion square_Prong.glb",
@@ -73,31 +73,31 @@ export const prongOptions = [
         default:
           "/assets/prong/ClassicProng/Solitire/weight_1.0/Emerald_Square_Prong.glb",
         1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Emerald_Square_Prong.glb",
-
+        
         2.0: "/assets/prong/ClassicProng/Solitire/weight_2.0/Emerald S_weight_2.0_prong.glb",
         3.0: "/assets/prong/ClassicProng/Solitire/weight_3.0/EM S_3.0_weight_prong.glb",
         4.0: "/assets/prong/ClassicProng/Solitire/weight_4.0/Emerald S_4.0_weight_prong.glb",
         5.0: "/assets/prong/ClassicProng/Solitire/weight_5.0/Emerald S_5.0_weight_prong.glb",
 
-
+     
       },
       Princess: {
         default:
           "/assets/prong/ClassicProng/Solitire/weight_1.0/PrincessHiden helo.glb",
         1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/PrincessHiden helo.glb",
-
+        
         2.0: "/assets/prong/ClassicProng/Solitire/weight_2.0/Princess_weight_2.0_prong.glb",
         3.0: "/assets/prong/ClassicProng/Solitire/weight_3.0/Princess_3.0_weight_prong.glb",
         4.0: "/assets/prong/ClassicProng/Solitire/weight_4.0/Princess_4.0_weight_prong.glb",
         5.0: "/assets/prong/ClassicProng/Solitire/weight_5.0/Princess_5.0_weight_prong.glb",
 
-
+       
       },
       Radiant: {
         default:
           "/assets/prong/ClassicProng/Solitire/weight_1.0/Radiant_Prong.glb",
         1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Radiant_Prong.glb",
-
+        
         2.0: "/assets/prong/ClassicProng/Solitire/weight_2.0/Radiant _weight_2.0_prong.glb",
         3.0: "/assets/prong/ClassicProng/Solitire/weight_3.0/Radiant_3.0_weight_prong.glb",
         4.0: "/assets/prong/ClassicProng/Solitire/weight_4.0/Radiant_4.0_weight_prong.glb",
@@ -108,7 +108,7 @@ export const prongOptions = [
         default:
           "/assets/prong/ClassicProng/Solitire/weight_1.0/Emerald_Prong.glb",
         1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Emerald_Prong.glb",
-
+        
         2.0: "/assets/prong/ClassicProng/Solitire/weight_2.0/Emerald _weight_2.0_prong.glb",
         3.0: "/assets/prong/ClassicProng/Solitire/weight_3.0/Emerald_3.0_weight_prong.glb",
         4.0: "/assets/prong/ClassicProng/Solitire/weight_4.0/Emerald _4.0_weight_prong.glb",
@@ -119,7 +119,7 @@ export const prongOptions = [
         default:
           "/assets/prong/ClassicProng/Solitire/weight_1.0/Heart_weight_1.0_prong.glb",
         1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Heart_weight_1.0_prong.glb",
-
+        
         2.0: "/assets/prong/ClassicProng/Solitire/weight_2.0/Heart_weight_2.0_prong.glb",
         3.0: "/assets/prong/ClassicProng/Solitire/weight_3.0/Hart_3.0_weight_prong.glb",
         4.0: "/assets/prong/ClassicProng/Solitire/weight_4.0/Hart_4.0_weight_prong.glb",
@@ -130,7 +130,7 @@ export const prongOptions = [
         default:
           "/assets/prong/ClassicProng/Solitire/weight_1.0/Pear_Prong.glb",
         1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Pear_Prong.glb",
-
+        
         // 2.0: "/assets/prong/ClassicProng/Solitire/weight_2.0/PEAR _weight_2.0_prong.glb",
         // 3.0: "/assets/prong/ClassicProng/Solitire/weight_3.0/Pear_3.0_weight_prong.glb",
         // 4.0: "/assets/prong/ClassicProng/Solitire/weight_4.0/Pear_4.0_weight_prong.glb",
@@ -184,7 +184,7 @@ export const prongOptions = [
         4.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_4.0/Round_weight_4.0_Solitire Bezel.glb",
         5.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_4.0/Round_weight_4.0_Solitire Bezel.glb",
 
-
+       
       },
       Cushion: {
         default:
@@ -201,7 +201,7 @@ export const prongOptions = [
         4.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Cushion_weight_1.0_Solitire_Bezel.glb",
         5.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Cushion_weight_1.0_Solitire_Bezel.glb",
 
-
+      
       },
       Heart: {
         default:
@@ -212,7 +212,7 @@ export const prongOptions = [
         4.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_4.0/Heart_weight_4.0_Solitire Bezel.glb",
         5.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_5.0/Cushion_5.0_weight_prong.glb",
 
-
+      
       },
       Marquise: {
         default:
@@ -229,12 +229,12 @@ export const prongOptions = [
         4.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_4.0/Marquise_weight_4.0_Solitire Bezel.glb",
         5.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_4.0/Marquise_weight_4.0_Solitire Bezel.glb",
 
-
+      
       },
       // CushionSquare: {
       //   default: "/assets/prong/ClassicProng/Solitire Bezel/weight_5.0/Cushion square_Prong.glb",
       //   1.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_5.0/Cushion square_Prong.glb",
-
+      
       // },
       EmeraldSquare: {
         default:
@@ -245,7 +245,7 @@ export const prongOptions = [
         4.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_4.0/Emerald S_weight_4.0_Solitire Bezel.glb",
         5.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_5.0/Emerald S_weight_Solitire Bezel.glb",
 
-
+     
       },
       Princess: {
         default:
@@ -255,7 +255,7 @@ export const prongOptions = [
         3.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_3.0/Princess_weight_3.0_Solitire Bezel.glb",
         4.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_4.0/Princess_weight_4.0_Solitire Bezel.glb",
         5.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_5.0/Princess_weight_5.0_Solitire Bezel.glb",
-
+       
       },
       Radiant: {
         default:
@@ -323,31 +323,31 @@ export const prongOptions = [
       Oval: {
         default:
           "/assets/prong/classic Hidden Halo/weight_1.0/Oval_weight_1.0_prong.glb",
-        5.0: "/assets/prong/classic Hidden Halo/weight_5.0/Oval_weight_5.0_prong.glb",
-        4.0: "/assets/prong/classic Hidden Halo/weight_4.0/Oval_4.0_weight_prong.glb",
-        3.0: "/assets/prong/classic Hidden Halo/weight_3.0/Oval_3.0_weight_prong.glb",
-        2.0: "/assets/prong/classic Hidden Halo/weight_2.0/OVAL_2.0_weight_prong.glb",
-        1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Oval_weight_1.0_prong.glb",
+         5.0: "/assets/prong/classic Hidden Halo/weight_5.0/Oval_weight_5.0_prong.glb",
+          4.0: "/assets/prong/classic Hidden Halo/weight_4.0/Oval_4.0_weight_prong.glb",
+          3.0: "/assets/prong/classic Hidden Halo/weight_3.0/Oval_3.0_weight_prong.glb",
+          2.0: "/assets/prong/classic Hidden Halo/weight_2.0/OVAL_2.0_weight_prong.glb",
+          1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Oval_weight_1.0_prong.glb",
 
       },
       CushionSquare: {
         default:
           "/assets/prong/classic Hidden Halo/weight_1.0/Cushion S_weight_1.0_prong.glb",
         5.0: "/assets/prong/classic Hidden Halo/weight_5.0/Cushion S_weight_5.0_prong.glb",
-        4.0: "/assets/prong/classic Hidden Halo/weight_4.0/Cushion S_4.0_weight_prong.glb",
-        3.0: "/assets/prong/classic Hidden Halo/weight_3.0/Cushion S_3.0_weight_prong.glb",
-        2.0: "/assets/prong/classic Hidden Halo/weight_2.0/Cushion S_2.0_weight_prong.glb",
-        1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Cushion S_weight_1.0_prong.glb",
-
+          4.0: "/assets/prong/classic Hidden Halo/weight_4.0/Cushion S_4.0_weight_prong.glb",
+          3.0: "/assets/prong/classic Hidden Halo/weight_3.0/Cushion S_3.0_weight_prong.glb",
+          2.0: "/assets/prong/classic Hidden Halo/weight_2.0/Cushion S_2.0_weight_prong.glb",
+          1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Cushion S_weight_1.0_prong.glb",
+      
       },
       Round: {
         default:
           "/assets/prong/classic Hidden Halo/weight_1.0/Round_weight_1.0_prong.glb",
         5.0: "/assets/prong/classic Hidden Halo/weight_5.0/Round_5.0_weight_prong.glb",
-        4.0: "/assets/prong/classic Hidden Halo/weight_4.0/Round_4.0_weight_prong.glb",
-        3.0: "/assets/prong/classic Hidden Halo/weight_3.0/Round_3.0_weight_prong.glb",
-        2.0: "/assets/prong/classic Hidden Halo/weight_2.0/Round_2.0_weight_prong.glb",
-        1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Round_weight_1.0_prong.glb",
+          4.0: "/assets/prong/classic Hidden Halo/weight_4.0/Round_4.0_weight_prong.glb",
+          3.0: "/assets/prong/classic Hidden Halo/weight_3.0/Round_3.0_weight_prong.glb",
+          2.0: "/assets/prong/classic Hidden Halo/weight_2.0/Round_2.0_weight_prong.glb",
+          1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Round_weight_1.0_prong.glb",
 
       },
       Cushion: {
@@ -359,13 +359,13 @@ export const prongOptions = [
         //   2.0: "/assets/prong/classic Hidden Halo/weight_2.0/Cushion_2.0_weight_prong.glb",
         //   1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Cushion_weight_1.0_prong.glb",
 
-        5.0: "/assets/prong/classic Hidden Halo/weight_1.0/Cushion_weight_1.0_prong.glb",
-        4.0: "/assets/prong/classic Hidden Halo/weight_1.0/Cushion_weight_1.0_prong.glb",
-        3.0: "/assets/prong/classic Hidden Halo/weight_1.0/Cushion_weight_1.0_prong.glb",
-        2.0: "/assets/prong/classic Hidden Halo/weight_1.0/Cushion_weight_1.0_prong.glb",
-        1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Cushion_weight_1.0_prong.glb",
+           5.0: "/assets/prong/classic Hidden Halo/weight_1.0/Cushion_weight_1.0_prong.glb",
+          4.0: "/assets/prong/classic Hidden Halo/weight_1.0/Cushion_weight_1.0_prong.glb",
+          3.0: "/assets/prong/classic Hidden Halo/weight_1.0/Cushion_weight_1.0_prong.glb",
+          2.0: "/assets/prong/classic Hidden Halo/weight_1.0/Cushion_weight_1.0_prong.glb",
+          1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Cushion_weight_1.0_prong.glb",
 
-
+       
       },
       // CushionSquare: {
       //   default: "/assets/prong/ClassicProng/Solitire/weight_5.0/Cushion square_Prong.glb",
@@ -376,40 +376,40 @@ export const prongOptions = [
         default:
           "/assets/prong/classic Hidden Halo/weight_1.0/Emerald S_weight_1.0_prong.glb",
         5.0: "/assets/prong/classic Hidden Halo/weight_5.0/Emerald S_wight_5.0_prong.glb",
-        4.0: "/assets/prong/classic Hidden Halo/weight_4.0/Emerald S_4.0_weight_prong.glb",
-        3.0: "/assets/prong/classic Hidden Halo/weight_3.0/EM S_3.0_weight_prong.glb",
-        2.0: "/assets/prong/classic Hidden Halo/weight_2.0/Emerald S_2.0_weight_prong.glb",
-        1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Emerald S_weight_1.0_prong.glb",
+          4.0: "/assets/prong/classic Hidden Halo/weight_4.0/Emerald S_4.0_weight_prong.glb",
+          3.0: "/assets/prong/classic Hidden Halo/weight_3.0/EM S_3.0_weight_prong.glb",
+          2.0: "/assets/prong/classic Hidden Halo/weight_2.0/Emerald S_2.0_weight_prong.glb",
+          1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Emerald S_weight_1.0_prong.glb",
 
       },
       Princess: {
         default:
           "/assets/prong/classic Hidden Halo/weight_1.0/PRINCESS_weight_1.0_prong.glb",
         5.0: "/assets/prong/classic Hidden Halo/weight_5.0/Princess_5.0_weight_prong.glb",
-        4.0: "/assets/prong/classic Hidden Halo/weight_4.0/Princess_4.0_weight_prong.glb",
-        3.0: "/assets/prong/classic Hidden Halo/weight_3.0/Princess_3.0_weight_prong.glb",
-        2.0: "/assets/prong/classic Hidden Halo/weight_2.0/Princess_2.0_weight_prong.glb",
-        1.0: "/assets/prong/classic Hidden Halo/weight_1.0/PRINCESS_weight_1.0_prong.glb",
+          4.0: "/assets/prong/classic Hidden Halo/weight_4.0/Princess_4.0_weight_prong.glb",
+          3.0: "/assets/prong/classic Hidden Halo/weight_3.0/Princess_3.0_weight_prong.glb",
+          2.0: "/assets/prong/classic Hidden Halo/weight_2.0/Princess_2.0_weight_prong.glb",
+          1.0: "/assets/prong/classic Hidden Halo/weight_1.0/PRINCESS_weight_1.0_prong.glb",
 
       },
       Radiant: {
         default:
           "/assets/prong/classic Hidden Halo/weight_1.0/Radiant_weight_1.0_prong.glb",
-        5.0: "/assets/prong/classic Hidden Halo/weight_5.0/Radiant5.0_weight_prong.glb",
-        4.0: "/assets/prong/classic Hidden Halo/weight_4.0/Radiant_4.0_weight_prong.glb",
-        3.0: "/assets/prong/classic Hidden Halo/weight_3.0/Radiant_3.0_weight_prong.glb",
-        2.0: "/assets/prong/classic Hidden Halo/weight_2.0/Radiant _2.0_weight_prong.glb",
-        1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Radiant_weight_1.0_prong.glb",
+         5.0: "/assets/prong/classic Hidden Halo/weight_5.0/Radiant5.0_weight_prong.glb",
+          4.0: "/assets/prong/classic Hidden Halo/weight_4.0/Radiant_4.0_weight_prong.glb",
+          3.0: "/assets/prong/classic Hidden Halo/weight_3.0/Radiant_3.0_weight_prong.glb",
+          2.0: "/assets/prong/classic Hidden Halo/weight_2.0/Radiant _2.0_weight_prong.glb",
+          1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Radiant_weight_1.0_prong.glb",
 
       },
       Emerald: {
         default:
           "/assets/prong/classic Hidden Halo/weight_1.0/Emerald_weight_1.0_prong.glb",
         5.0: "/assets/prong/classic Hidden Halo/weight_5.0/Emerald_weight_5.0_prong.glb",
-        4.0: "/assets/prong/classic Hidden Halo/weight_4.0/Emerald_4.0_weight_prong.glb",
-        3.0: "/assets/prong/classic Hidden Halo/weight_3.0/Emerald_3.0_weight_prong.glb",
-        2.0: "/assets/prong/classic Hidden Halo/weight_2.0/Emerald _2.0_weight_prong.glb",
-        1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Emerald_weight_1.0_prong.glb",
+          4.0: "/assets/prong/classic Hidden Halo/weight_4.0/Emerald_4.0_weight_prong.glb",
+          3.0: "/assets/prong/classic Hidden Halo/weight_3.0/Emerald_3.0_weight_prong.glb",
+          2.0: "/assets/prong/classic Hidden Halo/weight_2.0/Emerald _2.0_weight_prong.glb",
+          1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Emerald_weight_1.0_prong.glb",
 
       },
       Heart: {
@@ -433,8 +433,8 @@ export const prongOptions = [
         //   1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Pear_weight_1.0_prong.glb",
 
 
-        1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Pear_weight_1.0_prong.glb",
-
+          1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Pear_weight_1.0_prong.glb",
+        
       },
     },
     defaultPath:
@@ -446,31 +446,31 @@ export const prongOptions = [
       Oval: {
         default:
           "/assets/prong/Pave Hidden Halo/weight_1.0/Oval_weight_1.0_prong.glb",
-        5.0: "/assets/prong/Pave Hidden Halo/weight_5.0/Oval_weight_5.0_prong.glb",
-        4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Oval_weight_4.0_prong.glb",
-        3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Oval_weight_3.0_prong.glb",
-        2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/OVAL_weight_2.0_prong.glb",
-        1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Oval_weight_1.0_prong.glb",
+         5.0: "/assets/prong/Pave Hidden Halo/weight_5.0/Oval_weight_5.0_prong.glb",
+          4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Oval_weight_4.0_prong.glb",
+          3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Oval_weight_3.0_prong.glb",
+          2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/OVAL_weight_2.0_prong.glb",
+          1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Oval_weight_1.0_prong.glb",
 
       },
       CushionSquare: {
         default:
           "/assets/prong/Pave Hidden Halo/weight_1.0/Cushion S_weight_1.0_prong.glb",
         5.0: "/assets/prong/Pave Hidden Halo/weight_5.0/Cushion S_weight_5.0_prong.glb",
-        4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Cushion S_weight_4.0_prong.glb",
-        3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Cushion S_weight_3.0_prong.glb",
-        2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/Cushion S_weight_2.0_prong.glb",
-        1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Cushion S_weight_1.0_prong.glb",
-
+          4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Cushion S_weight_4.0_prong.glb",
+          3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Cushion S_weight_3.0_prong.glb",
+          2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/Cushion S_weight_2.0_prong.glb",
+          1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Cushion S_weight_1.0_prong.glb",
+      
       },
       Round: {
         default:
           "/assets/prong/Pave Hidden Halo/weight_1.0/Round_weight_1.0_prong.glb",
         5.0: "/assets/prong/Pave Hidden Halo/weight_5.0/Round_weight_5.0_prong.glb",
-        4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Round_weight_4.0_prong.glb",
-        3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Round_weight_3.0_prong.glb",
-        2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/Round_weight_2.0_prong.glb",
-        1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Round_weight_1.0_prong.glb",
+          4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Round_weight_4.0_prong.glb",
+          3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Round_weight_3.0_prong.glb",
+          2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/Round_weight_2.0_prong.glb",
+          1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Round_weight_1.0_prong.glb",
 
       },
       Cushion: {
@@ -481,12 +481,12 @@ export const prongOptions = [
         //   3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Cushion_weight_3.0_prong.glb",
         //   2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/Cushion_weight_2.0_prong.glb",
         //   1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Cushion _weight_1.0_prong.glb",
-
+        
         1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Cushion _weight_1.0_prong.glb",
 
 
 
-
+       
       },
       // CushionSquare: {
       //   default: "/assets/prong/ClassicProng/Solitire/weight_5.0/Cushion square_Prong.glb",
@@ -497,40 +497,40 @@ export const prongOptions = [
         default:
           "/assets/prong/Pave Hidden Halo/weight_1.0/Emerald S_weight_1.0_prong.glb",
         5.0: "/assets/prong/Pave Hidden Halo/weight_5.0/Emerald S_weight_5.0_prong.glb",
-        4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Emerald S_weight_4.0_prong.glb",
-        3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/EM S_weight_3.0_prong.glb",
-        2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/Emerald S_weight_2.0_prong.glb",
-        1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Emerald S_weight_1.0_prong.glb",
+          4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Emerald S_weight_4.0_prong.glb",
+          3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/EM S_weight_3.0_prong.glb",
+          2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/Emerald S_weight_2.0_prong.glb",
+          1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Emerald S_weight_1.0_prong.glb",
 
       },
       Princess: {
         default:
           "/assets/prong/Pave Hidden Halo/weight_1.0/PRINCESS_weight_1.0_prong.glb",
         5.0: "/assets/prong/Pave Hidden Halo/weight_5.0/Princess_weight_5.0_prong.glb",
-        4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Princess_weight_4.0_prong.glb",
-        3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Princess_weight_3.0_prong.glb",
-        2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/Princess_weight_2.0_prong.glb",
-        1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/PRINCESS_weight_1.0_prong.glb",
+          4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Princess_weight_4.0_prong.glb",
+          3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Princess_weight_3.0_prong.glb",
+          2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/Princess_weight_2.0_prong.glb",
+          1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/PRINCESS_weight_1.0_prong.glb",
 
       },
       Radiant: {
         default:
           "/assets/prong/Pave Hidden Halo/weight_1.0/Radiant_weight-1.0_prong.glb",
-        5.0: "/assets/prong/Pave Hidden Halo/weight_5.0/Radiant_weight_5.0_prong.glb",
-        4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Radiant_weight_4.0_prong.glb",
-        3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Radiant_weight_3.0_prong.glb",
-        2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/Radiant _weight_2.0_prong.glb",
-        1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Radiant_weight-1.0_prong.glb",
+         5.0: "/assets/prong/Pave Hidden Halo/weight_5.0/Radiant_weight_5.0_prong.glb",
+          4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Radiant_weight_4.0_prong.glb",
+          3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Radiant_weight_3.0_prong.glb",
+          2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/Radiant _weight_2.0_prong.glb",
+          1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Radiant_weight-1.0_prong.glb",
 
       },
       Emerald: {
         default:
           "/assets/prong/Pave Hidden Halo/weight_1.0/Emerald_weight_1.0_prong.glb",
         5.0: "/assets/prong/Pave Hidden Halo/weight_5.0/Emerald_weight_5.0_prong.glb",
-        4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Emerald_weight_4.0_prong.glb",
-        3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Emerald_weight_3.0_prong.glb",
-        2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/Emerald _weight_2.0_prong.glb",
-        1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Emerald_weight_1.0_prong.glb",
+          4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Emerald_weight_4.0_prong.glb",
+          3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Emerald_weight_3.0_prong.glb",
+          2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/Emerald _weight_2.0_prong.glb",
+          1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Emerald_weight_1.0_prong.glb",
 
       },
       // Heart: {
@@ -546,9 +546,9 @@ export const prongOptions = [
         //   4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Pear_weight_4.0_prong.glb",
         //   3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Pear_weight_3.0_prong.glb",
         //   2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/PEAR _weight_2.0_prong.glb",
-        1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Pear_weight_1.0_prong.glb",
+          1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Pear_weight_1.0_prong.glb",
 
-
+        
       },
     },
     defaultPath:
@@ -576,442 +576,68 @@ export const prongOptions = [
   // add more here
 ];
 
-// export const diamondOptions = [
-//   {
-//     name: "Round",
-//     path: "/assets/diamond/Round_diamond.glb",
-//     image_icon: "/assets/diamond-icon/Round.png",
-//   },
-//   // {
-//   //   name: "Ascher",
-//   //   path: "/assets/diamond/Diamond - Pink.glb",
-//   //   image_icon: "/assets/diamond-icon/Ascher.png",
-//   // },
-//   {
-//     name: "Cushion",
-//     path: "/assets/diamond/Cushion_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Antique Cushion.png",
-//   },
-//   {
-//     name: "CushionSquare",
-//     path: "/assets/diamond/Cushion square_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Cushion.png",
-//   },
-
-//   {
-//     name: "Emerald",
-//     path: "/assets/diamond/Diamond - Pink.glb",
-//     image_icon: "/assets/diamond-icon/Emerald.png",
-//   },
-//   {
-//     name: "EmeraldSquare",
-//     path: "/assets/diamond/Em square_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/SQ. Emerald.png",
-//   },
-//   {
-//     name: "Heart",
-//     path: "/assets/diamond/Diamond - Pink.glb",
-//     image_icon: "/assets/diamond-icon/Heart.png",
-//   },
-//   {
-//     name: "Marquise",
-//     path: "/assets/diamond/Diamond - Pink.glb",
-//     image_icon: "/assets/diamond-icon/Marquise.png",
-//   },
-//   {
-//     name: "Oval",
-//     path: "/assets/diamond/OVAL_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Oval.png",
-//   },
-//   {
-//     name: "Pear",
-//     path: "/assets/diamond/Pear_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Pear.png",
-//   },
-//   {
-//     name: "Princess",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Princess.png",
-//   },
-//   // {
-//   //   name: "Radiant",
-//   //   path: "/assets/diamond/Radiant_Diamond.glb",
-//   //   image_icon: "/assets/diamond-icon/Radiant.png",
-//   // },
-
-//   // -----------------------------------------------------------------
-//   {
-//     name: "Antiqe Oval",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Antiqe_Oval.png",
-//   },
-//   {
-//     name: "Antique_Asscher",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Antique_Asscher.png",
-//   }, {
-//     name: "Antique_Cushion",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Antique_Cushion.png",
-//   }, {
-//     name: "Ascher",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Ascher.png",
-//   }, {
-//     name: "Briolette",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Briolette.png",
-//   }, {
-//     name: "Bugget",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Bugget.png",
-//   }, {
-//     name: "Bull",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Bull.png",
-//   }, {
-//     name: "Bullet_Cut",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Bullet_Cut.png",
-//   }, {
-//     name: "Butterfly",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Butterfly.png",
-//   }, {
-//     name: "Circular_Brilliant",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Circular_Brilliant.png",
-//   },
-//   {
-//     name: "Cushion",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Cushion.png",
-//   }, {
-//     name: "Emerald",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Emerald.png",
-//   }, {
-//     name: "European_Cut",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/European_Cut.png",
-//   }, {
-//     name: "Half_Moon",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Half_Moon.png",
-//   }, {
-//     name: "Heart",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Heart.png",
-//   }, {
-//     name: "Hexagonal",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Hexagonal.png",
-//   }, {
-//     name: "Horse",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Horse.png",
-//   }, {
-//     name: "Kite",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Kite.png",
-//   }, {
-//     name: "Lozenge",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Lozenge.png",
-//   }, {
-//     name: "Marquise",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Marquise.png",
-//   },
-//   {
-//     name: "mix",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/mix.png",
-//   }, {
-//     name: "Princess",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Princess.png",
-//   }, {
-//     name: "Princess",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Princess.png",
-//   }, {
-//     name: "Princess",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Princess.png",
-//   }, {
-//     name: "Princess",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Princess.png",
-//   }, {
-//     name: "Princess",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Princess.png",
-//   }, {
-//     name: "Princess",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Princess.png",
-//   }, {
-//     name: "Princess",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Princess.png",
-//   },
-//   {
-//     name: "Princess",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Princess.png",
-//   }, {
-//     name: "Princess",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Princess.png",
-//   }, {
-//     name: "Princess",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Princess.png",
-//   }, {
-//     name: "Princess",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Princess.png",
-//   }, {
-//     name: "Princess",
-//     path: "/assets/diamond/Pricess_Diamond.glb",
-//     image_icon: "/assets/diamond-icon/Princess.png",
-//   },
-// ];
-
-
-
 export const diamondOptions = [
   {
     name: "Round",
-    path: "/assets/diamond/Pricess_Diamond.glb",
+    path: "/assets/diamond/Round_diamond.glb",
     image_icon: "/assets/diamond-icon/Round.png",
   },
+  // {
+  //   name: "Ascher",
+  //   path: "/assets/diamond/Diamond - Pink.glb",
+  //   image_icon: "/assets/diamond-icon/Ascher.png",
+  // },
   {
-    name: "Oval",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Oval.png",
+    name: "Cushion",
+    path: "/assets/diamond/Cushion_Diamond.glb",
+    image_icon: "/assets/diamond-icon/Antique Cushion.png",
   },
   {
+    name: "CushionSquare",
+    path: "/assets/diamond/Cushion square_Diamond.glb",
+    image_icon: "/assets/diamond-icon/Cushion.png",
+  },
+
+  {
     name: "Emerald",
-    path: "/assets/diamond/Pricess_Diamond.glb",
+    path: "/assets/diamond/Diamond - Pink.glb",
     image_icon: "/assets/diamond-icon/Emerald.png",
   },
   {
-    name: "Radiant",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Radiant.png",
-  },
-  {
-    name: "Cushion",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Cushion.png",
-  },
-  {
-    name: "Antique_Cushion",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Antique_Cushion.png",
-  },
-  {
-    name: "Pear",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Pear.png",
+    name: "EmeraldSquare",
+    path: "/assets/diamond/Em square_Diamond.glb",
+    image_icon: "/assets/diamond-icon/SQ. Emerald.png",
   },
   {
     name: "Heart",
-    path: "/assets/diamond/Pricess_Diamond.glb",
+    path: "/assets/diamond/Diamond - Pink.glb",
     image_icon: "/assets/diamond-icon/Heart.png",
+  },
+  {
+    name: "Marquise",
+    path: "/assets/diamond/Diamond - Pink.glb",
+    image_icon: "/assets/diamond-icon/Marquise.png",
+  },
+  {
+    name: "Oval",
+    path: "/assets/diamond/OVAL_Diamond.glb",
+    image_icon: "/assets/diamond-icon/Oval.png",
+  },
+  {
+    name: "Pear",
+    path: "/assets/diamond/Pear_Diamond.glb",
+    image_icon: "/assets/diamond-icon/Pear.png",
   },
   {
     name: "Princess",
     path: "/assets/diamond/Pricess_Diamond.glb",
     image_icon: "/assets/diamond-icon/Princess.png",
   },
-  {
-    name: "Ascher",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Ascher.png",
-  },
-  {
-    name: "mix",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/mix.png",
-  },
-  {
-    name: "Duchess Cut",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Marquise.png",
-  },
-  {
-    name: "Marquise",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Marquise.png",
-  },
-  {
-    name: "Stap_Marquise",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Stap_Marquise.png",
-  },
-  {
-    name: "SQ_Emerald",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/SQ_Emerald.png",
-  },
-  {
-    name: "SQ_Radiant",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/SQ_Radiant.png",
-  },
-  {
-    name: "Squre_Brilliant_Cushion",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Squre_Brilliant_Cushion.png",
-  },
-  {
-    name: "Octagonal",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Octagonal.png",
-  },
-  {
-    name: "Octagon H&A", // Added based on screenshot, needs entry if missing
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Octagonal.png",
-  },
-  {
-    name: "Octagon", // Added based on screenshot
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Octagonal.png",
-  },
-  {
-    name: "Hexagonal",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Hexagonal.png",
-  },
-  {
-    name: "European_Cut",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/European_Cut.png",
-  },
-  {
-    name: "Antiqe_Oval",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Antiqe_Oval.png",
-  },
-  {
-    name: "Antique_Asscher",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Antique_Asscher.png",
-  },
-  {
-    name: "Modified_Radiant",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Modified_Radiant.png",
-  },
-  {
-    name: "Rose",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Rose.png",
-  },
-  {
-    name: "Bugget",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Bugget.png",
-  },
-  {
-    name: "Tapered Baguette", // Added based on screenshot
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Trapped_Budget.png",
-  },
-  {
-    name: "Tapered_Bullet",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Tapered_Bullet.png",
-  },
-  {
-    name: "Trapezoid",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Trapezoid.png",
-  },
-  {
-    name: "Bullet_Cut",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Bullet_Cut.png",
-  },
-  {
-    name: "Half_Moon",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Half_Moon.png",
-  },
-  {
-    name: "Butterfly",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Butterfly.png",
-  },
-  {
-    name: "Horse",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Horse.png",
-  },
-  {
-    name: "Bull",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Bull.png",
-  },
-  {
-    name: "Star",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Star.png",
-  },
-  {
-    name: "Shield",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Shield.png",
-  },
-  {
-    name: "Lozenge",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Lozenge.png",
-  },
-  {
-    name: "Circular_Brilliant",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Circular_Brilliant.png",
-  },
-  {
-    name: "Pentagonal",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Pentagonal.png",
-  },
-  {
-    name: "Trilliant_Cut",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Trilliant_Cut.png",
-  },
-  {
-    name: "Triangle",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Trilliant_Cut.png", 
-  },
-  {
-    name: "Kite",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Kite.png",
-  },
-  {
-    name: "Briolette",
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Briolette.png",
-  },
-  {
-    name: "Cushion Brilliant", // Added based on screenshot
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Cushion.png",
-  },
-  {
-    name: "Cushion Modified", // Added based on screenshot
-    path: "/assets/diamond/Pricess_Diamond.glb",
-    image_icon: "/assets/diamond-icon/Cushion.png",
-  },
+  // {
+  //   name: "Radiant",
+  //   path: "/assets/diamond/Radiant_Diamond.glb",
+  //   image_icon: "/assets/diamond-icon/Radiant.png",
+  // },
 ];
 
 export const diamondWeightOptions = [
