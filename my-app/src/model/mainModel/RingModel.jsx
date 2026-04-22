@@ -34,18 +34,21 @@ const RingModel = ({
   prongScale,
   bandHeight,
   diamondScale,
-  prongOffsetY,
+  prongOffsetY, // Pehle se hai
+  prongOffsetZ, // 👈 Ye Naya Add Karein
   diamondBaseY,
   sharedMetalProps,
   setBandHeight,
   diamondWeight
 }) => {
-  const [adjustedProngOffsetY, setAdjustedProngOffsetY] = useState(prongOffsetY);
+  // const [adjustedProngOffsetY, setAdjustedProngOffsetY] = useState(prongOffsetY);
+  const finalProngOffsetY = prongOffsetY;
   const [adjustedProngScale, setAdjustedProngScale] = useState(prongScale);
   const [prongDiamondName, setProngDiamondName] = useState(null);
   const [autoRotate, setAutoRotate] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
   const containerRef = useRef(null);
+  const [prongDepth, setProngDepth] = useState(0);
   const navigate = useNavigate();
   const ringGroupRef = useRef();
 
@@ -99,18 +102,6 @@ useEffect(() => {
     };
   }, []);
 
-  useEffect(() => {
-    if (selectedProng) {
-      const prongName = selectedProng.name.toLowerCase();
-      if (prongName.includes("halo") && !prongName.includes("hidden")) {
-        setAdjustedProngOffsetY(prongOffsetY / 1.13);
-        setAdjustedProngScale(prongScale * 1.23);
-      } else {
-        setAdjustedProngOffsetY(prongOffsetY);
-        setAdjustedProngScale(prongScale);
-      }
-    }
-  }, [selectedProng, prongOffsetY, prongScale]);
 
   const getProngModelPath = () => {
     const shankName = selectedShank?.name;
@@ -159,6 +150,12 @@ useEffect(() => {
   return () => window.removeEventListener("resize", checkScreen);
 }, []);
 
+// console.log("OFFSET DEBUG", {
+//   prongOffsetY,
+//   prongOffsetZ,
+//   selectedProng
+// });
+
   return (
 
     <div
@@ -197,12 +194,13 @@ useEffect(() => {
           {!prongIncludesBand && selectedShank && (
             <group>
               <BandRModel
-                modelPath={selectedShank.path}
-                onLoaded={setBandHeight}
-                color={bandColor}
-                scale={bandScale || 1}
-                sharedMetalProps={sharedMetalProps}
-              />
+  modelPath={selectedShank.path}
+  onLoaded={setBandHeight}
+  color={bandColor}
+  scale={bandScale || 1}
+  sharedMetalProps={sharedMetalProps}
+  selectedProngName={selectedProng?.name} // 👈 Ye line add karein
+/>
 
               <Pave modelPath={selectedShank.path} />
             </group>
@@ -212,16 +210,18 @@ useEffect(() => {
             {selectedProng && (
               <group ref={ringGroupRef}>
                 <ProngModel
-                  key={getProngModelPath()}
-                  modelPath={getProngModelPath()}
-                  color={prongColor}
-                  scale={adjustedProngScale}
-                  position={[0, adjustedProngOffsetY, 0]}
-                  sharedMetalProps={{ roughness: 0.2, metalness: 1, reflectivity: 1 }}
-                  setProngDiamondName={setProngDiamondName}
-                  ringGroupRef={ringGroupRef}
-                  diamondWeight={diamondWeight}
-                />
+  key={getProngModelPath()}
+  modelPath={getProngModelPath()}
+  color={prongColor}
+  scale={adjustedProngScale}
+  // Yahan Z axis par prongOffsetZ pass karein
+  // position={[0, adjustedProngOffsetY, prongOffsetZ || 0]} 
+  position={[0, prongOffsetY, prongOffsetZ || 0]}
+  sharedMetalProps={{ roughness: 0.2, metalness: 1, reflectivity: 1 }}
+  setProngDiamondName={setProngDiamondName}
+  ringGroupRef={ringGroupRef}
+  diamondWeight={diamondWeight}
+/>
               </group>
             )}
           </Suspense>
