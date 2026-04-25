@@ -160,7 +160,7 @@ useEffect(() => {
 }, []);
 
   return (
-
+<>
     <div
       ref={containerRef}
       // className={`w-full h-[600px] transition-all duration-700 ease-in-out ${themeClass} relative `}
@@ -309,6 +309,7 @@ useEffect(() => {
       </div>
       )}
     </div>
+    </>
   );
 };
 
