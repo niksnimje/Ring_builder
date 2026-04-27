@@ -269,27 +269,46 @@ export default function RingBuilder() {
     setSelectedShank(shank);
     // console.log(shank.name)
 
-    const allowedProngs = shankProngMap[shank.name] || [];
+    // const allowedProngs = shankProngMap[shank.name] || [];
 
-    const validProng = prongOptions.find(p =>
-      allowedProngs.includes(p.name)
-    );
+    // const validProng = prongOptions.find(p =>
+    //   allowedProngs.includes(p.name)
+    // );
 
-    if (validProng) {
-      setSelectedProng(validProng);
-    }
+    // if (validProng) {
+    //   setSelectedProng(validProng);
+    // }
   };
 
   const changeProng = (prong) => {
     setSelectedProng(prong);
     // console.log(prong.name)
 
-    if (prong.name === "Solitaire Bezel") {
-      const bezelShank = shankOptions.find(s => s.name === "Solitaire Bezel");
-      if (bezelShank) {
-        setSelectedShank(bezelShank);
-      }
+    // if (prong.name === "Solitaire Bezel") {
+    //   const bezelShank = shankOptions.find(s => s.name === "Solitaire Bezel");
+    //   if (bezelShank) {
+    //     setSelectedShank(bezelShank);
+    //   }
+    // }
+      if (prong.name === "Solitaire Bezel") {
+    // ✅ Bezel case → bezel band
+    const bezelShank = shankOptions.find(
+      (s) => s.name === "Solitaire Bezel"
+    );
+
+    if (bezelShank) {
+      setSelectedShank(bezelShank);
     }
+  } else {
+    // ✅ All other cases → default Solitaire band
+    const defaultShank = shankOptions.find(
+      (s) => s.name === "Solitaire"
+    );
+
+    if (defaultShank) {
+      setSelectedShank(defaultShank);
+    }
+  }
   };
 
   const changeBandColor = (color) => setBandColor(color);
@@ -297,9 +316,11 @@ export default function RingBuilder() {
   const changeDiamondWeight = (weight) => setSelectedDiamondWeight(weight);
 
 
-  const visibleProngs = selectedShank?.name && shankProngMap[selectedShank.name]
-    ? prongOptions.filter((p) => shankProngMap[selectedShank.name].includes(p.name))
-    : prongOptions;
+  // const visibleProngs = selectedShank?.name && shankProngMap[selectedShank.name]
+  //   ? prongOptions.filter((p) => shankProngMap[selectedShank.name].includes(p.name))
+  //   : prongOptions;
+
+  const visibleProngs = prongOptions;
 
   const finalSelectedProng = (() => {
     if (!selectedProng) return null;
@@ -320,13 +341,14 @@ export default function RingBuilder() {
     ["#E0E0E0", "18K White Gold"],
     ["#E6BE5A", "14KY"],
     ["#DDB140", "18KY"],
-    ["#f7c5ad", "14K RG"],
-    ["#f1a886", "18K RG"],
+    ["#f1a886", "14K RG"],
+    ["#d99982", "18K RG"],
+     ["#B0C4DE", "PT"],
     // ["#f7c5ad", "14K RG"],
-    // ["#FFCC00", "14K TT"],
-    // ["#FAC000", "18K TT"],
     // ["#ffcb7d", "gold"],
   ];
+
+
 
   const handleTwoTone = (type) => {
     if (type === "14K") {
