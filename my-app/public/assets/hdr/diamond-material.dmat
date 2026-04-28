@@ -1,0 +1,48 @@
+{
+  "metadata": {
+    "version": 4.6001,
+    "type": "DiamondMaterial",
+    "generator": "DiamondMaterial.toJSON"
+  },
+  "name": "Gem",
+  "uuid": "547fd467-8c26-42ea-9f5c-bd2f3be6f027",
+  "color": 16777215,
+  "envMapIntensity": 2.31,
+  "envMapIndex": 0,
+  "envMapRotationOffset": -0.18,
+  "envMapRotationOffsetX": 0,
+  "envMapRotationOffsetY": 0,
+  "envMapRotationOffsetZ": 0,
+  "dispersion": 0,
+  "squashFactor": 0.98,
+  "geometryFactor": 0.5,
+  "gammaFactor": 0.9999999999999999,
+  "absorptionFactor": 0,
+  "reflectivity": 0.1,
+  "refractiveIndex": 2.4,
+  "rayBounces": 5,
+  "diamondOrientedEnvMap": 0,
+  "boostFactors": {
+    "x": 0.892,
+    "y": 0.892,
+    "z": 0.98595025,
+    "isVector3": true
+  },
+  "transmission": 0,
+  "isDiamondMaterialParameters": true,
+  "userData": {
+    "separateEnvMapIntensity": true,
+    "Bloom": {
+      "enable": true
+    },
+    "_baseMaterial": "d5c28fdb-1d33-4d07-b9e1-164007749944",
+    "rootPath": "https://cdn1.ijewel.design/f7ca1e69a1c89e3c818cb9669f18ce186aba68f5/69208a90-c3d6/custom-asset/asscher_1763740305230.dmat",
+    "cloneId": "0_1_1",
+    "cloneCount": 0,
+    "icon": "https://cdn1.ijewel.design/f7ca1e69a1c89e3c818cb9669f18ce186aba68f5/69208a91-21fb/custom-asset/thumb/asscher_1763740305229.png",
+    "uuid": "547fd467-8c26-42ea-9f5c-bd2f3be6f027"
+  },
+  "type": "DiamondMaterial",
+  "textures": [],
+  "images": []
+}
