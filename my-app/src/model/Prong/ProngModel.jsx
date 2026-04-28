@@ -1,6 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useGLTF, useEnvironment, MeshRefractionMaterial } from "@react-three/drei";
 import { Color } from "three";
+import { Box3, Vector3 } from "three";
+import { EXRLoader } from "three/examples/jsm/loaders/EXRLoader";
+import { PMREMGenerator } from "three";
+import { useThree } from "@react-three/fiber";
 
 const ProngModel = ({
   modelPath,
@@ -9,20 +13,24 @@ const ProngModel = ({
   position = [0, 0, 0],
   sharedMetalProps,
   setProngDiamondName,
+  gemColor   
 }) => {
   const { scene } = useGLTF(modelPath);
   const envMap = useEnvironment({
-    files: "/assets/hdr/diamond (1).hdr",
+    // files: "/assets/hdr/diamond (1).hdr",
+    files: "/assets/hdr/env_gem_Test.exr",
+    // files: "/assets/hdr/diamond-material.dmat",
   });
 
   useEffect(() => {
     if (envMap) {
-      envMap.intensity = 2.0; // brightness inner diamond 
+      envMap.intensity = 0.0; // brightness inner diamond 
     }
   }, [envMap]);
 
   const [clonedScene, setClonedScene] = useState(null);
   const [diamonds, setDiamonds] = useState([]);
+  const [prongDepth, setProngDepth] = useState(0);
   const prongRef = useRef();
 
   useEffect(() => {
@@ -68,6 +76,15 @@ const ProngModel = ({
     setClonedScene(cloned);
   }, [scene, color, sharedMetalProps, setProngDiamondName]);
 
+  useEffect(() => {
+  if (!scene) return;
+
+  const box = new Box3().setFromObject(scene);
+  const size = new Vector3();
+  box.getSize(size);
+
+  setProngDepth(size.z);
+}, [scene]);
 
   return (
     <>
@@ -93,14 +110,30 @@ const ProngModel = ({
 
               <MeshRefractionMaterial
                 envMap={envMap}
-                ior={2.42}
+                ior={2.32} // diamond pattern 
                 fresnel={0.4}           
                 bounces={4}
-                aberrationStrength={0.014} // adjust rainbow effect 
-                color={[1.8, 1.8, 1.8]} // adjust brightness 
+                aberrationStrength={0.003} // adjust rainbow effect 
+                // color={[1.8, 1.8, 1.8]} // adjust brightness 
                 toneMapped={false}
                 fastChroma={true}
+                color={gemColor || [1.5, 1.5, 1.5]} 
               />
+
+
+
+              {/* <MeshRefractionMaterial
+                envMap={envMap}
+                ior={2.32} // diamond pattern 
+                fresnel={0.4}           
+                bounces={4}
+                aberrationStrength={0.003} // adjust rainbow effect 
+                // color="#e1405c" // red
+                color="#e1405c" // green
+                color="#22dfa3" // 
+                toneMapped={false}
+                fastChroma={true}
+              /> */}
 
 
             </mesh>

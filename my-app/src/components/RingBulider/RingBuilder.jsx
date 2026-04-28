@@ -150,6 +150,31 @@ export default function RingBuilder() {
   const [prongColor, setProngColor] = useState(defaultProngColor);
   const [activeTab, setActiveTab] = useState("color");
   const location = useLocation();
+  const [isMixMode, setIsMixMode] = useState(false);
+
+  const [showMixPanel, setShowMixPanel] = useState(false);
+
+// temp state (important)
+const [tempBandColor, setTempBandColor] = useState(bandColor);
+const [tempProngColor, setTempProngColor] = useState(prongColor);
+
+const applyMixColors = () => {
+  setBandColor(tempBandColor);
+  setProngColor(tempProngColor);
+  setShowMixPanel(false);
+};
+
+  const handleColorChange = (color) => {
+    if (isMixMode) {
+      // mix mode → kuch mat kar (buttons alag handle karenge)
+      return;
+    }
+
+    // default mode → dono change
+    setBandColor(color);
+    setProngColor(color);
+  };
+
 
   useEffect(() => {
     const text = location.state?.description;
@@ -269,14 +294,34 @@ export default function RingBuilder() {
     setSelectedShank(shank);
     // console.log(shank.name)
 
-    const allowedProngs = shankProngMap[shank.name] || [];
+    // const allowedProngs = shankProngMap[shank.name] || [];
 
-    const validProng = prongOptions.find(p =>
-      allowedProngs.includes(p.name)
-    );
+    // const validProng = prongOptions.find(p =>
+    //   allowedProngs.includes(p.name)
+    // );
 
-    if (validProng) {
-      setSelectedProng(validProng);
+    // if (validProng) {
+    //   setSelectedProng(validProng);
+    // }
+
+    if (shank.name === "Solitaire Bezel") {
+      // 👉  → Head bhi Bezel
+      const bezelProng = prongOptions.find(
+        (p) => p.name === "Solitaire Bezel"
+      );
+
+      if (bezelProng) {
+        setSelectedProng(bezelProng);
+      }
+    } else {
+      // 👉  → default head
+      const defaultProng = prongOptions.find(
+        (p) => p.name === "Classic Prong"
+      );
+
+      if (defaultProng) {
+        setSelectedProng(defaultProng);
+      }
     }
   };
 
@@ -284,10 +329,29 @@ export default function RingBuilder() {
     setSelectedProng(prong);
     // console.log(prong.name)
 
+    // if (prong.name === "Solitaire Bezel") {
+    //   const bezelShank = shankOptions.find(s => s.name === "Solitaire Bezel");
+    //   if (bezelShank) {
+    //     setSelectedShank(bezelShank);
+    //   }
+    // }
     if (prong.name === "Solitaire Bezel") {
-      const bezelShank = shankOptions.find(s => s.name === "Solitaire Bezel");
+      // ✅ Bezel case → bezel band
+      const bezelShank = shankOptions.find(
+        (s) => s.name === "Solitaire Bezel"
+      );
+
       if (bezelShank) {
         setSelectedShank(bezelShank);
+      }
+    } else {
+      // ✅ All other cases → default Solitaire band
+      const defaultShank = shankOptions.find(
+        (s) => s.name === "Solitaire"
+      );
+
+      if (defaultShank) {
+        setSelectedShank(defaultShank);
       }
     }
   };
@@ -297,9 +361,11 @@ export default function RingBuilder() {
   const changeDiamondWeight = (weight) => setSelectedDiamondWeight(weight);
 
 
-  const visibleProngs = selectedShank?.name && shankProngMap[selectedShank.name]
-    ? prongOptions.filter((p) => shankProngMap[selectedShank.name].includes(p.name))
-    : prongOptions;
+  // const visibleProngs = selectedShank?.name && shankProngMap[selectedShank.name]
+  //   ? prongOptions.filter((p) => shankProngMap[selectedShank.name].includes(p.name))
+  //   : prongOptions;
+
+  const visibleProngs = prongOptions;
 
   const finalSelectedProng = (() => {
     if (!selectedProng) return null;
@@ -320,13 +386,14 @@ export default function RingBuilder() {
     ["#E0E0E0", "18K White Gold"],
     ["#E6BE5A", "14KY"],
     ["#DDB140", "18KY"],
-    ["#f7c5ad", "14K RG"],
-    ["#f1a886", "18K RG"],
+    ["#f1a886", "14K RG"],
+    ["#d99982", "18K RG"],
+    ["#B0C4DE", "PT"],
     // ["#f7c5ad", "14K RG"],
-    // ["#FFCC00", "14K TT"],
-    // ["#FAC000", "18K TT"],
     // ["#ffcb7d", "gold"],
   ];
+
+
 
   const handleTwoTone = (type) => {
     if (type === "14K") {
@@ -355,6 +422,7 @@ export default function RingBuilder() {
     "bg-gradient-to-tr from-[#042f2e] via-[#064e4b] to-[#022c22]",
     "bg-gradient-to-br from-gray-800 via-gray-700 to-gray-900",
     "bg-gradient-to-b from-gray-100 via-gray-200 to-gray-500",
+    "bg-white",
     "bg-[radial-gradient(circle_at_50%_40%,#6d28d9_0%,#1e1b4b_50%,#020617_100%)]",
     "bg-[radial-gradient(circle_at_50%_30%,#2a2a2a_0%,#000000_80%)]",
     "bg-[radial-gradient(circle_at_center,_#1e1b4b_0%,_#0f172a_40%,_#020617_100%)]",
@@ -415,76 +483,105 @@ export default function RingBuilder() {
           <div className="flex-1 overflow-y-auto pb-20">
             <div className="p-3 sm:p-4 md:p-6">
               {/* color */}
+
               {activeTab === "color" && (
-                <>
-                  {/* <PremiumAccordion
-                    title="Head & Band Color"
-                    icon="🎨"
-                    isOpen={openAccordions.headBandColor}
-                    onToggle={() => toggleAccordion('headBandColor')}
-                  > */}
-                  <div className="space-y-4">
-                    <div>
-                      <label className="text-sm font-medium text-white mb-2 block">
-                        Head Metal Color
-                      </label>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-1.5 sm:gap-2">
-                        {metalOptions.map(([color, label]) => (
-                          <MetalColorButton
-                            key={label}
-                            color={color}
-                            label={label}
-                            isSelected={prongColor === color}
-                            onClick={() => changeProngColor(color)}
-                          />
-                        ))}
-                      </div>
-                    </div>
+  <>
+    {!isMixMode ? (
+      // ✅ NORMAL UI
+      <>
+        <div>
+          <label className="text-sm font-medium text-white mb-2 block">
+            Select Metal Color
+          </label>
 
-                    <div>
-                      <label className="text-sm font-medium text-white mt-2 mb-2 block">
-                        Select Metal Type
-                      </label>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-1.5 sm:gap-2">
-                        {metalOptions.map(([color, label]) => (
-                          <MetalColorButton
-                            key={label}
-                            color={color}
-                            label={label}
-                            isSelected={bandColor === color}
-                            onClick={() => changeBandColor(color)}
-                          />
-                        ))}
-                      </div>
-                    </div>
+          <div className="grid grid-cols-2 gap-2">
+            {metalOptions.map(([color, label]) => (
+              <MetalColorButton
+                key={label}
+                color={color}
+                label={label}
+                isSelected={bandColor === color && prongColor === color}
+                onClick={() => handleColorChange(color)}
+              />
+            ))}
 
+            <button
+              onClick={() => {
+                setTempBandColor(bandColor);
+                setTempProngColor(prongColor);
+                setIsMixMode(true);
+              }}
+              className="w-full py-2 bg-purple-600 text-white rounded-lg"
+            >
+              Mix Colors
+            </button>
+          </div>
+        </div>
+      </>
+    ) : (
+      // 🔥 MIX MODE UI (INLINE — NOT MODAL)
+      <>
+        {/* Header */}
+        <div className="flex items-center justify-between mb-3">
+          <button onClick={() => setIsMixMode(false)} className="text-white bg-black p-2">← Back</button>
+          <h2 className="text-lg font-semibold text-white">Mixed Metal</h2>
+          <div />
+        </div>
 
-                    <div>
-                      <label className="text-sm font-medium text-white mt-2 mb-2 block">
-                        Select Two Tone
-                      </label>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-1.5 sm:gap-2">
-                        <button
-                          onClick={() => handleTwoTone("14K")}
-                          className="py-2 rounded-lg bg-gradient-to-r from-gray-300 to-yellow-400 text-black font-medium hover:scale-105 transition"
-                        >
-                          14K TT
-                        </button>
+        {/* Head Color */}
+        <div>
+          <label className="text-base mb-2 block text-white">
+            Head Metal Color
+          </label>
+          <div className="grid grid-cols-2 gap-2">
+            {metalOptions.map(([color, label]) => (
+              <MetalColorButton
+                key={label}
+                color={color}
+                label={label}
+                isSelected={tempProngColor === color}
+                onClick={() => {
+                  setTempProngColor(color);
+                  setProngColor(color); // 🔥 LIVE UPDATE
+                }}
+              />
+            ))}
+          </div>
+        </div>
 
-                        <button
-                          onClick={() => handleTwoTone("18K")}
-                          className="py-2 rounded-lg bg-gradient-to-r from-gray-200 to-yellow-500 text-black font-medium hover:scale-105 transition"
-                        >
-                          18K TT
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                  {/* </PremiumAccordion> */}
+        {/* Band Color */}
+        <div className="mt-4">
+          <label className="text-base mb-2 block text-white">
+            Band Metal Color
+          </label>
+          <div className="grid grid-cols-2 gap-2">
+            {metalOptions.map(([color, label]) => (
+              <MetalColorButton
+                key={label}
+                color={color}
+                label={label}
+                isSelected={tempBandColor === color}
+                onClick={() => {
+                  setTempBandColor(color);
+                  setBandColor(color); // 🔥 LIVE UPDATE
+                }}
+              />
+            ))}
+          </div>
+        </div>
 
-
-                </>
-              )}
+        {/* Apply */}
+        <button
+          onClick={() => setIsMixMode(false)}
+          className="w-full mt-6 py-3 rounded-xl text-white font-medium bg-gradient-to-r from-indigo-500 to-purple-600"
+        >
+          Apply & Return
+        </button>
+      </>
+    )}
+  </>
+)}
+              
 
               {/* Metal Tab */}
               {activeTab === "metal" && (
