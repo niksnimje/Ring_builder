@@ -10,7 +10,7 @@ import {
 import { useTheme } from "../../Context/ThemeContext";
 import { Link, useLocation } from "react-router-dom";
 import { inputChecker } from "../../utils/inputChecker";
-import SingleModelDemo from "../../model/mainModel/SingleModelDemo";
+// import SingleModelDemo from "../../model/mainModel/SingleModelDemo";
 
 // Define shankProngMap
 const shankProngMap = {
