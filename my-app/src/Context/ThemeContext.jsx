@@ -5,8 +5,8 @@ import { createContext, useContext, useState } from "react";
 
 export const ThemeProvider = ({ children }) => {
   const [themeClass, setThemeClass] = useState(
-    "bg-gradient-to-b from-gray-100 via-gray-200 to-gray-500"
-    
+    // "bg-white"
+    "bg-[radial-gradient(circle_at_center,_#1e1b4b_0%,_#0f172a_40%,_#020617_100%)]"
   );
 
   return (
