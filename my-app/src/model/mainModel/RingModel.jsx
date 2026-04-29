@@ -57,9 +57,9 @@ const RingModel = ({
 
   // gem colors
   const gems = [
-    { name: "Diamond", color: [1.5, 1.5, 1.5], bg: "/assets/GemBtn-BG/white.png", isImage: true },
-    { name: "Ruby", color: "#e1405c", bg: "/assets/GemBtn-BG/rubby.png", isImage: true },
-    { name: "Sapphire Blue", color: "#89b0cb",  bg: "/assets/GemBtn-BG/sapphire.png", isImage: true  },
+    { name: "Diamond", color: [1.5, 1.5, 1.5], bg: "/assets/GemBtn-BG/white.png"},
+    { name: "Ruby", color: "#e1405c", bg: "/assets/GemBtn-BG/rubby.png"},
+    { name: "Sapphire Blue", color: "#89b0cb",  bg: "/assets/GemBtn-BG/sapphire.png"  },
     { name: "Green Emerald", color: "#22dfa3",  bg: "/assets/GemBtn-BG/gem-emerald.png"  },
     { name: "Orange Stone", color: "#ffa500", bg: "/assets/GemBtn-BG/orenge.png" },
     { name: "Green Stone", color: "#90ee90", bg: "/assets/GemBtn-BG/Green-Stone.png" },
@@ -229,7 +229,7 @@ const RingModel = ({
           <ambientLight intensity={0.5} />
           <directionalLight position={[5, 10, 5]} intensity={2} castShadow />
 
-          <RotatingRing isRotating={autoRotate}>
+          <RotatingRing isRotating={autoRotate} >
             {!prongIncludesBand && selectedShank && (
               <group>
                 <BandRModel
@@ -240,7 +240,7 @@ const RingModel = ({
                   sharedMetalProps={sharedMetalProps}
                   selectedProngName={selectedProng?.name}
                 />
-                <Pave modelPath={selectedShank.path} />
+                <Pave modelPath={selectedShank.path}  gemColor={gemColor} />
               </group>
             )}
 
@@ -285,6 +285,7 @@ const RingModel = ({
             maxDistance={20}
             enableDamping={true}
             dampingFactor={0.05}
+            // target={[0, 0.5, 0]} 
           />
         </Canvas>
       </div>

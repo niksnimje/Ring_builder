@@ -10,6 +10,7 @@ import {
 import { useTheme } from "../../Context/ThemeContext";
 import { Link, useLocation } from "react-router-dom";
 import { inputChecker } from "../../utils/inputChecker";
+import SingleModelDemo from "../../model/mainModel/SingleModelDemo";
 
 // Define shankProngMap
 const shankProngMap = {
@@ -384,8 +385,8 @@ const applyMixColors = () => {
   const metalOptions = [
     ["#B8B4B9", "14K White Gold"],
     ["#E0E0E0", "18K White Gold"],
-    ["#E6BE5A", "14KY"],
-    ["#DDB140", "18KY"],
+    ["#E6BE5A", "14K Yellow"],
+    ["#DDB140", "18K Yellow"],
     ["#f1a886", "14K RG"],
     ["#d99982", "18K RG"],
     ["#B0C4DE", "PT"],
@@ -471,6 +472,7 @@ const applyMixColors = () => {
                 value: selectedDiamondWeight,
               }}
             />
+            {/* <SingleModelDemo /> */}
           </div>
         </div>
 
