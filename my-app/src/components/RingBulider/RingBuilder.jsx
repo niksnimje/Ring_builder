@@ -10,7 +10,7 @@ import {
 import { useTheme } from "../../Context/ThemeContext";
 import { Link, useLocation } from "react-router-dom";
 import { inputChecker } from "../../utils/inputChecker";
-
+// import SingleModelDemo from "../../model/mainModel/SingleModelDemo";
 
 // Define shankProngMap
 const shankProngMap = {
@@ -305,25 +305,25 @@ const applyMixColors = () => {
     //   setSelectedProng(validProng);
     // }
 
-    // if (shank.name === "Solitaire Bezel") {
-    //   // 👉  → Head bhi Bezel
-    //   const bezelProng = prongOptions.find(
-    //     (p) => p.name === "Solitaire Bezel"
-    //   );
+    if (shank.name === "Solitaire Bezel") {
+      // 👉  → Head bhi Bezel
+      const bezelProng = prongOptions.find(
+        (p) => p.name === "Solitaire Bezel"
+      );
 
-    //   if (bezelProng) {
-    //     setSelectedProng(bezelProng);
-    //   }
-    // } else {
-    //   // 👉  → default head
-    //   const defaultProng = prongOptions.find(
-    //     (p) => p.name === "Classic Prong"
-    //   );
+      if (bezelProng) {
+        setSelectedProng(bezelProng);
+      }
+    } else {
+      // 👉  → default head
+      const defaultProng = prongOptions.find(
+        (p) => p.name === "Classic Prong"
+      );
 
-    //   if (defaultProng) {
-    //     setSelectedProng(defaultProng);
-    //   }
-    // }
+      if (defaultProng) {
+        setSelectedProng(defaultProng);
+      }
+    }
   };
 
   const changeProng = (prong) => {
@@ -336,26 +336,25 @@ const applyMixColors = () => {
     //     setSelectedShank(bezelShank);
     //   }
     // }
+    if (prong.name === "Solitaire Bezel") {
+      // ✅ Bezel case → bezel band
+      const bezelShank = shankOptions.find(
+        (s) => s.name === "Solitaire Bezel"
+      );
 
-    // if (prong.name === "Solitaire Bezel") {
-    //   // ✅ Bezel case → bezel band
-    //   const bezelShank = shankOptions.find(
-    //     (s) => s.name === "Solitaire Bezel"
-    //   );
+      if (bezelShank) {
+        setSelectedShank(bezelShank);
+      }
+    } else {
+      // ✅ All other cases → default Solitaire band
+      const defaultShank = shankOptions.find(
+        (s) => s.name === "Solitaire"
+      );
 
-    //   if (bezelShank) {
-    //     setSelectedShank(bezelShank);
-    //   }
-    // } else {
-    //   // ✅ All other cases → default Solitaire band
-    //   const defaultShank = shankOptions.find(
-    //     (s) => s.name === "Solitaire"
-    //   );
-
-    //   if (defaultShank) {
-    //     setSelectedShank(defaultShank);
-    //   }
-    // }
+      if (defaultShank) {
+        setSelectedShank(defaultShank);
+      }
+    }
   };
 
   const changeBandColor = (color) => setBandColor(color);
@@ -440,68 +439,11 @@ const applyMixColors = () => {
 
 
 
-  const currentRingConfig = {
-  shank: {
-    name: selectedShank?.name || null,
-  },
-
-  prong: {
-    name: selectedProng?.name || null,
-    color: prongColor,
-    position: {
-      offsetY: adjustedProngOffsetY,
-      offsetZ: adjustedProngOffsetZ,
-    }
-  },
-
-  band: {
-    color: bandColor,
-    height: bandHeight,
-  },
-
-  diamond: {
-    shape: selectedDiamond?.name || null,
-    weight: {
-      label: `${selectedDiamondWeight.toFixed(2)} ct`,
-      value: selectedDiamondWeight,
-    },
-    scale: diamondScale,
-  },
-
-  metal: {
-    isTwoTone: bandColor !== prongColor,
-  },
-
-  meta: {
-    isMixMode,
-    theme: themeClass,
-  }
-};
-
-useEffect(() => {
-  console.clear(); // optional (clean console)
-
-  console.log("💍 Ring JSON 👇");
-  console.log(JSON.stringify(currentRingConfig, null, 2));
-
-}, [
-  selectedShank,
-  selectedProng,
-  selectedDiamond,
-  selectedDiamondWeight,
-  bandColor,
-  prongColor,
-  bandHeight,
-  isMixMode,
-  themeClass
-]);
-
-
   return (
     <div className="h-screen flex flex-col bg-gray-50">
       {/* Header - Responsive */}
       <header className="bg-white border-b border-gray-200 px-4 sm:px-8 py-3 sm:py-4">
-        <h1 className="text-xl sm:text-2xl font-bold text-gray-800"> <Link to={"/ai"}>Ring Builder</Link></h1>
+        <h1 className="text-xl sm:text-2xl font-bold text-gray-800"> <Link to={"/"}>Ring Builder</Link></h1>
       </header>
 
       {/* Main Content */}
