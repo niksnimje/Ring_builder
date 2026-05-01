@@ -1,8 +1,8 @@
-
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useGLTF, useEnvironment, MeshRefractionMaterial } from "@react-three/drei";
 import { Color, Box3, Vector3 } from "three";
-// import FadeWrapper from "../../utils/FadeWrapper";
+import { useFrame } from "@react-three/fiber";
+import AnimatedDiamond from "./AnimatedDiamond";
 
 const ProngModel = ({
   modelPath,
@@ -19,7 +19,6 @@ const ProngModel = ({
     files: "/assets/hdr/env_gem_Test.exr",
   });
 
-  
   useEffect(() => {
     if (envMap) envMap.intensity = 0.0;
   }, [envMap]);
@@ -43,23 +42,18 @@ const ProngModel = ({
           child.visible = false;
           child.updateWorldMatrix(true, false);
 
-          // --- SIZE CALCULATION LOGIC ---
-          // Bounding box mesh to get size (x, y, z)
           const box = new Box3().setFromObject(child);
           const size = new Vector3();
           box.getSize(size);
-          
-          // Volume calculate  (x * y * z)
           const volume = size.x * size.y * size.z;
 
           tempDiamonds.push({
             geometry: child.geometry,
             matrix: child.matrixWorld.clone(),
-            volume: volume, //  base on filter
+            volume: volume,
             name: child.name
           });
         } else {
-          // Metal handling
           child.material = child.material.clone();
           child.material.color = new Color(color);
           Object.assign(child.material, sharedMetalProps || {});
@@ -67,16 +61,13 @@ const ProngModel = ({
       }
     });
 
-    // 2. Sorting: big volume diamond on top
     tempDiamonds.sort((a, b) => b.volume - a.volume);
 
-    // 3. first diamond (index 0) MAIN diamond
     const finalDiamonds = tempDiamonds.map((d, index) => ({
       ...d,
-      isTop: index === 0 
+      isTop: index === 0
     }));
 
-    // Update parent state if needed
     if (finalDiamonds.length > 0) {
       setProngDiamondName(finalDiamonds[0].name);
     }
@@ -86,26 +77,21 @@ const ProngModel = ({
   }, [scene, color, sharedMetalProps, setProngDiamondName]);
 
   return (
-        // <FadeWrapper trigger={`${modelPath}-${color}-${JSON.stringify(gemColor)}`} active={true}>
     <group scale={scale} position={position}>
       {clonedScene && <primitive object={clonedScene} />}
 
       {diamonds.map((d, i) => (
-        <mesh key={i} geometry={d.geometry} matrix={d.matrix} matrixAutoUpdate={false}>
-          <MeshRefractionMaterial
-            envMap={envMap}
-            ior={2.4}
-            fresnel={0.5}
-            color={d.isTop ? (gemColor || [1.5, 1.5, 1.5]) : sideGemColor}
-            aberrationStrength={d.isTop ? 0.002 : 0.005} // rainbow effect
-            bounces={d.isTop ? 4 : 2}
-            toneMapped={false}
-            fastChroma={true}
-          />
-        </mesh>
+        <AnimatedDiamond
+          key={i}
+          geometry={d.geometry}
+          matrix={d.matrix}
+          isTop={d.isTop}
+          targetColor={gemColor}
+          sideGemColor={sideGemColor}
+          envMap={envMap}
+        />
       ))}
     </group>
-    // </FadeWrapper>
   );
 };
 
