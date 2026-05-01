@@ -52,11 +52,6 @@ export const prongOptions = [
         default:
           "/assets/prong/ClassicProng/Solitire/weight_1.0/Cushion Brilliant_Prong.glb",
         1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Cushion Brilliant_Prong.glb",
-        
-        // 2.0: "/assets/prong/ClassicProng/Solitire/weight_2.0/Cushion_weight_2.0_prong.glb",
-        // 3.0: "/assets/prong/ClassicProng/Solitire/weight_3.0/Cushion_3.0_weight_prong.glb",
-        // 4.0: "/assets/prong/ClassicProng/Solitire/weight_4.0/Cushion_4.0_weight_prong.glb",
-        // 5.0: "/assets/prong/ClassicProng/Solitire/weight_5.0/Cushion_5.0_weight_prong.glb",
         2.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Cushion Brilliant_Prong.glb",
         3.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Cushion Brilliant_Prong.glb",
         4.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Cushion Brilliant_Prong.glb",
@@ -73,74 +68,55 @@ export const prongOptions = [
         default:
           "/assets/prong/ClassicProng/Solitire/weight_1.0/Emerald_Square_Prong.glb",
         1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Emerald_Square_Prong.glb",
-        
         2.0: "/assets/prong/ClassicProng/Solitire/weight_2.0/Emerald S_weight_2.0_prong.glb",
         3.0: "/assets/prong/ClassicProng/Solitire/weight_3.0/EM S_3.0_weight_prong.glb",
         4.0: "/assets/prong/ClassicProng/Solitire/weight_4.0/Emerald S_4.0_weight_prong.glb",
-        5.0: "/assets/prong/ClassicProng/Solitire/weight_5.0/Emerald S_5.0_weight_prong.glb",
-
-     
+        5.0: "/assets/prong/ClassicProng/Solitire/weight_5.0/Emerald S_5.0_weight_prong.glb", 
       },
       Princess: {
         default:
           "/assets/prong/ClassicProng/Solitire/weight_1.0/PrincessHiden helo.glb",
-        1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/PrincessHiden helo.glb",
-        
+        1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/PrincessHiden helo.glb",       
         2.0: "/assets/prong/ClassicProng/Solitire/weight_2.0/Princess_weight_2.0_prong.glb",
         3.0: "/assets/prong/ClassicProng/Solitire/weight_3.0/Princess_3.0_weight_prong.glb",
         4.0: "/assets/prong/ClassicProng/Solitire/weight_4.0/Princess_4.0_weight_prong.glb",
-        5.0: "/assets/prong/ClassicProng/Solitire/weight_5.0/Princess_5.0_weight_prong.glb",
-
-       
+        5.0: "/assets/prong/ClassicProng/Solitire/weight_5.0/Princess_5.0_weight_prong.glb",    
       },
       Radiant: {
         default:
           "/assets/prong/ClassicProng/Solitire/weight_1.0/Radiant_Prong.glb",
         1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Radiant_Prong.glb",
-        
         2.0: "/assets/prong/ClassicProng/Solitire/weight_2.0/Radiant _weight_2.0_prong.glb",
         3.0: "/assets/prong/ClassicProng/Solitire/weight_3.0/Radiant_3.0_weight_prong.glb",
         4.0: "/assets/prong/ClassicProng/Solitire/weight_4.0/Radiant_4.0_weight_prong.glb",
-        5.0: "/assets/prong/ClassicProng/Solitire/weight_5.0/Radiant_5.0_weight_prong.glb",
-
+        5.0: "/assets/prong/ClassicProng/Solitire/weight_5.0/Radiant_5.0_weight_prong.glb"
       },
       Emerald: {
         default:
           "/assets/prong/ClassicProng/Solitire/weight_1.0/Emerald_Prong.glb",
         1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Emerald_Prong.glb",
-        
         2.0: "/assets/prong/ClassicProng/Solitire/weight_2.0/Emerald _weight_2.0_prong.glb",
         3.0: "/assets/prong/ClassicProng/Solitire/weight_3.0/Emerald_3.0_weight_prong.glb",
         4.0: "/assets/prong/ClassicProng/Solitire/weight_4.0/Emerald _4.0_weight_prong.glb",
         5.0: "/assets/prong/ClassicProng/Solitire/weight_5.0/Emerald_5.0_weight_prong.glb",
-
       },
       Heart: {
         default:
           "/assets/prong/ClassicProng/Solitire/weight_1.0/Heart_weight_1.0_prong.glb",
         1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Heart_weight_1.0_prong.glb",
-        
         2.0: "/assets/prong/ClassicProng/Solitire/weight_2.0/Heart_weight_2.0_prong.glb",
         3.0: "/assets/prong/ClassicProng/Solitire/weight_3.0/Hart_3.0_weight_prong.glb",
         4.0: "/assets/prong/ClassicProng/Solitire/weight_4.0/Hart_4.0_weight_prong.glb",
         5.0: "/assets/prong/ClassicProng/Solitire/weight_5.0/Heart_5.0_weight_prong.glb",
-
       },
       Pear: {
         default:
           "/assets/prong/ClassicProng/Solitire/weight_1.0/Pear_Prong.glb",
         1.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Pear_Prong.glb",
-        
-        // 2.0: "/assets/prong/ClassicProng/Solitire/weight_2.0/PEAR _weight_2.0_prong.glb",
-        // 3.0: "/assets/prong/ClassicProng/Solitire/weight_3.0/Pear_3.0_weight_prong.glb",
-        // 4.0: "/assets/prong/ClassicProng/Solitire/weight_4.0/Pear_4.0_weight_prong.glb",
-        // 5.0: "/assets/prong/ClassicProng/Solitire/weight_5.0/Pear_5.0_weight_prong.glb",
         2.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Pear_Prong.glb",
         3.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Pear_Prong.glb",
         4.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Pear_Prong.glb",
         5.0: "/assets/prong/ClassicProng/Solitire/weight_1.0/Pear_Prong.glb",
-
-
       },
     },
     defaultPath:
@@ -172,11 +148,6 @@ export const prongOptions = [
       Round: {
         default:
           "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Round_weight_1.0_Solitire Bezel.glb",
-        // 1.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Round_weight_1.0_Solitire Bezel.glb",
-        // 2.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_2.0/Round_weight_2.0_Solitire Bezel.glb",
-        // 3.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_3.0/Round_weight_3.0_Solitire Bezel.glb",
-        // 4.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_4.0Round_weight_4.0_Solitire Bezel.glb",
-        // 5.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_5.0/Round_5.0_weight_prong.glb",
 
         1.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Round_weight_1.0_Solitire Bezel.glb",
         2.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_2.0/Round_weight_2.0_Solitire Bezel.glb",
@@ -189,11 +160,6 @@ export const prongOptions = [
       Cushion: {
         default:
           "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Cushion_weight_1.0_Solitire_Bezel.glb",
-        // 1.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Cushion_weight_1.0_Solitire_Bezel.glb",
-        // 2.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_2.0/Cushion_weight_2.0_Solitire Bezel.glb",
-        // 3.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_3.0/Cushion weight_3.0_Solitire Bezel.glb",
-        // 4.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_4.0/Cushion_weight_4.0_Solitire Bezel.glb",
-        // 5.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_5.0/Cushion_weight_5.0_Solitire Bezel.glb",
 
         1.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Cushion_weight_1.0_Solitire_Bezel.glb",
         2.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Cushion_weight_1.0_Solitire_Bezel.glb",
@@ -217,11 +183,6 @@ export const prongOptions = [
       Marquise: {
         default:
           "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Marquise_weight_1.0_Solitire Bezel.glb",
-        // 1.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Marquise_weight_1.0_Solitire Bezel.glb",
-        // 2.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_2.0/Marquise_weight_2.0_Solitire Bezel.glb",
-        // 3.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_3.0/Marquise_weight_3.0_Solitire Bezel.glb",
-        // 4.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_4.0/Marquise_weight_4.0_Solitire Bezel.glb",
-        // 5.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_5.0/Cushion_5.0_weight_prong.glb",
 
         1.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Marquise_weight_1.0_Solitire Bezel.glb",
         2.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_2.0/Marquise_weight_2.0_Solitire Bezel.glb",
@@ -231,11 +192,7 @@ export const prongOptions = [
 
       
       },
-      // CushionSquare: {
-      //   default: "/assets/prong/ClassicProng/Solitire Bezel/weight_5.0/Cushion square_Prong.glb",
-      //   1.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_5.0/Cushion square_Prong.glb",
-      
-      // },
+
       EmeraldSquare: {
         default:
           "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Emerald S_weight_1.0_Solitire_Bezel.glb",
@@ -270,11 +227,6 @@ export const prongOptions = [
       Emerald: {
         default:
           "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Emerald_weight_1.0_Solitire Bezel.glb",
-        // 1.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Emerald_weight_1.0_Solitire Bezel.glb",
-        // 2.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_2.0/Emerald_weight_2.0_Solitire Bezel.glb",
-        // 3.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_3.0/Emerald_weight_3.0_Solitire Bezel.glb",
-        // 4.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_4.0/Emerald_weight_4.0_Solitire Bezel.glb",
-        // 5.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_5.0/Emerald_weight_Solitire Bezel.glb",
 
 
         1.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Emerald_weight_1.0_Solitire Bezel.glb",
@@ -297,11 +249,6 @@ export const prongOptions = [
       Pear: {
         default:
           "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Pear_weight_1.0_Solitire Bezel.glb",
-        // 1.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Pear_weight_1.0_Solitire Bezel.glb",
-        // 2.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_2.0/PEAR _weight_2.0_Solitire Bezel.glb",
-        // 3.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_3.0/Pear_weight_3.0_Solitire Bezel.glb",
-        // 4.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_4.0/Pear_weight_4.0_Solitire Bezel.glb",
-        // 5.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_5.0/Pear_5.0_weight_prong.glb",
 
         1.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Pear_weight_1.0_Solitire Bezel.glb",
         2.0: "/assets/prong/ClassicProng/Solitire Bezel/weight_1.0/Pear_weight_1.0_Solitire Bezel.glb",
@@ -353,11 +300,6 @@ export const prongOptions = [
       Cushion: {
         default:
           "/assets/prong/classic Hidden Halo/weight_1.0/Cushion_weight_1.0_prong.glb",
-        // 5.0: "/assets/prong/classic Hidden Halo/weight_5.0/Cushion_weight_5.0_prong.glb",
-        //   4.0: "/assets/prong/classic Hidden Halo/weight_4.0/Cushion_4.0_weight_prong.glb",
-        //   3.0: "/assets/prong/classic Hidden Halo/weight_3.0/Cushion_3.0_weight_prong.glb",
-        //   2.0: "/assets/prong/classic Hidden Halo/weight_2.0/Cushion_2.0_weight_prong.glb",
-        //   1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Cushion_weight_1.0_prong.glb",
 
            5.0: "/assets/prong/classic Hidden Halo/weight_1.0/Cushion_weight_1.0_prong.glb",
           4.0: "/assets/prong/classic Hidden Halo/weight_1.0/Cushion_weight_1.0_prong.glb",
@@ -367,11 +309,7 @@ export const prongOptions = [
 
        
       },
-      // CushionSquare: {
-      //   default: "/assets/prong/ClassicProng/Solitire/weight_5.0/Cushion square_Prong.glb",
-      //   1.0: "/assets/prong/ClassicProng/Solitire/weight_5.0/Cushion square_Prong.glb",
-      //   
-      // },
+
       EmeraldSquare: {
         default:
           "/assets/prong/classic Hidden Halo/weight_1.0/Emerald S_weight_1.0_prong.glb",
@@ -418,20 +356,10 @@ export const prongOptions = [
         1.0: "/assets/prong/classic Hidden Halo/weight_5.0/Heart_5.0_weight_prong.glb",
 
       },
-      // Marquise:{
-      //   default:
-      //     "/assets/prong/classic Hidden Halo/weight_5.0/Heart_5.0_weight_prong.glb",
 
-      // },
       Pear: {
         default:
           "/assets/prong/classic Hidden Halo/weight_1.0/Pear_weight_1.0_prong.glb",
-        // 5.0: "/assets/prong/classic Hidden Halo/weight_5.0/Pear_5.0_weight_prong.glb",
-        //   4.0: "/assets/prong/classic Hidden Halo/weight_4.0/Pear_4.0_weight_prong.glb",
-        //   3.0: "/assets/prong/classic Hidden Halo/weight_3.0/Pear_weight_3.0_prong.glb",
-        //   2.0: "/assets/prong/classic Hidden Halo/weight_2.0/PEAR_2.0_weight_prong.glb",
-        //   1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Pear_weight_1.0_prong.glb",
-
 
           1.0: "/assets/prong/classic Hidden Halo/weight_1.0/Pear_weight_1.0_prong.glb",
         
@@ -476,23 +404,14 @@ export const prongOptions = [
       Cushion: {
         default:
           "/assets/prong/Pave Hidden Halo/weight_1.0/Cushion _weight_1.0_prong.glb",
-        // 5.0: "/assets/prong/Pave Hidden Halo/weight_5.0/Cushion_weight_5.0_prong.glb",
-        //   4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Cushion_weight_4.0_prong.glb",
-        //   3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Cushion_weight_3.0_prong.glb",
-        //   2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/Cushion_weight_2.0_prong.glb",
-        //   1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Cushion _weight_1.0_prong.glb",
-        
+
         1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Cushion _weight_1.0_prong.glb",
 
 
 
        
       },
-      // CushionSquare: {
-      //   default: "/assets/prong/ClassicProng/Solitire/weight_5.0/Cushion square_Prong.glb",
-      //   1.0: "/assets/prong/ClassicProng/Solitire/weight_5.0/Cushion square_Prong.glb",
-      //   
-      // },
+     
       EmeraldSquare: {
         default:
           "/assets/prong/Pave Hidden Halo/weight_1.0/Emerald S_weight_1.0_prong.glb",
@@ -533,19 +452,11 @@ export const prongOptions = [
           1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Emerald_weight_1.0_prong.glb",
 
       },
-      // Heart: {
-      //   default:
-      //     "/assets/prong/Pave Hidden Halo/weight_5.0/Heart_5.0_weight_prong.glb",
-      //   1.0: "/assets/prong/Pave Hidden Halo/weight_5.0/Heart_5.0_weight_prong.glb",
-
-      // },
+    
       Pear: {
         default:
           "/assets/prong/Pave Hidden Halo/weight_1.0/Pear_weight_1.0_prong.glb",
-        // 5.0: "/assets/prong/Pave Hidden Halo/weight_5.0/Pear_weight_5.0_prong.glb",
-        //   4.0: "/assets/prong/Pave Hidden Halo/weight_4.0/Pear_weight_4.0_prong.glb",
-        //   3.0: "/assets/prong/Pave Hidden Halo/weight_3.0/Pear_weight_3.0_prong.glb",
-        //   2.0: "/assets/prong/Pave Hidden Halo/weight_2.0/PEAR _weight_2.0_prong.glb",
+  
           1.0: "/assets/prong/Pave Hidden Halo/weight_1.0/Pear_weight_1.0_prong.glb",
 
         
@@ -633,11 +544,7 @@ export const diamondOptions = [
     path: "/assets/diamond/Pricess_Diamond.glb",
     image_icon: "/assets/diamond-icon/Princess.png",
   },
-  // {
-  //   name: "Radiant",
-  //   path: "/assets/diamond/Radiant_Diamond.glb",
-  //   image_icon: "/assets/diamond-icon/Radiant.png",
-  // },
+  
 ];
 
 export const diamondWeightOptions = [
