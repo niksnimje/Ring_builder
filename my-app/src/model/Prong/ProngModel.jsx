@@ -3,6 +3,7 @@ import { useGLTF, useEnvironment, MeshRefractionMaterial } from "@react-three/dr
 import { Color, Box3, Vector3 } from "three";
 import { useFrame } from "@react-three/fiber";
 import AnimatedDiamond from "./AnimatedDiamond";
+import * as THREE from "three";
 
 const ProngModel = ({
   modelPath,
@@ -12,7 +13,8 @@ const ProngModel = ({
   sharedMetalProps,
   setProngDiamondName,
   gemColor,
-  sideGemColor = [1.5, 1.5, 1.5]
+  sideGemColor = [1.5, 1.5, 1.5],
+  onProngClick
 }) => {
   const { scene } = useGLTF(modelPath);
   const envMap = useEnvironment({
@@ -77,7 +79,18 @@ const ProngModel = ({
   }, [scene, color, sharedMetalProps, setProngDiamondName]);
 
   return (
-    <group scale={scale} position={position}>
+    <group scale={scale} position={position}  
+    onClick={(e) => {
+    e.stopPropagation();
+
+    if (onProngClick) {
+      // world position nikal
+      const worldPos = new THREE.Vector3();
+      e.eventObject.getWorldPosition(worldPos);
+
+      onProngClick(worldPos);
+    }
+  }}>
       {clonedScene && <primitive object={clonedScene} />}
 
       {diamonds.map((d, i) => (
