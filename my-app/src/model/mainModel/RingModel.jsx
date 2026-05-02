@@ -38,7 +38,8 @@ const RingModel = ({
   diamondBaseY,
   sharedMetalProps,
   setBandHeight,
-  diamondWeight
+  diamondWeight,
+  onGemColorChange
 }) => {
   const [prongDiamondName, setProngDiamondName] = useState(null);
   const [autoRotate, setAutoRotate] = useState(true);
@@ -51,21 +52,25 @@ const RingModel = ({
   const ringGroupRef = useRef();
   const { themeClass } = useTheme();
   const [isMobileView, setIsMobileView] = useState(false);
-  const [gemColor, setGemColor] = useState([1.8, 1.8, 1.8]); // Default White/Diamond
+  const [gemColor, setGemColor] = useState([1.5, 1.5, 1.5]); // Default White/Diamond
   const [showGems, setShowGems] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+
+  const initialCameraPos = useRef(new THREE.Vector3());
+  const initialTarget = useRef(new THREE.Vector3());
 
   // gem colors
   const gems = [
-    { name: "Diamond", color: [1.5, 1.5, 1.5], bg: "/assets/GemBtn-BG/white.png"},
-    { name: "Ruby", color: "#e1405c", bg: "/assets/GemBtn-BG/rubby.png"},
-    { name: "Sapphire Blue", color: "#89b0cb",  bg: "/assets/GemBtn-BG/sapphire.png"  },
-    { name: "Green Emerald", color: "#22dfa3",  bg: "/assets/GemBtn-BG/gem-emerald.png"  },
-    { name: "Orange Stone", color: "#ffa500", bg: "/assets/GemBtn-BG/orenge.png" },
-    { name: "Green Stone", color: "#90ee90", bg: "/assets/GemBtn-BG/Green-Stone.png" },
-    { name: "Yellow Stone", color: "#ffeb3b", bg: "/assets/GemBtn-BG/Yellow-Stone.png" },
-    { name: "Pink Stone", color: "#ffb6c1", bg: "/assets/GemBtn-BG/Pink-Stone.png" },
-    { name: "Vivid Blue", color: "#4169e1", bg: "/assets/GemBtn-BG/Blue-Stone.png" }
+    { name: "Diamond", color: [1.5, 1.5, 1.5], bg: "/assets/GemBtn-BG/white.png"}, // [1.5, 1.5, 1.5]
+    { name: "Ruby", color: "#e1405c", bg: "/assets/GemBtn-BG/rubby.png"}, // [1.8, 0.2, 0.4]
+    { name: "Sapphire Blue", color: "#89b0cb",  bg: "/assets/GemBtn-BG/sapphire.png"  }, // [0.2, 0.4, 1.8]
+    { name: "Green Emerald", color: "#22dfa3",  bg: "/assets/GemBtn-BG/gem-emerald.png"  }, // [0.2, 1.8, 0.4]
+    { name: "Orange Stone", color: "#ffa500", bg: "/assets/GemBtn-BG/orenge.png" }, // [1.8, 0.9, 0.2]
+    { name: "Green Stone", color: "#90ee90", bg: "/assets/GemBtn-BG/Green-Stone.png" }, // [0.2, 1.8, 0.9]
+    { name: "Yellow Stone", color: "#ffeb3b", bg: "/assets/GemBtn-BG/Yellow-Stone.png" }, // [1.8, 1.8, 0.2]
+    { name: "Pink Stone", color: "#ffb6c1", bg: "/assets/GemBtn-BG/Pink-Stone.png" },// [1.8, 0.2, 1.8]
+    { name: "Vivid Blue", color: "#4169e1", bg: "/assets/GemBtn-BG/Blue-Stone.png" }// [0.2, 0.9, 1.8]
   ];
 
   // Canvas cursor grabbing behavior
@@ -194,6 +199,84 @@ const RingModel = ({
   const handleNextClick = () => navigate("/diamond");
   const prongIncludesBand = getProngModelPath()?.toLowerCase().includes("with_band");
 
+
+  // prong auto focus logic
+
+  useEffect(() => {
+  if (controlsRef.current) {
+    initialTarget.current.copy(controlsRef.current.target);
+  }
+}, []);
+
+const focusOnProng = (targetPosition) => {
+  if (!controlsRef.current) return;
+
+  const controls = controlsRef.current;
+  const camera = controls.object;
+
+  // 🔁 TOGGLE CHECK
+  if (isFocused) {
+    // 👉 RESET VIEW
+    let progress = 0;
+
+    const startPos = camera.position.clone();
+    const startTarget = controls.target.clone();
+
+    const animate = () => {
+      progress += 0.03;
+      const t = progress * progress * (3 - 2 * progress);
+
+      camera.position.lerpVectors(startPos, initialCameraPos.current, t);
+      controls.target.lerpVectors(startTarget, initialTarget.current, t);
+
+      controls.update();
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    };
+
+    animate();
+    setIsFocused(false);
+    setAutoRotate(true); // 🔄 resume rotation
+    return;
+  }
+
+  // 👉 ZOOM IN
+  setAutoRotate(true);
+
+  const startPos = camera.position.clone();
+  const startTarget = controls.target.clone();
+
+  const direction = new THREE.Vector3()
+    .subVectors(camera.position, controls.target)
+    .normalize();
+
+  const offset = direction.multiplyScalar(5);
+
+  const endPos = targetPosition.clone().add(offset);
+  const endTarget = targetPosition.clone();
+
+  let progress = 0;
+
+  const animate = () => {
+    progress += 0.03;
+    const t = progress * progress * (3 - 2 * progress);
+
+    camera.position.lerpVectors(startPos, endPos, t);
+    controls.target.lerpVectors(startTarget, endTarget, t);
+
+    controls.update();
+
+    if (progress < 1) {
+      requestAnimationFrame(animate);
+    }
+  };
+
+  animate();
+  setIsFocused(true);
+};
+
   return (
     <div
       ref={containerRef}
@@ -218,11 +301,14 @@ const RingModel = ({
       >
         <Canvas
           camera={{ position: [0, 0, 22], fov: 15 }}
-          onCreated={({ gl }) => {
-            gl.physicallyCorrectLights = true;
-            gl.toneMapping = THREE.ACESFilmicToneMapping;
-            gl.outputColorSpace = THREE.SRGBColorSpace;
-          }}
+          // onCreated={({ gl }) => {
+          //   gl.physicallyCorrectLights = true;
+          //   gl.toneMapping = THREE.ACESFilmicToneMapping;
+          //   gl.outputColorSpace = THREE.SRGBColorSpace;
+          // }}
+          onCreated={({ camera }) => {
+    initialCameraPos.current.copy(camera.position);
+  }}
           shadows
         >
           <Environment files="/assets/hdr/env_metal_updated.hdr" background={false} />
@@ -258,6 +344,7 @@ const RingModel = ({
                     ringGroupRef={ringGroupRef}
                     diamondWeight={diamondWeight}
                     gemColor={gemColor}
+                    onProngClick={focusOnProng}
                   />
                 </group>
               )}
@@ -291,22 +378,25 @@ const RingModel = ({
       </div>
 
       {/* Settings Menu Container */}
-      <div className="absolute bottom-6 right-6 z-20 flex flex-col items-end gap-3">
-
-        <div className="flex items-end gap-3">
-          <div className={`flex gap-3 transition-all duration-500 transform ${showSettings ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10 pointer-events-none"}`}>
+      <div className="absolute bottom-6 right-2 md:right-6 lg:right-6 z-20 flex flex-col items-end gap-3">
+              {/* color gem row */}
+        <div className="flex items-end gap-2 lg:gap-3">
+          <div className={`flex gap-2 lg:gap-3 transition-all duration-500 transform ${showSettings ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10 pointer-events-none"}`}>
             {gems.map((gem) => (
               <div key={gem.name} className="relative group flex flex-col items-center">
                 <button
-                  onClick={() => setGemColor(gem.color)}
+                  onClick={() => {
+                    setGemColor(gem.color);
+                    onGemColorChange(gem.color);
+                  }}
                   className="hover:scale-110 transition-transform duration-300"
                 >
                   <div
-                    className="w-10 h-10 rounded-full shadow-md border border-gray-200"
+                    className="w-7 h-7 lg:w-10 lg:h-10  rounded-full shadow-md border border-gray-200"
                     style={{ 
                       background: `url(${gem.bg})` ,
                       backgroundSize: 'cover',
-                      backgroundPosition: 'center'
+                      backgroundPosition: 'center' 
                     }}
                   />
                 </button>
@@ -321,20 +411,20 @@ const RingModel = ({
           {/* Main Settings Button */}
           <button
             onClick={() => setShowSettings(!showSettings)}
-            className={`p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 z-30 ${showSettings ? "bg-red-500 text-white rotate-90" : "bg-black text-white"}`}
+            className={`p-2 sm:p-3 lg:p-4 rounded-full shadow-2xl transition-all duration-300 transform hover:scale-110 z-30 ${showSettings ? "bg-red-500 text-white rotate-90" : "bg-black text-white"}`}
           >
             {showSettings ? <X size={18} /> : <Settings size={18} />}
           </button>
         </div>
 
         {/* --- Existing: Bottom to Top Buttons --- */}
-        <div className={`absolute bottom-full right-0 mb-3 flex flex-col gap-3 transition-all duration-500 transform ${showSettings ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"}`}>
+        <div className={`absolute bottom-full right-0 mb-2 lg:mb-3 flex flex-col gap-2 lg:gap-3 transition-all duration-500 transform ${showSettings ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10 pointer-events-none"}`}>
 
           {/* Reset View Button */}
           <div className="relative group">
             <button
               onClick={resetView}
-              className="p-3 bg-white/80 hover:bg-white backdrop-blur-md rounded-full shadow-lg transition-transform hover:scale-110"
+              className="p-2 sm:p-2.5 lg:p-3 bg-white/80 hover:bg-white backdrop-blur-md rounded-full shadow-lg transition-transform hover:scale-110"
             >
               <RefreshCcw size={20} />
             </button>
@@ -355,7 +445,7 @@ const RingModel = ({
           <div className="relative group">
             <button
               onClick={() => setAutoRotate(!autoRotate)}
-              className={`p-3 backdrop-blur-md rounded-full shadow-lg transition-all hover:scale-110 ${autoRotate ? "bg-blue-500 text-white" : "bg-white/80 text-black"
+              className={`p-2 sm:p-2.5 lg:p-3 backdrop-blur-md rounded-full shadow-lg transition-all hover:scale-110 ${autoRotate ? "bg-blue-500 text-white" : "bg-white/80 text-black"
                 }`}
             >
               <RotateCw size={20} />
@@ -377,7 +467,7 @@ const RingModel = ({
           <div className="relative group">
             <button
               onClick={toggleFullscreen}
-              className="p-3 bg-white/80 hover:bg-white backdrop-blur-md rounded-full shadow-lg transition-transform hover:scale-110"
+              className="p-2 sm:p-2.5 lg:p-3 bg-white/80 hover:bg-white backdrop-blur-md rounded-full shadow-lg transition-transform hover:scale-110"
             >
               {isFullscreen ? <Minimize size={20} /> : <Maximize size={20} />}
             </button>
