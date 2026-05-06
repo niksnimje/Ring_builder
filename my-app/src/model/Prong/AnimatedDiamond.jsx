@@ -9,9 +9,9 @@ const AnimatedDiamond = ({ geometry, matrix, isTop, targetColor, sideGemColor, e
 
   const normalizeColor = (c) => {
     if (!c) return [1.5, 1.5, 1.5];
-    if (Array.isArray(c)) return c; // already array — seedha use karo, no multiply
+    if (Array.isArray(c)) return c; 
     const threeColor = new Color(c);
-    return [threeColor.r, threeColor.g, threeColor.b]; // ✅ * 2 hataya
+    return [threeColor.r, threeColor.g, threeColor.b]; 
   };
 
   const resolvedInitial = normalizeColor(isTop ? targetColor : sideGemColor);
