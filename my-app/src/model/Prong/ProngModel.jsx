@@ -21,6 +21,10 @@ const ProngModel = ({
   const { scene } = useGLTF(modelPath);
   const envMap = useEnvironment({
     files: "/assets/hdr/env_gem_Test.exr",
+    // files: "/assets/hdr/env_gem_002_30251392af (2).exr",
+    // files: "/assets/hdr/env_metal_014_66e705951c.exr",
+    // files: "/assets/hdr/env_gem_raff.exr",
+
   });
 
   useEffect(() => {
@@ -37,33 +41,6 @@ const ProngModel = ({
     cloned.updateMatrixWorld(true);
 
     const tempDiamonds = [];
-
-    // cloned.traverse((child) => {
-    //   if (child.isMesh) {
-    //     const name = child.name.toLowerCase();
-
-    //     if (name.includes("diamond") || name.includes("gem") || name.includes("Created_with_OctoNus_software_(httpwwwoctonuscom)")) {
-    //       child.visible = false;
-    //       child.updateWorldMatrix(true, false);
-
-    //       const box = new Box3().setFromObject(child);
-    //       const size = new Vector3();
-    //       box.getSize(size);
-    //       const volume = size.x * size.y * size.z;
-
-    //       tempDiamonds.push({
-    //         geometry: child.geometry,
-    //         matrix: child.matrixWorld.clone(),
-    //         volume: volume,
-    //         name: child.name
-    //       });
-    //     } else {
-    //       child.material = child.material.clone();
-    //       child.material.color = new Color(color);
-    //       Object.assign(child.material, sharedMetalProps || {});
-    //     }
-    //   }
-    // });
 
     cloned.traverse((child) => {
   if (child.isMesh) {
@@ -138,6 +115,7 @@ const ProngModel = ({
           targetColor={gemColor}
           sideGemColor={sideGemColor}
           envMap={envMap}
+          
         />
       ))}
     </group>
