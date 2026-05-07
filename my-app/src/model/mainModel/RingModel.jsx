@@ -53,9 +53,9 @@ const RingModel = ({
   const { themeClass } = useTheme();
   const [isMobileView, setIsMobileView] = useState(false);
   const [gemColor, setGemColor] = useState([1.5, 1.5, 1.5]); // Default White/Diamond
-  const [showGems, setShowGems] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const userAutoRotatePref = useRef(true);
 
   const initialCameraPos = useRef(new THREE.Vector3());
   const initialTarget = useRef(new THREE.Vector3());
@@ -174,7 +174,7 @@ const RingModel = ({
 
   const getProngModelPath = () => {
     const shankName = selectedShank?.name;
-    const prongName = selectedProng?.name;
+    // const prongName = selectedProng?.name;
     const shape = selectedDiamond?.name;
     const weightKey = diamondWeight?.value?.toString();
 
@@ -214,21 +214,17 @@ const focusOnProng = (targetPosition) => {
   const controls = controlsRef.current;
   const camera = controls.object;
 
-  // 🔁 TOGGLE CHECK
+  // 🔁 RESET VIEW (Zoom Out)
   if (isFocused) {
-    // 👉 RESET VIEW
     let progress = 0;
-
     const startPos = camera.position.clone();
     const startTarget = controls.target.clone();
 
     const animate = () => {
       progress += 0.03;
       const t = progress * progress * (3 - 2 * progress);
-
       camera.position.lerpVectors(startPos, initialCameraPos.current, t);
       controls.target.lerpVectors(startTarget, initialTarget.current, t);
-
       controls.update();
 
       if (progress < 1) {
@@ -238,12 +234,15 @@ const focusOnProng = (targetPosition) => {
 
     animate();
     setIsFocused(false);
-    setAutoRotate(true); // 🔄 resume rotation
+
+    // Zoom out check - restore auto-rotate if user had it on before
+    if (userAutoRotatePref.current) {
+      setAutoRotate(true);
+    }
     return;
   }
 
   // 👉 ZOOM IN
-  setAutoRotate(true);
 
   const startPos = camera.position.clone();
   const startTarget = controls.target.clone();
@@ -253,7 +252,6 @@ const focusOnProng = (targetPosition) => {
     .normalize();
 
   const offset = direction.multiplyScalar(5);
-
   const endPos = targetPosition.clone().add(offset);
   const endTarget = targetPosition.clone();
 
@@ -262,10 +260,8 @@ const focusOnProng = (targetPosition) => {
   const animate = () => {
     progress += 0.03;
     const t = progress * progress * (3 - 2 * progress);
-
     camera.position.lerpVectors(startPos, endPos, t);
     controls.target.lerpVectors(startTarget, endTarget, t);
-
     controls.update();
 
     if (progress < 1) {
@@ -275,6 +271,13 @@ const focusOnProng = (targetPosition) => {
 
   animate();
   setIsFocused(true);
+
+  //  Zoom in check 
+  if (userAutoRotatePref.current) {
+    setAutoRotate(true);
+  } else {
+    setAutoRotate(false); 
+  }
 };
 
   return (
@@ -309,7 +312,7 @@ const focusOnProng = (targetPosition) => {
           onCreated={({ camera }) => {
     initialCameraPos.current.copy(camera.position);
   }}
-          shadows
+          // shadows
         >
           <Environment files="/assets/hdr/env_metal_updated.hdr" background={false} />
           <ambientLight intensity={0.5} />
@@ -336,6 +339,7 @@ const focusOnProng = (targetPosition) => {
                   <ProngModel
                     key={getProngModelPath()}
                     modelPath={getProngModelPath()}
+                    fadeTrigger={`${getProngModelPath()}_${selectedDiamond?.name}`}
                     color={prongColor}
                     scale={prongScale}
                     position={[0, prongOffsetY, prongOffsetZ || 0]}
@@ -444,7 +448,11 @@ const focusOnProng = (targetPosition) => {
           {/* Auto Rotate Toggle */}
           <div className="relative group">
             <button
-              onClick={() => setAutoRotate(!autoRotate)}
+              onClick={() => {
+    const newState = !autoRotate;
+    setAutoRotate(newState);
+    userAutoRotatePref.current = newState; 
+  }}
               className={`p-2 sm:p-2.5 lg:p-3 backdrop-blur-md rounded-full shadow-lg transition-all hover:scale-110 ${autoRotate ? "bg-blue-500 text-white" : "bg-white/80 text-black"
                 }`}
             >
