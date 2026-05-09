@@ -10,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useTheme } from "../../Context/ThemeContext";
 import Pave from "../Band/Pave";
 import { Settings, RefreshCcw, RotateCw, Maximize, Minimize, X } from "lucide-react";
+import { calculatePrice } from "../../utils/calculatePrice";
 
 const RotatingRing = ({ children, isRotating = true }) => {
   const groupRef = useRef();
@@ -53,19 +54,19 @@ const RingModel = ({
   const { themeClass } = useTheme();
   const [isMobileView, setIsMobileView] = useState(false);
   const [gemColor, setGemColor] = useState([1.5, 1.5, 1.5]); // Default White/Diamond
-  const [showGems, setShowGems] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
+  const userAutoRotatePref = useRef(true);
 
   const initialCameraPos = useRef(new THREE.Vector3());
   const initialTarget = useRef(new THREE.Vector3());
 
   // gem colors
   const gems = [
-    { name: "Diamond", color: [1.5, 1.5, 1.5], bg: "/assets/GemBtn-BG/white.png"}, // [1.5, 1.5, 1.5]
-    { name: "Ruby", color: "#e1405c", bg: "/assets/GemBtn-BG/rubby.png"}, // [1.8, 0.2, 0.4]
-    { name: "Sapphire Blue", color: "#89b0cb",  bg: "/assets/GemBtn-BG/sapphire.png"  }, // [0.2, 0.4, 1.8]
-    { name: "Green Emerald", color: "#22dfa3",  bg: "/assets/GemBtn-BG/gem-emerald.png"  }, // [0.2, 1.8, 0.4]
+    { name: "Diamond", color: [1.5, 1.5, 1.5], bg: "/assets/GemBtn-BG/white.png" }, // [1.5, 1.5, 1.5]
+    { name: "Ruby", color: "#e1405c", bg: "/assets/GemBtn-BG/rubby.png" }, // [1.8, 0.2, 0.4]
+    { name: "Sapphire Blue", color: "#89b0cb", bg: "/assets/GemBtn-BG/sapphire.png" }, // [0.2, 0.4, 1.8]
+    { name: "Green Emerald", color: "#22dfa3", bg: "/assets/GemBtn-BG/gem-emerald.png" }, // [0.2, 1.8, 0.4]
     { name: "Orange Stone", color: "#ffa500", bg: "/assets/GemBtn-BG/orenge.png" }, // [1.8, 0.9, 0.2]
     { name: "Green Stone", color: "#90ee90", bg: "/assets/GemBtn-BG/Green-Stone.png" }, // [0.2, 1.8, 0.9]
     { name: "Yellow Stone", color: "#ffeb3b", bg: "/assets/GemBtn-BG/Yellow-Stone.png" }, // [1.8, 1.8, 0.2]
@@ -174,7 +175,7 @@ const RingModel = ({
 
   const getProngModelPath = () => {
     const shankName = selectedShank?.name;
-    const prongName = selectedProng?.name;
+    // const prongName = selectedProng?.name;
     const shape = selectedDiamond?.name;
     const weightKey = diamondWeight?.value?.toString();
 
@@ -203,32 +204,65 @@ const RingModel = ({
   // prong auto focus logic
 
   useEffect(() => {
-  if (controlsRef.current) {
-    initialTarget.current.copy(controlsRef.current.target);
-  }
-}, []);
+    if (controlsRef.current) {
+      initialTarget.current.copy(controlsRef.current.target);
+    }
+  }, []);
 
-const focusOnProng = (targetPosition) => {
-  if (!controlsRef.current) return;
+  const focusOnProng = (targetPosition) => {
+    if (!controlsRef.current) return;
 
-  const controls = controlsRef.current;
-  const camera = controls.object;
+    const controls = controlsRef.current;
+    const camera = controls.object;
 
-  // 🔁 TOGGLE CHECK
-  if (isFocused) {
-    // 👉 RESET VIEW
-    let progress = 0;
+    // 🔁 RESET VIEW (Zoom Out)
+    if (isFocused) {
+      let progress = 0;
+      const startPos = camera.position.clone();
+      const startTarget = controls.target.clone();
+
+      const animate = () => {
+        progress += 0.03;
+        const t = progress * progress * (3 - 2 * progress);
+        camera.position.lerpVectors(startPos, initialCameraPos.current, t);
+        controls.target.lerpVectors(startTarget, initialTarget.current, t);
+        controls.update();
+
+        if (progress < 1) {
+          requestAnimationFrame(animate);
+        }
+      };
+
+      animate();
+      setIsFocused(false);
+
+      // Zoom out check - restore auto-rotate if user had it on before
+      if (userAutoRotatePref.current) {
+        setAutoRotate(true);
+      }
+      return;
+    }
+
+    // 👉 ZOOM IN
 
     const startPos = camera.position.clone();
     const startTarget = controls.target.clone();
 
+    const direction = new THREE.Vector3()
+      .subVectors(camera.position, controls.target)
+      .normalize();
+
+    const offset = direction.multiplyScalar(5);
+    const endPos = targetPosition.clone().add(offset);
+    const endTarget = targetPosition.clone();
+
+    let progress = 0;
+
     const animate = () => {
       progress += 0.03;
       const t = progress * progress * (3 - 2 * progress);
-
-      camera.position.lerpVectors(startPos, initialCameraPos.current, t);
-      controls.target.lerpVectors(startTarget, initialTarget.current, t);
-
+      camera.position.lerpVectors(startPos, endPos, t);
+      controls.target.lerpVectors(startTarget, endTarget, t);
       controls.update();
 
       if (progress < 1) {
@@ -237,45 +271,24 @@ const focusOnProng = (targetPosition) => {
     };
 
     animate();
-    setIsFocused(false);
-    setAutoRotate(true); // 🔄 resume rotation
-    return;
-  }
+    setIsFocused(true);
 
-  // 👉 ZOOM IN
-  setAutoRotate(true);
-
-  const startPos = camera.position.clone();
-  const startTarget = controls.target.clone();
-
-  const direction = new THREE.Vector3()
-    .subVectors(camera.position, controls.target)
-    .normalize();
-
-  const offset = direction.multiplyScalar(5);
-
-  const endPos = targetPosition.clone().add(offset);
-  const endTarget = targetPosition.clone();
-
-  let progress = 0;
-
-  const animate = () => {
-    progress += 0.03;
-    const t = progress * progress * (3 - 2 * progress);
-
-    camera.position.lerpVectors(startPos, endPos, t);
-    controls.target.lerpVectors(startTarget, endTarget, t);
-
-    controls.update();
-
-    if (progress < 1) {
-      requestAnimationFrame(animate);
+    //  Zoom in check 
+    if (userAutoRotatePref.current) {
+      setAutoRotate(true);
+    } else {
+      setAutoRotate(false);
     }
   };
 
-  animate();
-  setIsFocused(true);
-};
+
+  const priceData = calculatePrice({
+    selectedShank,
+    selectedProng,
+    selectedDiamond,
+    diamondWeight,
+  });
+
 
   return (
     <div
@@ -294,8 +307,8 @@ const focusOnProng = (targetPosition) => {
         zIndex: isFullscreen ? 9999 : 'auto',
       }}
     >
-      <div 
-        ref={canvasContainerRef} 
+      <div
+        ref={canvasContainerRef}
         className="w-full h-full"
         style={{ cursor: 'default' }}
       >
@@ -307,9 +320,9 @@ const focusOnProng = (targetPosition) => {
           //   gl.outputColorSpace = THREE.SRGBColorSpace;
           // }}
           onCreated={({ camera }) => {
-    initialCameraPos.current.copy(camera.position);
-  }}
-          shadows
+            initialCameraPos.current.copy(camera.position);
+          }}
+        // shadows
         >
           <Environment files="/assets/hdr/env_metal_updated.hdr" background={false} />
           <ambientLight intensity={0.5} />
@@ -326,7 +339,7 @@ const focusOnProng = (targetPosition) => {
                   sharedMetalProps={sharedMetalProps}
                   selectedProngName={selectedProng?.name}
                 />
-                <Pave modelPath={selectedShank.path}  gemColor={gemColor} />
+                <Pave modelPath={selectedShank.path} gemColor={gemColor} />
               </group>
             )}
 
@@ -336,6 +349,7 @@ const focusOnProng = (targetPosition) => {
                   <ProngModel
                     key={getProngModelPath()}
                     modelPath={getProngModelPath()}
+                    fadeTrigger={`${getProngModelPath()}_${selectedDiamond?.name}`}
                     color={prongColor}
                     scale={prongScale}
                     position={[0, prongOffsetY, prongOffsetZ || 0]}
@@ -372,14 +386,14 @@ const focusOnProng = (targetPosition) => {
             maxDistance={20}
             enableDamping={true}
             dampingFactor={0.05}
-            // target={[0, 0.5, 0]} 
+          // target={[0, 0.5, 0]} 
           />
         </Canvas>
       </div>
 
       {/* Settings Menu Container */}
       <div className="absolute bottom-6 right-2 md:right-6 lg:right-6 z-20 flex flex-col items-end gap-3">
-              {/* color gem row */}
+        {/* color gem row */}
         <div className="flex items-end gap-2 lg:gap-3">
           <div className={`flex gap-2 lg:gap-3 transition-all duration-500 transform ${showSettings ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10 pointer-events-none"}`}>
             {gems.map((gem) => (
@@ -393,10 +407,10 @@ const focusOnProng = (targetPosition) => {
                 >
                   <div
                     className="w-7 h-7 lg:w-10 lg:h-10  rounded-full shadow-md border border-gray-200"
-                    style={{ 
-                      background: `url(${gem.bg})` ,
+                    style={{
+                      background: `url(${gem.bg})`,
                       backgroundSize: 'cover',
-                      backgroundPosition: 'center' 
+                      backgroundPosition: 'center'
                     }}
                   />
                 </button>
@@ -444,7 +458,11 @@ const focusOnProng = (targetPosition) => {
           {/* Auto Rotate Toggle */}
           <div className="relative group">
             <button
-              onClick={() => setAutoRotate(!autoRotate)}
+              onClick={() => {
+                const newState = !autoRotate;
+                setAutoRotate(newState);
+                userAutoRotatePref.current = newState;
+              }}
               className={`p-2 sm:p-2.5 lg:p-3 backdrop-blur-md rounded-full shadow-lg transition-all hover:scale-110 ${autoRotate ? "bg-blue-500 text-white" : "bg-white/80 text-black"
                 }`}
             >
@@ -491,10 +509,24 @@ const focusOnProng = (targetPosition) => {
         <div className="fixed bottom-0 left-0 w-full flex justify-between items-center p-3 bg-[#373D73] text-white z-50 lg:relative">
 
           {/* Left side - Complete Price Info */}
-          <div className="flex flex-col">
-            <p className="text-sm md:text-lg lg:text-xl font-bold">Engagement Ring: $1,005.00</p>
-            <p className="text-sm md:text-lg lg:text-xl font-bold">Band: $595.00</p>
-            <p className="text-sm md:text-lg lg:text-2xl font-bold">TOTAL: $1,600.00</p>
+          <div className="flex flex-col gap-1">
+            <div className="flex gap-4 text-xs sm:text-sm md:text-base">
+              <div>
+                <p className="font-semibold">Diamond:</p>
+                <p className="text-yellow-300 font-bold">₹ {priceData.diamondPrice?.toLocaleString?.() || 0}</p>
+              </div>
+              <div>
+                <p className="font-semibold">Band:</p>
+                <p className="text-yellow-300 font-bold">₹ {priceData.shankPrice?.toLocaleString?.() || 0}</p>
+              </div>
+              <div>
+                <p className="font-semibold">Setting:</p>
+                <p className="text-yellow-300 font-bold">₹ {priceData.prongPrice?.toLocaleString?.() || 0}</p>
+              </div>
+            </div>
+            <p className="text-sm md:text-lg lg:text-xl font-bold text-white border-t border-yellow-300 pt-1 mt-1">
+              TOTAL: ₹ {priceData.totalPrice?.toLocaleString?.() || 0}
+            </p>
           </div>
 
           {/* Right side - Next button */}
