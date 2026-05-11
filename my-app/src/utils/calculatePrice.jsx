@@ -6,7 +6,6 @@ export const calculatePrice = ({
     selectedProng,
     selectedDiamond,
     diamondWeight,
-    selectedMetalColor,
 }) => {
 
     // Extract the name from objects and weight value
@@ -38,27 +37,18 @@ export const calculatePrice = ({
         pricingData.prong[prongName]?.[diamondName]?.[weightValue] || 0;
 
     // =========================
-    // METAL COLOR PRICE
-    // =========================
-
-    const metalColorPrice =
-        pricingData.metalColor[selectedMetalColor] || 0;
-
-    // =========================
     // TOTAL
     // =========================
 
     const totalPrice =
         shankPrice +
         diamondPrice +
-        prongPrice +
-        metalColorPrice;
+        prongPrice;
 
     return {
         shankPrice,
         diamondPrice,
         prongPrice,
-        metalColorPrice,
         totalPrice,
     };
 };

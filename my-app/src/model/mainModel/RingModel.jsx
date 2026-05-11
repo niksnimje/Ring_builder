@@ -287,7 +287,6 @@ const RingModel = ({
     selectedProng,
     selectedDiamond,
     diamondWeight,
-    selectedMetalColor: bandColor,
   });
 
 
@@ -523,10 +522,6 @@ const RingModel = ({
               <div>
                 <p className="font-semibold">Setting:</p>
                 <p className="text-yellow-300 font-bold">₹ {priceData.prongPrice?.toLocaleString?.() || 0}</p>
-              </div>
-              <div>
-                <p className="font-semibold">Color:</p>
-                <p className="text-yellow-300 font-bold">₹ {priceData.metalColorPrice?.toLocaleString?.() || 0}</p>
               </div>
             </div>
             <p className="text-sm md:text-lg lg:text-xl font-bold text-white border-t border-yellow-300 pt-1 mt-1">
