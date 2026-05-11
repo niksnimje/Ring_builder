@@ -11,7 +11,6 @@ export const pricingData = {
     "Pave 3": 9000,
     "Pave 4": 9500,
     "Pave 5": 10000,
-
     "Unique 1": 12000,
     "Unique 2": 12500,
     "Unique 3": 13000,
@@ -248,5 +247,20 @@ export const pricingData = {
         5.0: 21000,
       },
     },
+  },
+
+  // =========================
+  // METAL COLOR PRICE
+  // color hex code -> price
+  // =========================
+
+  metalColor: {
+    "#B8B4B9": 2000,      // 14K White Gold
+    "#E0E0E0": 3000,      // 18K White Gold
+    "#E6BE5A": 2000,      // 14K Yellow
+    "#DDB140": 3000,      // 18K Yellow
+    "#f1a886": 2500,      // 14K Rose Gold
+    "#d99982": 3500,      // 18K Rose Gold
+    "#B0C4DE": 8000,      // Platinum
   },
 };
