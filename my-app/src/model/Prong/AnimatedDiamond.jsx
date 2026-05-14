@@ -2,7 +2,7 @@
 import { MeshRefractionMaterial } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import React, { useEffect, useRef, useState } from 'react'
-import { Color } from 'three';
+import { Color, Box3, Vector3 } from 'three';
 
 const AnimatedDiamond = ({ geometry, matrix, isTop, targetColor, sideGemColor, envMap }) => {
   const meshRef = useRef();
@@ -50,15 +50,13 @@ const AnimatedDiamond = ({ geometry, matrix, isTop, targetColor, sideGemColor, e
     <mesh ref={meshRef} geometry={geometry} matrix={matrix} matrixAutoUpdate={false}>
       <MeshRefractionMaterial
         envMap={envMap}
-        ior={2.4} //  index of refraction for diamond
+        ior={2.4}
         fresnel={0.5}
         color={displayColor}
-        aberrationStrength={isTop ? 0.003 : 0.005} // rainbow effect
-        toneMapped={true} // for glow effect
-        fastChroma={true} // performance boost for chromatic aberration
-        envMapIntensity={isTop ? 2.5 : 1.3}
-        bounces={isTop ? 3 : 0.2}
-        thickness={isTop ? 0.25 : 0.08} // material depth
+        aberrationStrength={isTop ? 0.002 : 0.005}
+        bounces={isTop ? 4 : 2}
+        toneMapped={false}
+        fastChroma={true}
       />
     </mesh>
   );
