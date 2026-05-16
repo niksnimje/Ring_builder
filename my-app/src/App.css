@@ -1,0 +1,8 @@
+:root {
+  /* --primary-gold: #BD9C61; */
+  --primary-gold: red;
+}
+
+@theme {
+  --color-primaryGold: var(--primary-gold);
+}

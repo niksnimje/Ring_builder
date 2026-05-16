@@ -11,7 +11,6 @@ import { useTheme } from "../../Context/ThemeContext";
 import Pave from "../Band/Pave";
 import { Settings, RefreshCcw, RotateCw, Maximize, Minimize, X } from "lucide-react";
 import { calculatePrice } from "../../utils/calculatePrice";
-import Loader from "../../Common/Loader";
 
 const RotatingRing = ({ children, isRotating = true }) => {
   const groupRef = useRef();
@@ -283,9 +282,6 @@ const RingModel = ({
   };
 
 
-
-
-  // calculate price
   const priceData = calculatePrice({
     selectedShank,
     selectedProng,
@@ -298,7 +294,7 @@ const RingModel = ({
   return (
     <div
       ref={containerRef}
-      className={`w-full h-full transition-all duration-700 ease-in-out  ${themeClass} ${!isFullscreen ? "rounded-[32px] border border-[#e7e1d8] shadow-xl " : ""} relative`}
+      className={`w-full h-full transition-all duration-700 ease-in-out ${themeClass} relative`}
       style={{
         width: isFullscreen ? '100vw' : '100%',
         height: isFullscreen
@@ -335,27 +331,20 @@ const RingModel = ({
 
           <RotatingRing isRotating={autoRotate} >
             {!prongIncludesBand && selectedShank && (
-              <Suspense fallback={<Loader />}>
-                <group>
-                  <BandRModel
-                    modelPath={selectedShank.path}
-                    onLoaded={setBandHeight}
-                    color={bandColor}
-                    scale={bandScale || 1}
-                    sharedMetalProps={sharedMetalProps}
-                    selectedProngName={selectedProng?.name}
-                    diamondWeight={diamondWeight}
-                  />
-                  <Pave
-                    modelPath={selectedShank.path}
-                    gemColor={gemColor}
-                    diamondWeight={diamondWeight}
-                  />
-                </group>
-              </Suspense>
+              <group>
+                <BandRModel
+                  modelPath={selectedShank.path}
+                  onLoaded={setBandHeight}
+                  color={bandColor}
+                  scale={bandScale || 1}
+                  sharedMetalProps={sharedMetalProps}
+                  selectedProngName={selectedProng?.name}
+                />
+                <Pave modelPath={selectedShank.path} gemColor={gemColor} />
+              </group>
             )}
 
-            <Suspense fallback={<Loader />}>
+            <Suspense fallback={null}>
               {selectedProng && (
                 <group ref={ringGroupRef}>
                   <ProngModel
@@ -375,9 +364,8 @@ const RingModel = ({
                 </group>
               )}
             </Suspense>
-            
 
-            <Suspense fallback={<Loader />}>
+            <Suspense fallback={null}>
               {!(selectedShank?.name === "Halo" && selectedProng?.name === "Halo") && selectedDiamond && (
                 <DiamondModel
                   modelPath={selectedDiamond.path}
@@ -395,8 +383,8 @@ const RingModel = ({
             enablePan={false}
             autoRotate={autoRotate}
             autoRotateSpeed={1.5}
-            minDistance={5} // zoom in minimum value is give close look at diamond
-            maxDistance={25} // zoom out maximum value is give full look at ring
+            minDistance={8}
+            maxDistance={20}
             enableDamping={true}
             dampingFactor={0.05}
           // target={[0, 0.5, 0]} 
