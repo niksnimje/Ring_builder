@@ -10,7 +10,18 @@ import {
 import { useTheme } from "../../Context/ThemeContext";
 import { Link, useLocation } from "react-router-dom";
 import { inputChecker } from "../../utils/inputChecker";
-// import SingleModelDemo from "../../model/mainModel/SingleModelDemo";
+import { RingWizard } from "./RingWizard";
+
+import {
+  Gem,
+  CircleDot,
+  Diamond,
+  Palette,
+  SquaresExclude,
+} from "lucide-react";
+// import { GiDiamondRing  } from "react-icons/ri";
+import { GiDiamondRing } from "react-icons/gi";
+
 
 // Define shankProngMap
 const shankProngMap = {
@@ -31,38 +42,6 @@ const defaultDiamond = diamondOptions.length > 0 ? diamondOptions[0] : null;
 const defaultDiamondWeight = diamondWeightOptions.find(opt => opt.weight === '1.0 ct')?.value || (diamondWeightOptions.length > 0 ? diamondWeightOptions[0].value : 0);
 const defaultBandColor = "#E6BE5A";
 const defaultProngColor = "#E6BE5A";
-
-// Premium Accordion Component
-const PremiumAccordion = ({ title, icon, children, isOpen, onToggle }) => {
-  return (
-    <div className="border-b border-gray-100 last:border-0">
-      <button
-        onClick={onToggle}
-        className="w-full px-4 sm:px-6 py-3 sm:py-4 lg:px-6 lg:py-3 flex justify-between items-center bg-white transition-all duration-200 group"
-      >
-        <div className="flex items-center gap-2 sm:gap-3">
-          <span className="font-medium text-gray-800 text-base sm:text-lg group-hover:text-gray-900">
-            {title}
-          </span>
-        </div>
-        <svg
-          className={`w-4 h-4 sm:w-5 sm:h-5 text-gray-400 transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-      {/* <div className={`transition-all duration-300 ease-in-out ${isOpen ? 'max-h-[2000px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}> */}
-      <div className={`${isOpen ? 'block' : 'hidden'}`}>
-        <div className="px-4 sm:px-6 pb-4 sm:pb-6">
-          {children}
-        </div>
-      </div>
-    </div>
-  );
-};
 
 // Metal Color Button Component
 const MetalColorButton = ({ color, label, isSelected, onClick }) => {
@@ -97,23 +76,23 @@ const ResponsiveTabs = ({ activeTab, setActiveTab }) => {
     <div className="border-b border-gray-200 px-3 sm:px-6 pt-3 sm:pt-4 sticky top-0 z-10 bg-[#1e293b]">
       <div className="flex justify-between sm:justify-start gap-2 sm:gap-6">
         <button
-          onClick={() => setActiveTab("color")}
-          className={`flex-1 sm:flex-none pb-2 text-sm sm:text-lg font-medium transition-colors ${activeTab === "color"
-            ? "text-white border-b-2 border-white"
-            : "text-gray-400"
-            }`}
-        >
-          Color
-        </button>
-
-        <button
           onClick={() => setActiveTab("metal")}
           className={`flex-1 sm:flex-none pb-2 text-sm sm:text-lg font-medium transition-colors ${activeTab === "metal"
             ? "text-white border-b-2 border-white"
             : "text-gray-400"
             }`}
         >
-          Metal
+          Metal 
+        </button>
+
+        <button
+          onClick={() => setActiveTab("type")}
+          className={`flex-1 sm:flex-none pb-2 text-sm sm:text-lg font-medium transition-colors ${activeTab === "type"
+            ? "text-white border-b-2 border-white"
+            : "text-gray-400"
+            }`}
+        >
+          Type
         </button>
 
         <button
@@ -149,29 +128,81 @@ export default function RingBuilder() {
   const [bandHeight, setBandHeight] = useState(0.3);
   const [bandColor, setBandColor] = useState(defaultBandColor);
   const [prongColor, setProngColor] = useState(defaultProngColor);
-  const [activeTab, setActiveTab] = useState("color");
+  const [activeTab, setActiveTab] = useState("metal");
+  const [showWizard, setShowWizard] = useState(true);
   const location = useLocation();
   const [isMixMode, setIsMixMode] = useState(false);
+  const [gemColor, setGemColor] = useState([1.5, 1.5, 1.5]);
+  const [showControls, setShowControls] = useState(true);
+
+  const handleGemColorChange = (color) => {
+    setGemColor(color);
+  };
 
   const [showMixPanel, setShowMixPanel] = useState(false);
 
-// temp state (important)
-const [tempBandColor, setTempBandColor] = useState(bandColor);
-const [tempProngColor, setTempProngColor] = useState(prongColor);
+  const resolveStyleConfig = (style) => {
+    const styleMap = {
+      Solitaire: { shankName: "Solitaire", prongName: "Classic Prong" },
+      "Pave": { shankName: "Pave", prongName: "Classic" },
+      "Pave 2": { shankName: "Pave 2", prongName: "Classic" },
+      "Unique 1": { shankName: "Unique 1", prongName: "Classic" },
+      "Unique 2": { shankName: "Unique 2", prongName: "Classic" },
+      "Unique 3": { shankName: "Unique 3", prongName: "Classic" },
+      "Unique 4": { shankName: "Unique 4", prongName: "Classic" },
+      "Unique 5": { shankName: "Unique 5", prongName: "Classic" },
+      "Unique 6": { shankName: "Unique 6", prongName: "Classic" },
+      "Start from scratch": { shankName: "Solitaire", prongName: "Classic Prong" },
+    };
 
-const applyMixColors = () => {
-  setBandColor(tempBandColor);
-  setProngColor(tempProngColor);
-  setShowMixPanel(false);
-};
+    return styleMap[style] || { shankName: "Solitaire", prongName: "Classic Prong" };
+  };
+
+  const handleWizardComplete = (config) => {
+    setShowWizard(false);
+
+    if (config.metal) {
+      setBandColor(config.metal);
+      setProngColor(config.metal);
+    }
+
+    if (config.shape) {
+      const foundDiamond = diamondOptions.find((d) => d.name === config.shape);
+      if (foundDiamond) {
+        setSelectedDiamond(foundDiamond);
+      }
+    }
+
+    if (config.weight) {
+      setSelectedDiamondWeight(config.weight);
+    }
+
+    if (config.style) {
+      const { shankName, prongName } = resolveStyleConfig(config.style);
+      const foundShank = shankOptions.find((s) => s.name === shankName) || defaultShank;
+      const foundProng = prongOptions.find((p) => p.name === prongName) || defaultProng;
+      setSelectedShank(foundShank);
+      setSelectedProng(foundProng);
+    }
+  };
+
+  // temp state (important)
+  const [tempBandColor, setTempBandColor] = useState(bandColor);
+  const [tempProngColor, setTempProngColor] = useState(prongColor);
+
+  const applyMixColors = () => {
+    setBandColor(tempBandColor);
+    setProngColor(tempProngColor);
+    setShowMixPanel(false);
+  };
 
   const handleColorChange = (color) => {
     if (isMixMode) {
-      // mix mode → kuch mat kar (buttons alag handle karenge)
+      // mix mode 
       return;
     }
 
-    // default mode → dono change
+    // default mode - single click sets both colors
     setBandColor(color);
     setProngColor(color);
   };
@@ -258,9 +289,59 @@ const applyMixColors = () => {
   const hasMoreDiamonds = diamondOptions.length > 10 && !showAllDiamonds;
 
   const bandScale = 1;
-  const prongScale = 0.3;
   const prongHeight = 0.5;
   const diamondScale = 0.08;
+
+
+  // prong wight to scale
+
+  //   const prongScaleByWeight = [
+  //   { weight: 1.0, scale: 0.23 },
+  //   { weight: 2.0, scale: 0.25 },
+  //   { weight: 3.0, scale: 0.28 },
+  //   { weight: 4.0, scale: 0.29 },
+  //   { weight: 5.0, scale: 0.3 },
+  // ];
+
+  // const offsetYByWeight = [
+  //   { weight: 1.0, offsetY: 1.82 },
+  //   { weight: 2.0, offsetY: 1.8 },
+  //   { weight: 3.0, offsetY: 1.76 },
+  //   { weight: 4.0, offsetY: 1.77 },
+  //   { weight: 5.0, offsetY: 1.77 },
+  // ];
+
+  // __________________________________
+
+  const prongScaleByWeight = [
+    { weight: 1.0, scale: 0.23 },
+    { weight: 2.0, scale: 0.29 },
+    { weight: 3.0, scale: 0.33 },
+    { weight: 4.0, scale: 0.36 },
+    { weight: 5.0, scale: 0.39 },
+  ];
+
+  //   const prongScaleByWeight = [
+  //   { weight: 1.0, scale: 0.25 },
+  //   { weight: 2.0, scale: 0.32 },
+  //   { weight: 3.0, scale: 0.36 },
+  //   { weight: 4.0, scale: 0.39 },
+  //   { weight: 5.0, scale: 0.43 },
+  // ];
+
+  // Weight-based offsetY mapping (smaller for larger weights)
+
+  const offsetYByWeight = [
+    { weight: 1.0, offsetY: 1.82 },
+    { weight: 2.0, offsetY: 1.8 },
+    { weight: 3.0, offsetY: 1.76 },
+    { weight: 4.0, offsetY: 1.75 },
+    { weight: 5.0, offsetY: 1.73 },
+  ];
+
+
+
+  const prongScale = prongScaleByWeight.find((entry) => entry.weight === selectedDiamondWeight)?.scale || 0.3;
 
   const sharedMetalProps = {
     metalness: 1,
@@ -281,8 +362,24 @@ const applyMixColors = () => {
   // const adjustedProngOffsetY = bandHeight / currentYDivisor; 
   const currentShapeData = selectedProng?.shapeMap?.[selectedDiamond?.name];
 
+  const isUniqueShank = selectedShank?.name === "Unique 1" || selectedShank?.name === "Unique 3";
 
-  const currentYDivisor = currentShapeData?.offsetY || selectedProng?.offsetY || 1.75;
+  // Get weight-based offsetY, fallback to shape data or default
+  const shapeSpecificOffset = currentShapeData?.weightOffsets?.[selectedDiamondWeight];
+  const weightBasedOffsetY = offsetYByWeight.find((entry) => entry.weight === selectedDiamondWeight)?.offsetY;
+  let currentYDivisor = shapeSpecificOffset || weightBasedOffsetY || currentShapeData?.offsetY || selectedProng?.offsetY || 1.75;
+
+  if (selectedShank?.name === "Unique 1") {
+    currentYDivisor = 1.85;
+  } else if (selectedShank?.name === "Unique 3") {
+    currentYDivisor = 1.95;
+  }
+  else if (selectedShank?.name === "Unique 12") {
+    currentYDivisor = 1.85;
+  }
+  else if (selectedShank?.name === "Unique 14") {
+    currentYDivisor = 1.87;
+  }
 
   const adjustedProngOffsetY = bandHeight / currentYDivisor;
   const adjustedProngOffsetZ = currentShapeData?.offsetZ || selectedProng?.offsetZ || 0;
@@ -293,68 +390,12 @@ const applyMixColors = () => {
   // const changeShank = (shank) => setSelectedShank(shank);
   const changeShank = (shank) => {
     setSelectedShank(shank);
-    // console.log(shank.name)
 
-    // const allowedProngs = shankProngMap[shank.name] || [];
-
-    // const validProng = prongOptions.find(p =>
-    //   allowedProngs.includes(p.name)
-    // );
-
-    // if (validProng) {
-    //   setSelectedProng(validProng);
-    // }
-
-    if (shank.name === "Solitaire Bezel") {
-      // 👉  → Head bhi Bezel
-      const bezelProng = prongOptions.find(
-        (p) => p.name === "Solitaire Bezel"
-      );
-
-      if (bezelProng) {
-        setSelectedProng(bezelProng);
-      }
-    } else {
-      // 👉  → default head
-      const defaultProng = prongOptions.find(
-        (p) => p.name === "Classic Prong"
-      );
-
-      if (defaultProng) {
-        setSelectedProng(defaultProng);
-      }
-    }
   };
 
   const changeProng = (prong) => {
     setSelectedProng(prong);
-    // console.log(prong.name)
 
-    // if (prong.name === "Solitaire Bezel") {
-    //   const bezelShank = shankOptions.find(s => s.name === "Solitaire Bezel");
-    //   if (bezelShank) {
-    //     setSelectedShank(bezelShank);
-    //   }
-    // }
-    if (prong.name === "Solitaire Bezel") {
-      // ✅ Bezel case → bezel band
-      const bezelShank = shankOptions.find(
-        (s) => s.name === "Solitaire Bezel"
-      );
-
-      if (bezelShank) {
-        setSelectedShank(bezelShank);
-      }
-    } else {
-      // ✅ All other cases → default Solitaire band
-      const defaultShank = shankOptions.find(
-        (s) => s.name === "Solitaire"
-      );
-
-      if (defaultShank) {
-        setSelectedShank(defaultShank);
-      }
-    }
   };
 
   const changeBandColor = (color) => setBandColor(color);
@@ -382,18 +423,65 @@ const applyMixColors = () => {
     };
   })();
 
-  const metalOptions = [
-    ["#B8B4B9", "14K White Gold"],
-    ["#E0E0E0", "18K White Gold"],
-    ["#E6BE5A", "14K Yellow"],
-    ["#DDB140", "18K Yellow"],
-    ["#f1a886", "14K RG"],
-    ["#d99982", "18K RG"],
-    ["#B0C4DE", "PT"],
-    // ["#f7c5ad", "14K RG"],
-    // ["#ffcb7d", "gold"],
-  ];
+  // const metalOptions = [
+  //   ["#B8B4B9", "14K White Gold"],
+  //   ["#E0E0E0", "18K White Gold"],
+  //   ["#E6BE5A", "14K Yellow"],
+  //   ["#DDB140", "18K Yellow"],
+  //   ["#f1a886", "14K RG"],
+  //   ["#d99982", "18K RG"],
+  //   ["#B0C4DE", "PT"],
+  //   // ["#f7c5ad", "14K RG"],
+  //   // ["#ffcb7d", "gold"],
+  // ];
 
+  // ✅ Best Structure: color + label + imagePath
+// color = actual metal color used in your 3D model
+// label = UI text
+// image = background image path shown in the card
+
+const metalOptions = [
+  {
+    color: "#B8B4B9",
+    label: "14K White Gold",
+    image: "/assets/Mattel-bg/silver-14k.png",
+  },
+  {
+    color: "#E0E0E0",
+    label: "18K White Gold",
+    image: "/assets/Mattel-bg/silver-18k.png",
+  },
+  {
+    color: "#E6BE5A",
+    label: "14K Yellow Gold",
+    image: "/assets/Mattel-bg/gold-14k.png",
+  },
+  {
+    color: "#DDB140",
+    label: "18K Yellow Gold",
+    image: "/assets/Mattel-bg/gold-18k.png",
+  },
+  {
+    color: "#f1a886",
+    label: "14K Rose Gold",
+    image: "/assets/Mattel-bg/rose-14k.png",
+  },
+  {
+    color: "#d99982",
+    label: "18K Rose Gold",
+    image: "/assets/Mattel-bg/rose-18k.png",
+  },
+  {
+    color: "#B0C4DE",
+    label: "Platinum (PT)",
+    image: "/assets/Mattel-bg/platinum.png",
+  },
+  {
+    color: "mix",
+    label: "Mix Metals",
+    image: "/assets/Mattel-bg/mix.png",
+  },
+];
 
 
   const handleTwoTone = (type) => {
@@ -435,21 +523,139 @@ const applyMixColors = () => {
     "bg-gradient-to-br from-[#1a0a2e] via-[#2a1a4e] to-[#1a0a2e]",
     "bg-[radial-gradient(circle_at_center,_#2a1a4e_0%,_#0a0515_100%)]",
     "bg-gradient-to-br from-[#2a2218] via-[#3d3224] to-[#1a1510]",
+    "bg-gradient-to-r from-[#f1eeee] via-[#ffffff] to-[#ede9e9]",
+    
   ];
 
 
 
+  const currentRingConfig = {
+    shank: {
+      name: selectedShank?.name || null,
+    },
+
+    prong: {
+      name: selectedProng?.name || null,
+      color: prongColor,
+      position: {
+        offsetY: adjustedProngOffsetY,
+        offsetZ: adjustedProngOffsetZ,
+      }
+    },
+
+    band: {
+      color: bandColor,
+      height: bandHeight,
+    },
+
+    diamond: {
+      shape: selectedDiamond?.name || null,
+      // weight: {
+      //   label: `${selectedDiamondWeight.toFixed(2)} ct`,
+      //   value: selectedDiamondWeight,
+      // },
+      weight: `${selectedDiamondWeight.toFixed(2)} ct`,
+      scale: diamondScale,
+    },
+
+    gem: {
+      color: gemColor
+    },
+
+
+    metal: {
+      isTwoTone: bandColor !== prongColor,
+    },
+
+    meta: {
+      isMixMode,
+      theme: themeClass,
+    }
+  };
+
+  useEffect(() => {
+    // console.clear();
+    console.log("💍 Ring JSON 👇");
+    console.log(JSON.stringify(currentRingConfig, null, 2));
+  }, [
+    selectedShank,
+    selectedProng,
+    selectedDiamond,
+    selectedDiamondWeight,
+    bandColor,
+    prongColor,
+    bandHeight,
+    isMixMode,
+    themeClass,
+    gemColor // 🔥 ADD THIS
+  ]);
+
+
   return (
     <div className="h-screen flex flex-col bg-gray-50">
+      {/* {showWizard && <RingWizard onComplete={handleWizardComplete} />} */}
+      {showWizard && (
+  <RingWizard
+    onComplete={handleWizardComplete}
+    onSkip={() => setShowWizard(false)}
+  />
+)}
       {/* Header - Responsive */}
       <header className="bg-white border-b border-gray-200 px-4 sm:px-8 py-3 sm:py-4">
         <h1 className="text-xl sm:text-2xl font-bold text-gray-800"> <Link to={"/"}>Ring Builder</Link></h1>
       </header>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col lg:flex-row overflow-hidden bg-gradient-to-tr from-slate-900 via-[#1e293b] to-slate-800">
+      {/* <div className="flex-1 flex flex-col lg:flex-row overflow-hidden bg-gradient-to-tr from-slate-900 via-[#1e293b] to-slate-800"> */}
+        <div className="relative flex-1 flex flex-col lg:flex-row overflow-hidden bg-gradient-to-tr from-slate-900 via-[#1e293b] to-slate-800">
+
+          {/* <button
+  onClick={() => setShowControls(!showControls)}
+  className="
+    hidden lg:flex
+    absolute top-4 right-4 z-50
+    items-center justify-center
+    w-12 h-12 rounded-full
+    bg-white/10 backdrop-blur-xl
+    border border-white/20
+    text-white
+    hover:bg-white/20
+    transition-all duration-300
+    shadow-2xl
+  "
+  title={showControls ? "Hide Controls" : "Show Controls"}
+>
+  <svg
+    className={`w-5 h-5 transition-transform duration-300 ${
+      showControls ? "" : "rotate-180"
+    }`}
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M15 19l-7-7 7-7"
+    />
+  </svg>
+</button> */}
+
         {/* Left Panel - Ring Model */}
-        <div className="flex w-full lg:w-[70%] xl:w-[75%] 2xl:w-[80%] h-[35vh] sm:h-[40vh] lg:h-full items-center justify-center">
+        {/* <div className="flex w-full lg:w-[70%] xl:w-[75%] 2xl:w-[80%] h-[35vh] sm:h-[40vh] lg:h-full items-center justify-center"> */}
+        <div
+  className={`
+    flex h-[35vh] sm:h-[40vh] lg:h-full items-center justify-center
+    transition-all duration-500 ease-in-out
+    w-full
+    ${
+      showControls
+        ? "lg:w-[68%] xl:w-[73%] 2xl:w-[78%]"
+        : "lg:w-full"
+    }
+  `}
+>
           <div className="w-full h-full">
             <RingModel
               selectedProng={finalSelectedProng}
@@ -467,6 +673,7 @@ const applyMixColors = () => {
               sharedMetalProps={sharedMetalProps}
               setBandHeight={setBandHeight}
               bandHeight={bandHeight}
+              onGemColorChange={handleGemColorChange}
               diamondWeight={{
                 weight: `${selectedDiamondWeight.toFixed(2)} ct`,
                 value: selectedDiamondWeight,
@@ -477,288 +684,589 @@ const applyMixColors = () => {
         </div>
 
         {/* Right Panel - Controls */}
-        <div className="flex w-full lg:w-[30%] xl:w-[25%] 2xl:w-[20%] bg-transparent flex-col h-[50vh] lg:h-full">
-          {/* Tabs */}
-          <ResponsiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+{/* <div className="w-full lg:w-[32%] xl:w-[27%] 2xl:w-[22%] h-[55vh] lg:h-full relative overflow-hidden"> */}
+<div
+  className={`
+    h-[55vh] lg:h-full relative overflow-visible
+    transition-all duration-500 ease-in-out
+    ${
+      showControls
+        ? "w-full lg:w-[32%] xl:w-[27%] 2xl:w-[22%]"
+        : "w-full lg:w-[72px]"
+    }
+  `}
+>
+  {/* Toggle Button - Always Visible */}
+  <button
+    onClick={() => setShowControls(!showControls)}
+    className="
+      hidden lg:flex
+      absolute top-4 -left-6 z-50
+      items-center justify-center
+      w-9 h-9 rounded-full
+      bg-white/10 backdrop-blur-xl
+      border border-white/20
+      text-white
+      hover:bg-white/20
+      transition-all duration-300
+      shadow-2xl
+    "
+    title={showControls ? "Hide Controls" : "Show Controls"}
+  >
+    <svg
+      className={`w-5 h-5 transition-transform duration-300 ${
+        showControls ? "rotate-180" : ""
+      }`}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M15 19l-7-7 7-7"
+      />
+    </svg>
+  </button>
 
-          {/* Scrollable Content Area */}
-          <div className="flex-1 overflow-y-auto pb-20">
-            <div className="p-3 sm:p-4 md:p-6">
-              {/* color */}
+  {/* ================= EXPANDED PANEL ================= */}
+  {showControls ? (
+    <div className="relative z-20 flex flex-col h-full backdrop-blur-xl border-l border-white/10">
+      {/* Premium Tabs */}
+      <div className="sticky top-0 z-20 bg-black/20 backdrop-blur-xl border-b border-white/10 px-4 py-4">
+        <div className="grid grid-cols-4 gap-2">
+          {[
+            { key: "metal", label: "Metal", icon: SquaresExclude },
+            { key: "type", label: "Type", icon: GiDiamondRing  },
+            { key: "diamonds", label: "Diamonds", icon: Gem },
+            { key: "theme", label: "Theme", icon: Palette },
+          ].map((tab) => {
+            const Icon = tab.icon;
 
-              {activeTab === "color" && (
-  <>
-    {!isMixMode ? (
-      // ✅ NORMAL UI
-      <>
-        <div>
-          <label className="text-sm font-medium text-white mb-2 block">
-            Select Metal Color
-          </label>
-
-          <div className="grid grid-cols-2 gap-2">
-            {metalOptions.map(([color, label]) => (
-              <MetalColorButton
-                key={label}
-                color={color}
-                label={label}
-                isSelected={bandColor === color && prongColor === color}
-                onClick={() => handleColorChange(color)}
-              />
-            ))}
-
-            <button
-              onClick={() => {
-                setTempBandColor(bandColor);
-                setTempProngColor(prongColor);
-                setIsMixMode(true);
-              }}
-              className="w-full py-2 bg-purple-600 text-white rounded-lg"
-            >
-              Mix Colors
-            </button>
-          </div>
+            return (
+              <button
+                key={tab.key}
+                onClick={() => setActiveTab(tab.key)}
+                className={`
+                  flex flex-col items-center justify-center gap-1
+                  py-2.5 rounded-xl text-sm font-medium
+                  transition-all duration-300
+                  ${
+                    activeTab === tab.key
+                      ? "bg-white text-black shadow-2xl scale-[1.03]"
+                      : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                  }
+                `}
+              >
+                <Icon
+                  size={20}
+                  strokeWidth={1.8}
+                  className="mb-0.5"
+                />
+                <span className="text-xs font-medium">
+                  {tab.label}
+                </span>
+              </button>
+            );
+          })}
         </div>
-      </>
-    ) : (
-      // 🔥 MIX MODE UI (INLINE — NOT MODAL)
-      <>
-        {/* Header */}
-        <div className="flex items-center justify-between mb-3">
-          <button onClick={() => setIsMixMode(false)} className="text-white bg-black p-2">← Back</button>
-          <h2 className="text-lg font-semibold text-white">Mixed Metal</h2>
-          <div />
-        </div>
+      </div>
 
-        {/* Head Color */}
-        <div>
-          <label className="text-base mb-2 block text-white">
-            Head Metal Color
-          </label>
-          <div className="grid grid-cols-2 gap-2">
-            {metalOptions.map(([color, label]) => (
-              <MetalColorButton
-                key={label}
-                color={color}
-                label={label}
-                isSelected={tempProngColor === color}
-                onClick={() => {
-                  setTempProngColor(color);
-                  setProngColor(color); // 🔥 LIVE UPDATE
-                }}
-              />
-            ))}
-          </div>
-        </div>
+    {/* Scroll Area */}
+    <div className="flex-1 overflow-y-auto custom-scrollbar px-4 py-5 space-y-6">
 
-        {/* Band Color */}
-        <div className="mt-4">
-          <label className="text-base mb-2 block text-white">
-            Band Metal Color
-          </label>
-          <div className="grid grid-cols-2 gap-2">
-            {metalOptions.map(([color, label]) => (
-              <MetalColorButton
-                key={label}
-                color={color}
-                label={label}
-                isSelected={tempBandColor === color}
-                onClick={() => {
-                  setTempBandColor(color);
-                  setBandColor(color); // 🔥 LIVE UPDATE
-                }}
-              />
-            ))}
-          </div>
-        </div>
+      {/* ================= METAL TAB ================= */}
+      {activeTab === "metal" && (
+        <div className="space-y-5">
 
-        {/* Apply */}
-        <button
-          onClick={() => setIsMixMode(false)}
-          className="w-full mt-6 py-3 rounded-xl text-white font-medium bg-gradient-to-r from-indigo-500 to-purple-600"
-        >
-          Apply & Return
-        </button>
-      </>
-    )}
-  </>
-)}
-              
+          {!isMixMode ? (
+            <>
+              <div className="rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md p-5 shadow-2xl">
 
-              {/* Metal Tab */}
-              {activeTab === "metal" && (
-                <>
-
-                  {/* <PremiumAccordion
-                    title="Select Head Type"
-                    icon="🎨"
-                    isOpen={openAccordions.headBandType}
-                    onToggle={() => toggleAccordion('headBandType')}
-                  > */}
+                <div className="flex items-center justify-between mb-5">
                   <div>
-                    <label className="text-sm font-medium text-white mb-2 block">
-                      Select Head Type
-                    </label>
-                    <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-2">
-                      {visibleProngs.map((p) => (
-                        <button
-                          key={p.name}
-                          onClick={() => changeProng(p)}
-                          className={`px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg transition-all text-sm sm:text-base ${selectedProng?.name === p.name
-                            ? "bg-blue-600 text-white shadow-md"
-                            : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                            }`}
-                        >
-                          {p.name}
-                        </button>
-                      ))}
-                    </div>
+                    <h2 className="text-[#C79840] text-lg font-semibold">
+                      Select Metal Color
+                    </h2>
+                    <p className="text-[#BD9C61] text-sm">
+                      Select your premium metal tone
+                    </p>
                   </div>
-                  {/* </PremiumAccordion> */}
-
-
-
-                  <div className="space-y-4 mt-3 md:mt-3 lg:mt-5">
-                    <div>
-                      <label className="text-sm font-medium text-white mb-2 block">
-                        Shank Type
-                      </label>
-                      <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-start">
-                        {shankOptions.map((p) => (
-                          <button
-                            key={p.name}
-                            onClick={() => changeShank(p)}
-                            className={`px-2 sm:px-4 py-1.5 sm:py-2 rounded-lg transition-all text-sm sm:text-base ${selectedShank?.name === p.name
-                              ? "bg-blue-600 text-white shadow-md"
-                              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                              }`}
-                          >
-                            {p.name}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-
-                </>
-              )}
-              {/* Diamonds Tab */}
-              {activeTab === "diamonds" && (
-                <>
-
-                  <div className="space-y-4">
-                    {/* Carat Weight */}
-                    <div>
-                      <label className="text-sm font-medium text-white mb-2 block">
-                        Carat Weight
-                      </label>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 gap-1.5 sm:gap-2">
-                        {diamondWeightOptions.map((d) => (
-                          <button
-                            key={d.weight}
-                            onClick={() => changeDiamondWeight(d.value)}
-                            className={`px-2 sm:px-4 py-3 sm:py-2 rounded-lg transition-all text-sm sm:text-base ${selectedDiamondWeight === d.value
-                              ? "bg-blue-600 text-white shadow-md"
-                              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                              }`}
-                          >
-                            {d.weight}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    {/* Center Stone Shape + Load More / Show Less Button */}
-                    <div>
-                      <label className="text-sm font-medium text-white mb-2 block">
-                        Center Stone Shape
-                      </label>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-2 gap-2 sm:gap-3">
-                        {visibleDiamonds.map((d) => (
-                          <button
-                            key={d.name}
-                            onClick={() => setSelectedDiamond(d)}
-                            className={`p-2 rounded-lg transition-all text-center ${selectedDiamond?.name === d.name
-                              ? "bg-blue-600 shadow-lg scale-105 text-white"
-                              : "bg-gray-50 hover:bg-gray-100"
-                              }`}
-                          >
-                            <img
-                              src={d.image_icon}
-                              alt={d.name}
-                              width={40}
-                              height={40}
-                              className="mx-auto w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12"
-                            />
-                            <span className="text-sm mt-1 block">{d.name}</span>
-                          </button>
-                        ))}
-                      </div>
-
-                      {/* Toggle Button - Load More / Show Less */}
-                      {diamondOptions.length > 10 && (
-                        <div className="mt-6 flex justify-center">
-                          <button
-                            onClick={handleToggleDiamonds}
-                            className={`px-6 py-2 rounded-lg transition-all duration-200 flex items-center gap-2 text-sm sm:text-base font-medium ${showAllDiamonds
-                              ? "bg-gray-600 text-white hover:bg-gray-700"
-                              : "bg-blue-600 text-white hover:bg-blue-700"
-                              }`}
-                          >
-                            {showAllDiamonds ? (
-                              <>
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
-                                </svg>
-                                Show Less
-                              </>
-                            ) : (
-                              <>
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                </svg>
-                                Load More
-                              </>
-                            )}
-                          </button>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-
-
-                </>
-              )}
-
-              {/* Theme Tab */}
-              {activeTab === "theme" && (
-                <div className="grid grid-cols-2 gap-2 sm:gap-3">
-                  {themes.map((theme, i) => {
-                    const isActive = themeClass === theme;
-                    return (
-                      <button
-                        key={i}
-                        onClick={() => setThemeClass(theme)}
-                        style={{ background: theme.includes('bg-') ? undefined : theme }}
-                        className={`
-                          h-16 sm:h-16 rounded-lg transition-all duration-300
-                          ${theme}
-                          ${isActive
-                            ? "ring-4 ring-white shadow-[0_0_20px_rgba(255,255,255,0.6)]"
-                            : "hover:scale-105 opacity-80 hover:opacity-100"
-                          }
-                        `}
-                      >
-                      </button>
-                    );
-                  })}
                 </div>
-              )}
+
+            <div className="grid grid-cols-2 gap-3">
+  {metalOptions.map(({ color, label, image }) => {
+    const isMixCard = color === "mix";
+
+    // const isSelected = isMixCard
+    //   ? isMixMode
+    //   : bandColor === color && prongColor === color;
+
+      const isSelected = isMixCard
+  ? bandColor !== prongColor || isMixMode
+  : !isMixMode &&
+    bandColor === color &&
+    prongColor === color;
+
+    return (
+      <button
+        key={label}
+        onClick={() => {
+          if (isMixCard) {
+            // Mix panel open
+            setTempBandColor(bandColor);
+            setTempProngColor(prongColor);
+            setIsMixMode(true);
+          } else {
+            // Normal metal selection
+            setIsMixMode(false);
+            handleColorChange(color);
+          }
+        }}
+        className={`
+          relative overflow-hidden rounded-2xl border transition-all duration-300
+          ${isSelected
+            ? "border-[#c59d5f] scale-[1.03] shadow-[0_0_0_2px_rgba(197,157,95,0.25)]"
+            : "border-gray-200 hover:border-[#d4b47a]"}
+        `}
+      >
+        <div
+          className="relative flex items-center justify-center px-3 py-5 min-h-[80px] bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url(${image})`,
+          }}
+        >
+          {/* <div className="absolute inset-0 bg-white/10 rounded-2xl" /> */}
+
+          <span className="relative z-10 text-sm font-medium text-gray-800 text-center leading-snug">
+            {label}
+          </span>
+        </div>
+
+        {isSelected && (
+          <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-green-400 flex items-center justify-center shadow-md">
+            <svg
+              className="w-4 h-4 text-white"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
+          </div>
+        )}
+      </button>
+    );
+  })}
+</div>
+
+                
+              </div>
+            </>
+          ) : (
+            <>
+  {/* MIX MODE */}
+  <div className="rounded-3xl border border-white/10 bg-white/5 p-5">
+
+    {/* Header */}
+    <div className="flex items-center justify-between mb-6">
+      <button
+        onClick={() => setIsMixMode(false)}
+        className="px-3 py-2 rounded-xl bg-white/10 text-white hover:bg-white/20 transition"
+      >
+        ← Back
+      </button>
+
+      <h2 className="text-white text-lg font-semibold">
+        Mixed Metal
+      </h2>
+
+      <div className="w-8" />
+    </div>
+
+    {/* ================= HEAD METAL ================= */}
+    <div className="mb-6">
+      <h3 className="text-white mb-3 font-medium">
+        Head Metal
+      </h3>
+
+      <div className="grid grid-cols-2 gap-3">
+        {metalOptions
+          .filter((metal) => metal.color !== "mix")
+          .map(({ color, label, image }) => (
+            <button
+              key={`head-${label}`}
+              onClick={() => {
+                setTempProngColor(color);
+                setProngColor(color); // Live Preview
+              }}
+              className={`
+                relative overflow-hidden rounded-2xl border transition-all duration-300
+                ${tempProngColor === color
+                  ? "border-white scale-[1.03] shadow-lg"
+                  : "border-white/10 hover:border-white/30"}
+              `}
+            >
+              <div
+                className="relative flex items-center justify-center px-3 py-5 min-h-[80px] bg-cover bg-center bg-no-repeat"
+                style={{
+                  backgroundImage: `url(${image})`,
+                }}
+              >
+                {/* <div className="absolute inset-0 bg-white/10 rounded-2xl" /> */}
+
+                <span className="relative z-10 text-sm font-medium text-gray-800 text-center leading-snug">
+                  {label}
+                </span>
+                {tempProngColor === color && (
+  <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-green-400 flex items-center justify-center shadow-md">
+    <svg
+      className="w-3 h-3 text-white"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M5 13l4 4L19 7"
+      />
+    </svg>
+  </div>
+)}
+              </div>
+            </button>
+          ))}
+      </div>
+    </div>
+
+    {/* ================= BAND METAL ================= */}
+    <div>
+      <h3 className="text-white mb-3 font-medium">
+        Band Metal
+      </h3>
+
+      <div className="grid grid-cols-2 gap-3">
+        {metalOptions
+          .filter((metal) => metal.color !== "mix")
+          .map(({ color, label, image }) => (
+            <button
+              key={`band-${label}`}
+              onClick={() => {
+                setTempBandColor(color);
+                setBandColor(color); // Live Preview
+              }}
+              className={`
+                relative overflow-hidden rounded-2xl border transition-all duration-300
+                ${tempBandColor === color
+                  ? "border-white scale-[1.03] shadow-lg"
+                  : "border-white/10 hover:border-white/30"}
+              `}
+            >
+              <div
+                className="relative flex items-center justify-center px-3 py-5 min-h-[80px] bg-cover bg-center bg-no-repeat"
+                style={{
+                  backgroundImage: `url(${image})`,
+                }}
+              >
+                {/* <div className="absolute inset-0 bg-white/10 rounded-2xl" /> */}
+
+                <span className="relative z-10 text-sm font-medium text-gray-800 text-center leading-snug">
+                  {label}
+                </span>
+
+               {tempBandColor === color && (
+  <div className="absolute top-2 right-2 z-20 w-5 h-5 rounded-full bg-green-400 flex items-center justify-center shadow-md">
+    <svg
+      className="w-3 h-3 text-white"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="3"
+      viewBox="0 0 24 24"
+    >
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        d="M5 13l4 4L19 7"
+      />
+    </svg>
+  </div>
+)}
+                
+              </div>
+              
+            </button>
+          ))}
+          
+      </div>
+    </div>
+
+    {/* ================= APPLY BUTTON ================= */}
+    <button
+      onClick={() => {
+        setBandColor(tempBandColor);
+        setProngColor(tempProngColor);
+        setIsMixMode(false);
+      }}
+      className="
+        mt-6 w-full py-3 rounded-2xl
+        bg-gradient-to-r from-emerald-500 to-cyan-500
+        text-white font-semibold
+        hover:scale-[1.02]
+        transition-all duration-300
+      "
+    >
+      Apply Changes
+    </button>
+  </div>
+</>
+          )}
+
+        </div>
+      )}
+
+      {/* ================= TYPE TAB ================= */}
+      {activeTab === "type" && (
+        <div className="space-y-6">
+
+          {/* Head Type */}
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-5 ">
+            <h2 className="text-white text-lg font-semibold mb-4">
+              Head Type
+            </h2>
+
+            <div className="flex flex-wrap gap-2">
+              {visibleProngs.map((p) => (
+                <button
+                  key={p.name}
+                  onClick={() => changeProng(p)}
+                  className={`
+                    px-4 py-2 rounded-xl text-sm transition-all duration-300
+                    ${selectedProng?.name === p.name
+                      ? "bg-white text-black scale-105"
+                      : "bg-white/10 text-white hover:bg-white/20"}
+                  `}
+                >
+                  {p.name}
+                </button>
+              ))}
             </div>
           </div>
+
+          {/* Shank */}
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
+            <h2 className="text-white text-lg font-semibold mb-4">
+              Shank Type
+            </h2>
+
+            <div className="flex flex-wrap gap-2">
+              {shankOptions.map((p) => (
+                <button
+                  key={p.name}
+                  onClick={() => changeShank(p)}
+                  className={`
+                    px-4 py-2 rounded-xl text-sm transition-all duration-300
+                    ${selectedShank?.name === p.name
+                      ? "bg-white text-black scale-105"
+                      : "bg-white/10 text-white hover:bg-white/20"}
+                  `}
+                >
+                  {p.name}
+                </button>
+              ))}
+            </div>
+          </div>
+
         </div>
+      )}
+
+      {/* ================= DIAMONDS TAB ================= */}
+      {activeTab === "diamonds" && (
+        <div className="space-y-6">
+
+          {/* Weight */}
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
+            <h2 className="text-white text-lg font-semibold mb-4">
+              Carat Weight
+            </h2>
+
+            <div className="grid grid-cols-3 gap-2">
+              {diamondWeightOptions.map((d) => (
+                <button
+                  key={d.weight}
+                  onClick={() => changeDiamondWeight(d.value)}
+                  className={`
+                    py-3 rounded-xl text-sm transition-all
+                    ${selectedDiamondWeight === d.value
+                      ? "bg-white text-black scale-105"
+                      : "bg-white/10 text-white hover:bg-white/20"}
+                  `}
+                >
+                  {d.weight}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Shapes */}
+          <div className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
+
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-white text-lg font-semibold">
+                Diamond Shape
+              </h2>
+
+              <div className="text-xs text-white/50">
+                {diamondOptions.length} Styles
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              {visibleDiamonds.map((d) => (
+                <button
+                  key={d.name}
+                  onClick={() => setSelectedDiamond(d)}
+                  className={`
+                    rounded-2xl border p-3 transition-all duration-300
+                    ${selectedDiamond?.name === d.name
+                      ? "border-white bg-white text-black scale-[1.03]"
+                      : "border-white/10 bg-white/5 hover:bg-white/10"}
+                  `}
+                >
+                  <img
+                    src={d.image_icon}
+                    alt={d.name}
+                    className="w-12 h-12 mx-auto mb-2"
+                  />
+
+                  <span className={`
+                    text-sm font-medium
+                    ${selectedDiamond?.name === d.name
+                      ? "text-black"
+                      : "text-white"}
+                  `}>
+                    {d.name}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            {diamondOptions.length > 10 && (
+              <button
+                onClick={handleToggleDiamonds}
+                className="
+                  mt-5 w-full py-3 rounded-2xl
+                  bg-white/10 text-white
+                  hover:bg-white/20
+                  transition-all
+                "
+              >
+                {showAllDiamonds ? "Show Less" : "Load More"}
+              </button>
+            )}
+
+          </div>
+        </div>
+      )}
+
+      {/* ================= THEME TAB ================= */}
+      {activeTab === "theme" && (
+        <div className="rounded-3xl border border-white/10 bg-white/5 p-5 backdrop-blur-xl">
+
+          <div className="flex items-center justify-between mb-5">
+            <div>
+              <h2 className="text-white text-lg font-semibold">
+                Scene Theme
+              </h2>
+              <p className="text-white/50 text-sm">
+                Luxury environment presets
+              </p>
+            </div>
+
+            <div className="text-white text-xl">
+              ✨
+            </div>
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            {themes.map((theme, i) => {
+              const isActive = themeClass === theme;
+
+              return (
+                <button
+                  key={i}
+                  onClick={() => setThemeClass(theme)}
+                  className={`
+                    relative h-24 rounded-3xl overflow-hidden transition-all duration-300
+                    ${theme}
+                    ${isActive
+                      ? "ring-4 ring-white scale-[1.04] shadow-[0_0_35px_rgba(255,255,255,0.3)]"
+                      : "hover:scale-[1.03] opacity-80 hover:opacity-100"}
+                  `}
+                >
+                  <div className="absolute inset-0 bg-black/10" />
+
+                  {isActive && (
+                    <div className="absolute top-2 right-2 w-3 h-3 rounded-full bg-white shadow-lg" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+    </div>
+  </div>
+ ) : (
+    /* ================= COLLAPSED ICON SIDEBAR ================= */
+    <div className="hidden lg:flex relative z-20 h-full border-l border-white/10 backdrop-blur-xl bg-black/20">
+      <div className="w-[72px] flex flex-col items-center py-20 gap-4">
+        {[
+          { key: "metal", icon: Gem },
+          { key: "type", icon: CircleDot },
+          { key: "diamonds", icon: Diamond },
+          { key: "theme", icon: Palette },
+        ].map((tab) => {
+          const Icon = tab.icon;
+          const isActive = activeTab === tab.key;
+
+          return (
+            <button
+              key={tab.key}
+              onClick={() => {
+                setActiveTab(tab.key);
+                setShowControls(true);
+              }}
+              className={`
+                w-12 h-12 rounded-xl
+                flex items-center justify-center
+                transition-all duration-300
+                ${
+                  isActive
+                    ? "bg-white text-black shadow-xl"
+                    : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
+                }
+              `}
+              title={tab.key}
+            >
+              <Icon size={20} strokeWidth={1.8} />
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  )}
+</div>
+
+
       </div>
       <Leva />
     </div>
