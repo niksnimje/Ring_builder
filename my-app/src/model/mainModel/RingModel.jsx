@@ -11,9 +11,6 @@ import { useTheme } from "../../Context/ThemeContext";
 import Pave from "../Band/Pave";
 import { Settings, RefreshCcw, RotateCw, Maximize, Minimize, X } from "lucide-react";
 import { calculatePrice } from "../../utils/calculatePrice";
-import Loader from "../../Common/Loader";
-import NumberFlow, { continuous } from '@number-flow/react'
-
 
 const RotatingRing = ({ children, isRotating = true }) => {
   const groupRef = useRef();
@@ -200,7 +197,7 @@ const RingModel = ({
     return selectedProng?.path || selectedProng?.defaultPath;
   };
 
-  const handleNextClick = () => navigate("/");
+  const handleNextClick = () => navigate("/diamond");
   const prongIncludesBand = getProngModelPath()?.toLowerCase().includes("with_band");
 
 
@@ -285,9 +282,6 @@ const RingModel = ({
   };
 
 
-
-
-  // calculate price
   const priceData = calculatePrice({
     selectedShank,
     selectedProng,
@@ -298,12 +292,9 @@ const RingModel = ({
 
 
   return (
-
-    <>
-    
-      <div
+    <div
       ref={containerRef}
-      className={`w-full h-full transition-all duration-700 ease-in-out  ${themeClass} ${!isFullscreen ? "rounded-[32px] border border-[#e7e1d8] shadow-xl " : ""} relative`}
+      className={`w-full h-full transition-all duration-700 ease-in-out ${themeClass} relative`}
       style={{
         width: isFullscreen ? '100vw' : '100%',
         height: isFullscreen
@@ -317,7 +308,6 @@ const RingModel = ({
         zIndex: isFullscreen ? 9999 : 'auto',
       }}
     >
-      
       <div
         ref={canvasContainerRef}
         className="w-full h-full"
@@ -341,27 +331,20 @@ const RingModel = ({
 
           <RotatingRing isRotating={autoRotate} >
             {!prongIncludesBand && selectedShank && (
-              <Suspense fallback={<Loader />}>
-                <group>
-                  <BandRModel
-                    modelPath={selectedShank.path}
-                    onLoaded={setBandHeight}
-                    color={bandColor}
-                    scale={bandScale || 1}
-                    sharedMetalProps={sharedMetalProps}
-                    selectedProngName={selectedProng?.name}
-                    diamondWeight={diamondWeight}
-                  />
-                  <Pave
-                    modelPath={selectedShank.path}
-                    gemColor={gemColor}
-                    diamondWeight={diamondWeight}
-                  />
-                </group>
-              </Suspense>
+              <group>
+                <BandRModel
+                  modelPath={selectedShank.path}
+                  onLoaded={setBandHeight}
+                  color={bandColor}
+                  scale={bandScale || 1}
+                  sharedMetalProps={sharedMetalProps}
+                  selectedProngName={selectedProng?.name}
+                />
+                <Pave modelPath={selectedShank.path} gemColor={gemColor} />
+              </group>
             )}
 
-            <Suspense fallback={<Loader />}>
+            <Suspense fallback={null}>
               {selectedProng && (
                 <group ref={ringGroupRef}>
                   <ProngModel
@@ -381,9 +364,8 @@ const RingModel = ({
                 </group>
               )}
             </Suspense>
-            
 
-            <Suspense fallback={<Loader />}>
+            <Suspense fallback={null}>
               {!(selectedShank?.name === "Halo" && selectedProng?.name === "Halo") && selectedDiamond && (
                 <DiamondModel
                   modelPath={selectedDiamond.path}
@@ -401,8 +383,8 @@ const RingModel = ({
             enablePan={false}
             autoRotate={autoRotate}
             autoRotateSpeed={1.5}
-            minDistance={5} // zoom in minimum value is give close look at diamond
-            maxDistance={25} // zoom out maximum value is give full look at ring
+            minDistance={8}
+            maxDistance={20}
             enableDamping={true}
             dampingFactor={0.05}
           // target={[0, 0.5, 0]} 
@@ -524,119 +506,43 @@ const RingModel = ({
       </div>
 
       {/* Price Section - Fixed from First Code */}
-  {/* Price Section - Full Mobile Responsive and Fluid Layout */}
-{!isFullscreen && (
-  <div className="fixed bottom-0 left-0 w-full bg-white/90 backdrop-blur-md border-t border-gray-200/60 p-3 px-4 md:p-4 md:px-6 z-50 flex flex-col md:flex-row justify-evenly items-stretch md:items-center gap-3 md:gap-4 shadow-[0_-10px_30px_rgba(0,0,0,0.04)] lg:relative rounded-b-3xl">
+      {!isFullscreen && (
+        <div className="fixed bottom-0 left-0 w-full flex justify-between items-center p-3 bg-[#373D73] text-white z-50 lg:relative">
 
-    {/* Left side - Price Breakdown */}
-    <div className="flex items-center gap-3 md:gap-6 w-full md:w-auto overflow-hidden">
-      
-      {/* Price Breakdown Title Header (Hidden on extra small mobile to save space) */}
-      <div className="hidden sm:flex items-center gap-2 shrink-0">
-        <div className="text-gray-500">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-calculator">
-            <rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/>
-          </svg>
+          {/* Left side - Complete Price Info */}
+          <div className="flex flex-col gap-1">
+            <div className="flex gap-4 text-xs sm:text-sm md:text-base">
+              <div>
+                <p className="font-semibold">Diamond:</p>
+                <p className="text-yellow-300 font-bold">₹ {priceData.diamondPrice?.toLocaleString?.() || 0}</p>
+              </div>
+              <div>
+                <p className="font-semibold">Band:</p>
+                <p className="text-yellow-300 font-bold">₹ {priceData.shankPrice?.toLocaleString?.() || 0}</p>
+              </div>
+              <div>
+                <p className="font-semibold">Setting:</p>
+                <p className="text-yellow-300 font-bold">₹ {priceData.prongPrice?.toLocaleString?.() || 0}</p>
+              </div>
+              <div>
+                <p className="font-semibold">Color:</p>
+                <p className="text-yellow-300 font-bold">₹ {priceData.metalColorPrice?.toLocaleString?.() || 0}</p>
+              </div>
+            </div>
+            <p className="text-sm md:text-lg lg:text-xl font-bold text-white border-t border-yellow-300 pt-1 mt-1">
+              TOTAL: ₹ {priceData.totalPrice?.toLocaleString?.() || 0}
+            </p>
+          </div>
+
+          {/* Right side - Next button */}
+          <button
+            className="bg-white text-black px-3 py-2 lg:px-6 lg:py-3 w-32 rounded shadow hover:bg-transparent hover:border hover:text-white transition-all ease-in duration-1"
+            onClick={handleNextClick}
+          >
+            Next
+          </button>
         </div>
-        <div className="flex flex-col">
-          <span className="text-[11px] font-bold text-gray-800 tracking-wide ">Price Breakdown</span>
-          <div className="w-8 h-[1px] bg-gray-300 mt-0.5" />
-        </div>
-      </div>
-
-      {/* Items List - Horizontal Scrollable on Mobile, Normal on Desktop */}
-      <div className="flex items-center gap-3 overflow-x-auto overflow-y-hidden whitespace-nowrap scrollbar-none w-full py-1 pr-2 text-xs md:text-sm">
-        
-        {/* Diamond */}
-        <div className="inline-block min-w-[65px] text-center md:text-left shrink-0">
-          <p className="text-gray-400 text-[10px] md:text-base font-medium mb-0.5">Diamond</p>
-          <p className="text-gray-800 font-bold">
-            <span className="text-gray-600 font-semibold mr-0.5">₹</span>
-            <NumberFlow className="text-[10px] md:text-base" plugins={[continuous]} value={priceData.diamondPrice || 0} />
-          </p>
-        </div>
-        
-        <span className="text-gray-300 font-light text-xs shrink-0">+</span>
-
-        {/* Band */}
-        <div className="inline-block min-w-[60px] text-center md:text-left shrink-0">
-          <p className="text-gray-400 text-[10px] md:text-base font-medium mb-0.5">Band</p>
-          <p className="text-gray-800 font-bold">
-            <span className="text-gray-600 font-semibold mr-0.5">₹</span>
-            <NumberFlow className="text-[10px] md:text-base" plugins={[continuous]} value={priceData.shankPrice || 0} />
-          </p>
-        </div>
-
-        <span className="text-gray-300 font-light text-xs shrink-0">+</span>
-
-        {/* Setting */}
-        <div className="inline-block min-w-[60px] text-center md:text-left shrink-0">
-          <p className="text-gray-400 text-[10px] md:text-base font-medium mb-0.5">Setting</p>
-          <p className="text-gray-800 font-bold">
-            <span className="text-gray-600 font-semibold mr-0.5">₹</span>
-            <NumberFlow className="text-[10px] md:text-base" plugins={[continuous]} value={priceData.prongPrice || 0} />
-          </p>
-        </div>
-
-        <span className="text-gray-300 font-light text-xs shrink-0">+</span>
-
-        {/* Color */}
-        <div className="inline-block min-w-[60px] text-center md:text-left shrink-0">
-          <p className="text-gray-400 text-[10px] md:text-base font-medium mb-0.5">Color</p>
-          <p className="text-gray-800 font-bold">
-            <span className="text-gray-600 font-semibold mr-0.5">₹</span>
-            <NumberFlow className="text-[10px] md:text-base" plugins={[continuous]} value={priceData.metalColorPrice || 0} />
-          </p>
-        </div>
-
-      </div>
-    </div>
-
-    {/* Vertical Divider (Desktop Only) */}
-    <div className="hidden md:block w-[1px] h-10 bg-gray-200" />
-
-    {/* Right side - Total Price Info & Next Button aligned perfectly */}
-    <div className="flex flex-row items-center justify-between md:justify-end gap-4 md:gap-6 w-full md:w-auto border-t border-gray-100 pt-2 md:pt-0 md:border-none shrink-0">
-      
-      {/* Total Section */}
-      <div className="flex flex-col justify-center m-auto">
-        <span className="text-[10px] md:text-xs font-medium text-gray-400 tracking-wide uppercase">Total Price</span>
-        <p className="text-lg md:text-2xl font-bold text-primaryGold tracking-tight mt-0.5 flex items-center">
-          <span className="text-primaryGold mr-1 text-base md:text-xl font-semibold">₹</span>
-          <NumberFlow plugins={[continuous]} value={priceData.totalPrice || 0} />
-        </p>
-      </div>
-
-    
-    </div>
-      {/* Premium Next Step Button */}
-      <button
-        onClick={handleNextClick}
-        className="
-          flex items-center justify-center gap-1.5 md:gap-2
-          bg-gradient-to-r from-[#fbf4ec] to-[#f3e5d3] 
-          text-[#6b512e] font-bold text-xs md:text-base
-          px-4 py-2.5 md:px-8 md:py-3.5 rounded-xl md:rounded-2xl border border-[#c59d5f]/40
-          shadow-[0_4px_15px_rgba(197,157,95,0.1)]
-          hover:scale-[1.02] active:scale-[0.98]
-          transition-all duration-300 min-w-[110px] md:min-w-[160px]
-        "
-      >
-        <span>Next Step</span>
-        <svg 
-          className="w-3.5 h-3.5 md:w-4 md:h-4 transition-transform duration-300" 
-          fill="none" 
-          stroke="currentColor" 
-          strokeWidth="2.5" 
-          viewBox="0 0 24 24"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-        </svg>
-      </button>
-
-
-  </div>
-)}
+      )}
 
       {/* Tooltip for fullscreen button when not in settings menu */}
       {!showSettings && (
@@ -645,8 +551,6 @@ const RingModel = ({
         </div>
       )}
     </div>
-    </>
-    
   );
 };
 
